@@ -1,7 +1,7 @@
 extends "res://ParentClasses/Enemy.gd"
 
 export var speed = 400
-export var acceleration = 1000
+export var acceleration = 4000
 
 func _physics_process(delta):
 	if Global.player != null:

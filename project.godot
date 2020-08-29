@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Singletons/Global.gd"
+SoundFx="*res://Singletons/SoundFX.tscn"
 
 [display]
 

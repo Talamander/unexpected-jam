@@ -50,6 +50,7 @@ func apply_friction(amount):
 	else:
 		motion = Vector2.ZERO
 
+# warning-ignore:shadowed_variable
 func calc_movement(acceleration):
 	#Uses the acceleration to ramp up to the speed, so it's not instantaneous
 	motion += acceleration
@@ -65,5 +66,5 @@ func fire_bullet():
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
-	motion -= bullet.velocity * 1
+	motion -= bullet.velocity * .75
 	fireRate.start()
