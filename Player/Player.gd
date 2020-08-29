@@ -12,6 +12,15 @@ var speed = 500
 var acceleration = 4000
 var motion = Vector2.ZERO
 
+#This function runs on the load
+func _ready():
+	#Sets the global.gd (singleton) var player to self. So enemies can reference it
+	Global.player = self
+
+#This function runs when the player is destroyed
+func _exit_tree():
+	Global.player = null
+
 #Runs every tick
 func _physics_process(delta):
 	look_rotation()
