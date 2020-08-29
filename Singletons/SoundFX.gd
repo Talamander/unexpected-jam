@@ -3,9 +3,7 @@ extends Node
 var sounds_path = "res://Music and Sounds/"
 
 var sounds = {
-	"Bullet" : load(sounds_path + "Bullet.wav"),
-	"Bullet2" : load(sounds_path + "Bullet.wav"),
-	"Bullet22" : load(sounds_path + "Bullet.wav")
+	"Bullet" : load(sounds_path + "Bullet.wav")
 }
 
 onready var sound_players = get_children()

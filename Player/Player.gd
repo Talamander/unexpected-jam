@@ -8,7 +8,7 @@ onready var fireRate = $FireRate
 
 
 #Movement Variables
-var speed = 500
+var speed = 400
 var acceleration = 4000
 var motion = Vector2.ZERO
 

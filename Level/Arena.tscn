@@ -21,3 +21,13 @@ position = Vector2( 299.546, 275.37 )
 environment = SubResource( 1 )
 
 [node name="BasicEnemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 6.74237, -40.4543 )
+
+[node name="BasicEnemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 616.108, -48.5128 )
+
+[node name="BasicEnemy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 658.871, 412.973 )
+
+[node name="BasicEnemy4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -35.139, 410.3 )
