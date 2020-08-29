@@ -7,7 +7,6 @@
 [node name="PlayerBullet" instance=ExtResource( 2 )]
 scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 3 )
-speed = 500
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color( 0.6, 0.690196, 1, 1 )

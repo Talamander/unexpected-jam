@@ -4,6 +4,7 @@ extends KinematicBody2D
 var playerBullet = preload("res://Player/PlayerBullet.tscn")
 
 onready var playerSprite = $Sprite
+onready var fireRate = $FireRate
 
 
 #Movement Variables
@@ -23,7 +24,7 @@ func _physics_process(delta):
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
 	motion = move_and_slide(motion)
 	
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
 		fire_bullet()
 
 func get_input_vector():
@@ -54,4 +55,6 @@ func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
-	motion -= bullet.velocity * .04
+	#Adds a little kick, tweak the number to change intensity
+	motion -= bullet.velocity * 1
+	fireRate.start()
