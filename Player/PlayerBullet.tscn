@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Square.png" type="Texture" id=1]
+[ext_resource path="res://ParentClasses/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/PlayerBullet.gd" type="Script" id=3]
+
+[node name="PlayerBullet" instance=ExtResource( 2 )]
+scale = Vector2( 0.4, 0.4 )
+script = ExtResource( 3 )
+speed = 500
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 0.6, 0.690196, 1, 1 )
+texture = ExtResource( 1 )

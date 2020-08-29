@@ -1,14 +1,20 @@
 extends KinematicBody2D
 
 
+var playerBullet = preload("res://Player/PlayerBullet.tscn")
+
+onready var playerSprite = $Sprite
+
+
+#Movement Variables
 var speed = 500
 var acceleration = 4000
 var motion = Vector2.ZERO
 
 #Runs every tick
 func _physics_process(delta):
+	look_rotation()
 	var input_vector = get_input_vector()
-	
 	#Vector2.ZERO is true when no move key is being pressed
 	if input_vector == Vector2.ZERO:
 		apply_friction(acceleration * delta)
@@ -16,6 +22,9 @@ func _physics_process(delta):
 		calc_movement(input_vector * acceleration * delta)
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
 	motion = move_and_slide(motion)
+	
+	if Input.is_action_just_pressed("fire"):
+		fire_bullet()
 
 func get_input_vector():
 	#input vector is direction of key input (WASD)
@@ -35,3 +44,14 @@ func calc_movement(acceleration):
 	#Uses the acceleration to ramp up to the speed, so it's not instantaneous
 	motion += acceleration
 	motion = motion.clamped(speed)
+
+func look_rotation():
+	#Gets the mouse location and sets the player rotation to match
+	var look_vector = get_global_mouse_position() - global_position
+	global_rotation = atan2(look_vector.y, look_vector.x)
+
+func fire_bullet():
+	#Instances the playerBullet scene via the Global.gd singleton.
+	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
+	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
+	motion -= bullet.velocity * .04
