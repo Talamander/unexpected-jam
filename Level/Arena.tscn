@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Arena.gd" type="Script" id=2]
@@ -11,11 +11,33 @@ glow_bloom = 0.15
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1722.4, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1723.17, 10 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 12.2675, 975.305 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 14.7296, 975.523 )
+
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 299.546, 275.37 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+process_mode = 0
+smoothing_enabled = true
+smoothing_speed = 2.3
+drag_margin_left = 0.3
+drag_margin_top = 0.3
+drag_margin_right = 0.3
+drag_margin_bottom = 0.3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
@@ -31,3 +53,26 @@ position = Vector2( 658.871, 412.973 )
 
 [node name="BasicEnemy4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -35.139, 410.3 )
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
+position = Vector2( 116.436, -648.899 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
+position = Vector2( 115.673, 1299.96 )
+scale = Vector2( 1, 1.091 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
+position = Vector2( -1593.3, 313.692 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
+position = Vector2( 1825.78, 319.904 )
+shape = SubResource( 5 )
