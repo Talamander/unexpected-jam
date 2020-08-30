@@ -31,19 +31,24 @@ extents = Vector2( 14.7296, 975.523 )
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Square" type="Sprite" parent="."]
-position = Vector2( 260.021, 292.843 )
-scale = Vector2( 1.5, 1.5 )
+[node name="testingsquares" type="Sprite" parent="."]
+position = Vector2( 99.6592, 1381.52 )
+scale = Vector2( 217.988, 12.859 )
 texture = SubResource( 1 )
 
-[node name="Square2" type="Sprite" parent="."]
-position = Vector2( 331.374, 239.328 )
-scale = Vector2( 1.5, 1.5 )
+[node name="testingsquares2" type="Sprite" parent="."]
+position = Vector2( -1610.04, 318.821 )
+scale = Vector2( 4.67838, 120.715 )
 texture = SubResource( 1 )
 
-[node name="Square3" type="Sprite" parent="."]
-position = Vector2( 243.967, 232.788 )
-scale = Vector2( 1.5, 1.5 )
+[node name="testingsquares4" type="Sprite" parent="."]
+position = Vector2( 1868.03, 318.821 )
+scale = Vector2( 4.67838, 120.715 )
+texture = SubResource( 1 )
+
+[node name="testingsquares3" type="Sprite" parent="."]
+position = Vector2( 113.843, -656.968 )
+scale = Vector2( 212.96, 1.5 )
 texture = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -66,6 +71,56 @@ environment = SubResource( 2 )
 
 [node name="BasicEnemy4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -35.139, 410.3 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy5" parent="." instance=ExtResource( 3 )]
+position = Vector2( -217.183, 546.646 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy6" parent="." instance=ExtResource( 3 )]
+position = Vector2( -340.045, 249.232 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy7" parent="." instance=ExtResource( 3 )]
+position = Vector2( -412.712, 450.754 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 632.288, 691.754 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy9" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1402.42, 294.703 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy10" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1120.74, -183.257 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy11" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1403.92, -349.569 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy12" parent="." instance=ExtResource( 3 )]
+position = Vector2( -417.494, -429.515 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy13" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1435.38, -440.966 )
+collision_layer = 1
+collision_mask = 1
+
+[node name="BasicEnemy14" parent="." instance=ExtResource( 3 )]
+position = Vector2( 657.381, -432.966 )
 collision_layer = 1
 collision_mask = 1
 
