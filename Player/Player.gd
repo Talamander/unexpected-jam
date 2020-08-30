@@ -1,21 +1,31 @@
 extends KinematicBody2D
 
+var PlayerStats = Global.PlayerStats
 
+#Preloading other scenes
 var playerBullet = preload("res://Player/PlayerBullet.tscn")
 
+#References to nodes under Player
 onready var playerSprite = $Sprite
 onready var fireRate = $FireRate
-
+onready var stunTimer = $StunTimer
 
 #Movement Variables
 var speed = 400
 var acceleration = 4000
 var motion = Vector2.ZERO
+var stun = false
+
+#Signals
+signal player_died
+
 
 #This function runs on the load
 func _ready():
 	#Sets the global.gd (singleton) var player to self. So enemies can reference it
 	Global.player = self
+	
+	PlayerStats.connect("player_died", self, "_on_died")
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -68,3 +78,18 @@ func fire_bullet():
 	#Adds a little kick, tweak the number to change intensity
 	motion -= bullet.velocity * .75
 	fireRate.start()
+
+
+func _on_Hurtbox_hit(damage):
+	if stun == false:
+		PlayerStats.health -= damage
+		self.modulate = Color.white
+		stunTimer.start()
+		stun = true
+
+func _on_died():
+	queue_free()
+
+func _on_StunTimer_timeout():
+	self.modulate = Color("4c65b9")
+	stun = false

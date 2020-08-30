@@ -1,6 +1,12 @@
 extends Node
 
+var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
+
+# warning-ignore-all:unused_signal
+signal add_screenshake(amount, duration)
+
 var player = null
+
 
 #Singleton for instancing scenes within a scene. ex: playerBullet
 func instance_scene_on_main(scene, position):
