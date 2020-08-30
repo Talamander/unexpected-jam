@@ -37,6 +37,10 @@ collision_mask = 2147483652
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 2 )
 
+[node name="Hurtbox" parent="." index="5"]
+collision_layer = 8
+collision_mask = 0
+
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 3 )
 
