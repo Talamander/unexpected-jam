@@ -73,7 +73,6 @@ func _physics_process(delta):
 		#otherwise run the reload function instead
 		elif can_shoot == false and timer.time_left == 0:
 			timer.start()
-			print(timer.get_wait_time())
 	if Input.is_action_pressed("ui_space"):
 		dash()
 
