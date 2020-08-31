@@ -28,7 +28,7 @@ texture = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="EnemyStats" parent="." index="3"]
-max_health = 5
+max_health = 3
 
 [node name="Hitbox" parent="." index="4" instance=ExtResource( 4 )]
 collision_layer = 2147483648
