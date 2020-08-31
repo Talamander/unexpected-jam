@@ -13,6 +13,10 @@ onready var stunTimer = $StunTimer
 #Movement Variables
 var speed = 400
 var acceleration = 4000
+var bulletsInClip = 16
+var timer = null
+var reloadDelay = 2
+var can_shoot = true
 var motion = Vector2.ZERO
 var stun = false
 
@@ -26,6 +30,14 @@ func _ready():
 	Global.player = self
 	
 	PlayerStats.connect("player_died", self, "_on_died")
+	#Sets up timer for weapon reload
+	timer = Timer.new()
+	#Makes timer only run itself once when called
+	timer.set_one_shot(true)
+	#Sets length of timer
+	timer.set_wait_time(reloadDelay)
+	timer.connect("timeout", self, "weapon_Reload")
+	add_child(timer)
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -42,9 +54,20 @@ func _physics_process(delta):
 		calc_movement(input_vector * acceleration * delta)
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
 	motion = move_and_slide(motion)
-	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
-		fire_bullet()
+		#if clip is empty
+		if bulletsInClip == 0:
+			can_shoot = false
+		#if clip isn't empty set can_shoot to true
+		#if can_shoot is true run fire_bullet and subtract 1 bullet from clip
+		if can_shoot == true:
+			fire_bullet()
+			#Tracks number of bullets in clip
+			bulletsInClip -= 1
+		#otherwise run the reload function instead
+		elif can_shoot == false and timer.time_left == 0:
+			timer.start()
+			print(timer.get_wait_time())
 
 func get_input_vector():
 	#input vector is direction of key input (WASD)
@@ -71,6 +94,10 @@ func look_rotation():
 	var look_vector = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vector.y, look_vector.x)
 
+func weapon_Reload():
+	can_shoot = true
+	#Resets bulletsInClip back to 16 after timer
+	bulletsInClip = 16
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)

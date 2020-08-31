@@ -5,51 +5,31 @@
 [ext_resource path="res://Enemies/BasicEnemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level/Camera2D.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/Square.png-2bdda9aaaaadf925749a415c5e8e6c53.stex"
-
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_bloom = 0.15
 glow_blend_mode = 0
 glow_bicubic_upscale = true
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1722.4, 10 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 17.0841, 976.462 )
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Square.png-2bdda9aaaaadf925749a415c5e8e6c53.stex"
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 1723.17, 10 )
+extents = Vector2( 1749.03, 10 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 12.2675, 975.305 )
+extents = Vector2( 14.7296, 975.523 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14.7296, 975.523 )
+extents = Vector2( 1754.81, 10 )
 
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
-
-[node name="testingsquares" type="Sprite" parent="."]
-position = Vector2( 99.6592, 1381.52 )
-scale = Vector2( 217.988, 12.859 )
-texture = SubResource( 1 )
-
-[node name="testingsquares2" type="Sprite" parent="."]
-position = Vector2( -1610.04, 318.821 )
-scale = Vector2( 4.67838, 120.715 )
-texture = SubResource( 1 )
-
-[node name="testingsquares4" type="Sprite" parent="."]
-position = Vector2( 1868.03, 318.821 )
-scale = Vector2( 4.67838, 120.715 )
-texture = SubResource( 1 )
-
-[node name="testingsquares3" type="Sprite" parent="."]
-position = Vector2( 113.843, -656.968 )
-scale = Vector2( 212.96, 1.5 )
-texture = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 299.546, 275.37 )
@@ -65,9 +45,11 @@ position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
 current = true
 process_mode = 0
+smoothing_enabled = true
+smoothing_speed = 4.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 
 [node name="BasicEnemy4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -35.139, 410.3 )
@@ -124,29 +106,45 @@ position = Vector2( 657.381, -432.966 )
 collision_layer = 1
 collision_mask = 1
 
-[node name="Wall" type="StaticBody2D" parent="."]
-collision_layer = 2
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 3
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
-position = Vector2( 116.436, -648.899 )
-shape = SubResource( 3 )
+[node name="LeftWallCollider" type="CollisionShape2D" parent="Walls"]
+position = Vector2( -1628.74, 313.692 )
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
-modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
-position = Vector2( 115.673, 1299.96 )
+[node name="LeftWall" type="Sprite" parent="Walls/LeftWallCollider"]
+position = Vector2( 0.881836, 1.56552 )
+scale = Vector2( 2.00567, 123.388 )
+texture = SubResource( 3 )
+
+[node name="BottomWallCollider" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 125.779, 1287.97 )
 scale = Vector2( 1, 1.091 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
-modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
-position = Vector2( -1593.3, 313.692 )
+[node name="BottomWall" type="Sprite" parent="Walls/BottomWallCollider"]
+position = Vector2( -7.05593, 0.498779 )
+scale = Vector2( 219.834, 1.42039 )
+texture = SubResource( 3 )
+
+[node name="RightWallCollider" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 1856.44, 323.468 )
 shape = SubResource( 5 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
-modulate = Color( 0.027451, 0.27451, 0.054902, 1 )
-position = Vector2( 1825.78, 319.904 )
+[node name="RightWall" type="Sprite" parent="Walls/RightWallCollider"]
+position = Vector2( 0.894653, -9.99185 )
+scale = Vector2( 2.00567, 122.72 )
+texture = SubResource( 3 )
+
+[node name="TopWallCollider" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 112.872, -654.982 )
 shape = SubResource( 6 )
+
+[node name="TopWall" type="Sprite" parent="Walls/TopWallCollider"]
+position = Vector2( 9.87984, -1.98572 )
+scale = Vector2( 218.974, 1.5 )
+texture = SubResource( 3 )
 
 [editable path="Player"]
