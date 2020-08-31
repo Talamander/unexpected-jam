@@ -3,8 +3,7 @@
 [ext_resource path="res://Effects/HitEffect.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.985185, 1 )
-colors = PoolColorArray( 1, 0.636719, 0.636719, 1, 0.988281, 0.0424652, 0.0424652, 1, 0.960938, 0.504574, 0.0187683, 1 )
+colors = PoolColorArray( 0.987583, 0.636719, 1, 1, 0.961426, 0, 0.566152, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )

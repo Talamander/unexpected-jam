@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Square.png" type="Texture" id=1]
 [ext_resource path="res://ParentClasses/Projectile.tscn" type="PackedScene" id=2]
@@ -7,12 +7,33 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
 
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.125926, 0.785185 )
+colors = PoolColorArray( 0.0429688, 0.34391, 1, 1, 0.429783, 0.698435, 0.991211, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 13.97
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 413.79
+initial_velocity_random = 0.57
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.22
+scale = 5.0
+scale_random = 0.5
+color_ramp = SubResource( 4 )
+
 [node name="PlayerBullet" instance=ExtResource( 2 )]
 scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 0.6, 0.690196, 1, 1 )
+modulate = Color( 0.4, 0.529412, 0.976471, 1 )
 texture = ExtResource( 1 )
 
 [node name="VisibilityNotifier2D" parent="." index="1"]
@@ -23,5 +44,18 @@ collision_mask = 10
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 1 )
+
+[node name="ParticleTrail" type="Particles2D" parent="." index="4"]
+show_behind_parent = true
+rotation = -3.14159
+emitting = false
+amount = 40
+one_shot = true
+speed_scale = 1.76
+process_material = SubResource( 2 )
+
+[node name="ParticleTrailTimer" type="Timer" parent="." index="5"]
+wait_time = 3.0
+one_shot = true
 
 [editable path="Hitbox"]

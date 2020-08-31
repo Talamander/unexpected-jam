@@ -102,6 +102,13 @@ func weapon_Reload():
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
+	
+	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
+	#This works for setting the bullets rotation and particle rotations though
+	var look_vector = get_global_mouse_position() - global_position
+	global_rotation = atan2(look_vector.y, look_vector.x)
+	
+	bullet.set_rotation(global_rotation)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 	motion -= bullet.velocity * .75
