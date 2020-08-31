@@ -113,6 +113,7 @@ func _on_Hurtbox_hit(damage):
 		self.modulate = Color.white
 		stunTimer.start()
 		stun = true
+		Global.emit_signal("add_screenshake", 2, 0.15)
 
 func _on_died():
 	queue_free()
