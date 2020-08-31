@@ -4,6 +4,7 @@ var PlayerStats = Global.PlayerStats
 
 #Preloading other scenes
 var playerBullet = preload("res://Player/PlayerBullet.tscn")
+var explosion = preload("res://Effects/ExplosionEffect.tscn")
 
 #References to nodes under Player
 onready var playerSprite = $Sprite
@@ -113,9 +114,11 @@ func _on_Hurtbox_hit(damage):
 		self.modulate = Color.white
 		stunTimer.start()
 		stun = true
-		Global.emit_signal("add_screenshake", 2, 0.15)
+		var hiteffect = Global.emit_signal("add_screenshake", 2, 0.15)
+		add_child(hiteffect)
 
 func _on_died():
+	Global.instance_scene_on_main(explosion, playerSprite.global_position)
 	queue_free()
 
 func _on_StunTimer_timeout():
