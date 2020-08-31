@@ -114,8 +114,7 @@ func _on_Hurtbox_hit(damage):
 		self.modulate = Color.white
 		stunTimer.start()
 		stun = true
-		var hiteffect = Global.emit_signal("add_screenshake", 2, 0.15)
-		add_child(hiteffect)
+		Global.emit_signal("add_screenshake", 2, 0.15)
 
 func _on_died():
 	Global.instance_scene_on_main(explosion, playerSprite.global_position)
