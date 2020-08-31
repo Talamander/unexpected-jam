@@ -25,16 +25,18 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="EnemyStats" parent="." index="3"]
 max_health = 3
 
 [node name="Hitbox" parent="." index="4" instance=ExtResource( 4 )]
-collision_layer = 2147483648
+collision_layer = 4
 collision_mask = 2147483652
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="Hurtbox" parent="." index="5"]
@@ -42,6 +44,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
 shape = SubResource( 3 )
 
 [node name="StunTimer" parent="." index="6" groups=[

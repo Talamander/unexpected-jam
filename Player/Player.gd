@@ -118,6 +118,7 @@ func _on_Hurtbox_hit(damage):
 
 func _on_died():
 	Global.instance_scene_on_main(explosion, playerSprite.global_position)
+	emit_signal("player_died")
 	queue_free()
 
 func _on_StunTimer_timeout():
