@@ -31,6 +31,10 @@ shape = SubResource( 1 )
 wait_time = 0.1
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -41,6 +45,7 @@ collision_mask = 2147483648
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 visible = false
 shape = SubResource( 2 )
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 

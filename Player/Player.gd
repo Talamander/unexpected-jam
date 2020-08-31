@@ -10,9 +10,12 @@ var explosion = preload("res://Effects/ExplosionEffect.tscn")
 onready var playerSprite = $Sprite
 onready var fireRate = $FireRate
 onready var stunTimer = $StunTimer
+onready var dashTimer = $DashTimer
 
 #Movement Variables
-var speed = 400
+var baseSpeed = 400
+var dashSpeed = 600
+var speed = null
 var acceleration = 4000
 var bulletsInClip = 16
 var timer = null
@@ -27,6 +30,8 @@ signal player_died
 
 #This function runs on the load
 func _ready():
+	
+	speed = baseSpeed
 	#Sets the global.gd (singleton) var player to self. So enemies can reference it
 	Global.player = self
 	
@@ -69,6 +74,8 @@ func _physics_process(delta):
 		elif can_shoot == false and timer.time_left == 0:
 			timer.start()
 			print(timer.get_wait_time())
+	if Input.is_action_pressed("ui_space"):
+		dash()
 
 func get_input_vector():
 	#input vector is direction of key input (WASD)
@@ -99,6 +106,7 @@ func weapon_Reload():
 	can_shoot = true
 	#Resets bulletsInClip back to 16 after timer
 	bulletsInClip = 16
+	
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
@@ -113,6 +121,20 @@ func fire_bullet():
 	#Adds a little kick, tweak the number to change intensity
 	motion -= bullet.velocity * .75
 	fireRate.start()
+
+func dash():
+	speed = dashSpeed
+	dashTimer.start()
+	#Allows player to dash through enemies, may or may not want to keep
+	#Will need a more robust system if we keep it, because as of now players can phase through walls
+	get_node("CollisionShape2D").set_deferred("disabled", true)
+	#Allows player not take damage while dashing
+	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
+
+func _on_DashTimer_timeout():
+	speed = baseSpeed
+	get_node("CollisionShape2D").set_deferred("disabled", false)
+	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
 
 
 func _on_Hurtbox_hit(damage):
