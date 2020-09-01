@@ -10,6 +10,7 @@ func _ready():
 func _on_EnemySpawnTimer_timeout():
 	var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 	
+
 	while enemy_position.x < 640 and enemy_position.x > -80 or enemy_position.y < 360 and enemy_position.y > -45:
 		enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 	

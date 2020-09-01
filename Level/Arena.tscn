@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Arena.gd" type="Script" id=2]
 [ext_resource path="res://UI/WeaponHeatUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level/Camera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Square.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 17.0841, 976.462 )
@@ -21,8 +22,27 @@ extents = Vector2( 14.7296, 975.523 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 1754.81, 10 )
 
+[sub_resource type="Environment" id=7]
+background_mode = 4
+glow_enabled = true
+glow_bloom = 0.1
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
 [node name="Arena" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color( 0.145098, 0.145098, 0.145098, 1 )
+margin_left = -2916.0
+margin_top = -1146.0
+margin_right = 2962.0
+margin_bottom = 1779.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 299.546, 275.37 )
@@ -90,6 +110,9 @@ texture = SubResource( 3 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 7 )
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 
 [editable path="Player"]
