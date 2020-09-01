@@ -24,7 +24,7 @@ var weaponHeating = 0
 var timer = null
 var timer2 = null
 var overheatDelay = 2
-var weaponCoolDown = 0.1
+var weaponCoolDown = 0.6
 var can_shoot = true
 var motion = Vector2.ZERO
 var stun = false
@@ -158,8 +158,8 @@ func weapon_Overheat():
 	
 func weapon_CoolDown():
 	#Subtracts one from weaponHeating
-	weaponHeating -= 1
-	PlayerStats.currentHeat += 1
+	weaponHeating -= 2
+	PlayerStats.currentHeat += 2
 
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
