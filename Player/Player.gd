@@ -17,9 +17,11 @@ var baseSpeed = 400
 var dashSpeed = 600
 var speed = null
 var acceleration = 4000
-var bulletsInClip = 16
+var weaponHeating = 0
 var timer = null
-var reloadDelay = 2
+var timer2 = null
+var overheatDelay = 2
+var weaponCoolDown = 1
 var can_shoot = true
 var motion = Vector2.ZERO
 var stun = false
@@ -38,12 +40,18 @@ func _ready():
 	PlayerStats.connect("player_died", self, "_on_died")
 	#Sets up timer for weapon reload
 	timer = Timer.new()
+	timer2 = Timer.new()
 	#Makes timer only run itself once when called
 	timer.set_one_shot(true)
+	timer2.set_one_shot(false)
 	#Sets length of timer
-	timer.set_wait_time(reloadDelay)
-	timer.connect("timeout", self, "weapon_Reload")
+	timer.set_wait_time(overheatDelay)
+	timer2.set_wait_time(weaponCoolDown)
+	#using connect dictates what each timer does when it reaches 0
+	timer.connect("timeout", self, "weapon_Overheat")
+	timer2.connect("timeout", self, "weapon_CoolDown")
 	add_child(timer)
+	add_child(timer2)
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -61,18 +69,24 @@ func _physics_process(delta):
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
 	motion = move_and_slide(motion)
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
-		#if clip is empty
-		if bulletsInClip == 0:
+		#cancels current cooldown timer if player begins shooting again
+		if timer2.time_left != 0:
+			timer2.stop()
+		#if weaponHeating equals 16 it stops allowing the weapon to be fired
+		if weaponHeating == 16:
 			can_shoot = false
-		#if clip isn't empty set can_shoot to true
-		#if can_shoot is true run fire_bullet and subtract 1 bullet from clip
+		#if they havent reached the overheat point it fires a bullet and adds one to heating
 		if can_shoot == true:
 			fire_bullet()
-			#Tracks number of bullets in clip
-			bulletsInClip -= 1
-		#otherwise run the reload function instead
+			#Tracks the bullets until overheat
+			weaponHeating += 1
+		#otherwise runs a forced weapon cooldown, causing 2 second delay before resetting clip
 		elif can_shoot == false and timer.time_left == 0:
 			timer.start()
+	#for each second the player hasnt been shooting, when the timer ends it calls the weapon_CoolDown function
+	else:
+		if weaponHeating <= 16 and timer2.time_left == 0:
+			timer2.start()
 	if Input.is_action_pressed("ui_space"):
 		dash()
 
@@ -101,11 +115,13 @@ func look_rotation():
 	var look_vector = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vector.y, look_vector.x)
 
-func weapon_Reload():
+func weapon_Overheat():
 	can_shoot = true
-	#Resets bulletsInClip back to 16 after timer
-	bulletsInClip = 16
-	
+	#Resets weaponHeating back to 0 after timer
+	weaponHeating = 0
+func weapon_CoolDown():
+	#Subtracts one from weaponHeating
+	weaponHeating -= 1
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
