@@ -24,4 +24,5 @@ func hit_effect():
 	Global.instance_scene_on_main(hit, enemySprite.global_position)
 
 func death_effect():
+	SoundFx.play("Explosion", rand_range(0.5, 1.5), 9)
 	Global.instance_scene_on_main(explosion, enemySprite.global_position)

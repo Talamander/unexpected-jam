@@ -195,6 +195,7 @@ func _on_Hurtbox_hit(damage):
 
 func _on_died():
 	Global.instance_scene_on_main(explosion, playerSprite.global_position)
+	SoundFx.play("Explosion", rand_range(0.5, 1.5), 13)
 	emit_signal("player_died")
 	queue_free()
 

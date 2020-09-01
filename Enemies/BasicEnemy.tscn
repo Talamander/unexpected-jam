@@ -1,25 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ParentClasses/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/BasicEnemy.gd" type="Script" id=2]
 [ext_resource path="res://Circle.png" type="Texture" id=3]
 [ext_resource path="res://HitboxesAndHurtboxes/Hitbox.tscn" type="PackedScene" id=4]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 9.29826
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 9.28899
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 8.44276
+[ext_resource path="res://Enemies/EnemyCollider.tres" type="Shape2D" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( 0.380058, -55.6897, -7.80457, -54.9882, -16.4569, -52.8836, -26.5123, -48.2066, -35.6323, -41.659, -43.583, -34.1759, -49.663, -25.2897, -54.34, -13.5974, -57.1461, -0.502014, -57.38, 8.85183, -54.5738, 20.5441, -49.663, 31.3011, -43.1153, 40.1872, -34.463, 48.138, -24.8753, 54.9195, -14.1184, 58.4272, -5.23226, 60.298, -0.0876363, 60.9995, 13.4754, 58.8949, 21.8939, 57.0242, 32.8847, 50.9442, 39.6662, 44.1626, 48.0847, 33.8734, 54.3985, 22.6488, 58.6078, 10.0211, 58.1401, -4.4774, 54.8662, -18.0405, 48.0847, -31.3697, 39.1985, -40.4897, 29.1431, -47.5051, 16.5154, -52.8836, 7.1616, -55.222 )
 
 [node name="BasicEnemy" instance=ExtResource( 1 )]
 collision_layer = 2147483664
-collision_mask = 3
+collision_mask = 19
 script = ExtResource( 2 )
 speed = 440
 
@@ -29,9 +21,8 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 position = Vector2( 0.0496063, 0.248032 )
-shape = SubResource( 1 )
+shape = ExtResource( 5 )
 
 [node name="EnemyStats" parent="." index="3"]
 max_health = 4
@@ -41,14 +32,11 @@ collision_mask = 2147483652
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0.111488, 0.371627 )
-shape = SubResource( 2 )
-
-[node name="Hurtbox" parent="." index="5"]
-visible = false
+shape = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0.0625, 0.375 )
-shape = SubResource( 3 )
+shape = ExtResource( 5 )
 
 [node name="StunTimer" parent="." index="6" groups=[
 "Enemy",
