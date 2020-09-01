@@ -72,7 +72,8 @@ func _exit_tree():
 #Runs every tick
 func _physics_process(delta):
 	
-	look_rotation()
+	if stun == false:
+		look_rotation()
 	var input_vector = get_input_vector()
 	
 	#Vector2.ZERO is true when no move key is being pressed
@@ -198,7 +199,6 @@ func _on_Hurtbox_hit(damage):
 		PlayerStats.health -= damage
 		self.modulate = Color.white
 		stunTimer.start()
-		stun = true
 		Global.emit_signal("add_screenshake", 2, 0.15)
 
 func _on_died():
@@ -213,7 +213,12 @@ func _on_StunTimer_timeout():
 
 
 func _on_Hurtbox_body_entered(body):
-	#if body.is_in_group("Enemy"):
-		#var enemyVelocity = body.get_rotation()
-		#motion -= enemyVelocity * 1
-		pass
+	if body.is_in_group("Enemy"):
+		stun = true
+		var enemyRotation = body.rotation
+		self.global_rotation_degrees = body.rotation_degrees
+		#self.global_rotation_degrees += 45
+		#motion = motion.rotated(enemyRotation) * 160
+		print (global_rotation)
+		var knockback = Vector2.RIGHT.rotated(self.rotation) * baseSpeed
+		motion += knockback * 4

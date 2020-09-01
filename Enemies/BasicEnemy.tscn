@@ -47,6 +47,9 @@ wait_time = 0.1
 scale = Vector2( 0.15, 0.15 )
 occluder = SubResource( 1 )
 
+[node name="RayCast2D" type="RayCast2D" parent="." index="8"]
+rotation = -1.57079
+
 [editable path="Hitbox"]
 
 [editable path="Hurtbox"]
