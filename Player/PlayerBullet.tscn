@@ -7,14 +7,14 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.125926, 0.785185 )
 colors = PoolColorArray( 0.0429688, 0.34391, 1, 1, 0.429783, 0.698435, 0.991211, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 13.97
 gravity = Vector3( 0, 0, 0 )
@@ -26,7 +26,7 @@ linear_accel = 100.0
 linear_accel_random = 0.22
 scale = 5.0
 scale_random = 0.5
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
 [node name="PlayerBullet" instance=ExtResource( 2 )]
 scale = Vector2( 0.4, 0.4 )
@@ -48,11 +48,9 @@ shape = SubResource( 1 )
 [node name="ParticleTrail" type="Particles2D" parent="." index="4"]
 show_behind_parent = true
 rotation = -3.14159
-emitting = false
 amount = 40
-one_shot = true
 speed_scale = 1.76
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )
 
 [node name="ParticleTrailTimer" type="Timer" parent="." index="5"]
 wait_time = 3.0
