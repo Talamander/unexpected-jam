@@ -7,7 +7,7 @@
 [ext_resource path="res://Player/Square.png" type="Texture" id=5]
 [ext_resource path="res://Level/TileMap.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Environment" id=7]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_bloom = 0.1
@@ -38,12 +38,6 @@ modulate = Color( 0.6, 0.690196, 1, 1 )
 [node name="CameraFocal" parent="Player" index="2"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="WeaponHeatUI" parent="Player" instance=ExtResource( 3 )]
-margin_left = 0.0119476
-margin_top = 0.257019
-margin_right = 0.0119476
-margin_bottom = 0.257019
-
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
@@ -52,11 +46,17 @@ process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 4.5
 
+[node name="WeaponHeatUI" parent="Camera2D" instance=ExtResource( 3 )]
+margin_left = 0.0119476
+margin_top = 0.257019
+margin_right = 0.0119476
+margin_bottom = 0.257019
+
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 7 )
+environment = SubResource( 1 )
 
 [node name="TileMap" parent="." instance=ExtResource( 6 )]
 modulate = Color( 0.192157, 0.192157, 0.192157, 1 )

@@ -11,6 +11,7 @@ onready var playerSprite = $Sprite
 onready var fireRate = $FireRate
 onready var stunTimer = $StunTimer
 onready var dashTimer = $DashTimer
+onready var light = $Light2D
 
 var playerColor = "57b4e2"
 
@@ -108,6 +109,13 @@ func _physics_process(delta):
 	#Dash
 	if Input.is_action_pressed("ui_space"):
 		dash()
+	
+	#Disable light and shadows hotkey
+	if Input.is_action_just_pressed("toggle_lights"):
+		if light.visible == true:
+			light.visible = false
+		elif light.visible == false:
+			light.visible = true
 
 
 
