@@ -201,3 +201,8 @@ func _on_died():
 func _on_StunTimer_timeout():
 	self.modulate = Color(playerColor)
 	stun = false
+
+
+func _on_Hurtbox_body_entered(body):
+	if body.is_in_group("Enemy"):
+		pass

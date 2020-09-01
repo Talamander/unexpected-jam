@@ -64,6 +64,7 @@ energy = 0.76
 shadow_enabled = true
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 
 [editable path="Hurtbox"]
