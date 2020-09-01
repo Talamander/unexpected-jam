@@ -15,6 +15,7 @@ func _ready():
 	Global.emit_signal("add_screenshake", .5, 0.15)
 	trail.emitting = true
 
+
 func _on_Hitbox_body_entered(_body):
 	bulletSprite.visible = false
 	get_node("Hitbox/CollisionShape2D").set_deferred("disabled", true)
