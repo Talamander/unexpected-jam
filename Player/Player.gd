@@ -32,21 +32,29 @@ signal player_died
 
 #This function runs on the load
 func _ready():
-	
 	speed = baseSpeed
+	
 	#Sets the global.gd (singleton) var player to self. So enemies can reference it
 	Global.player = self
 	
 	PlayerStats.connect("player_died", self, "_on_died")
+	
+	
 	#Sets up timer for weapon reload
 	timer = Timer.new()
 	timer2 = Timer.new()
+	
+	
 	#Makes timer only run itself once when called
 	timer.set_one_shot(true)
 	timer2.set_one_shot(false)
+	
+	
 	#Sets length of timer
 	timer.set_wait_time(overheatDelay)
 	timer2.set_wait_time(weaponCoolDown)
+	
+	
 	#using connect dictates what each timer does when it reaches 0
 	timer.connect("timeout", self, "weapon_Overheat")
 	timer2.connect("timeout", self, "weapon_CoolDown")
@@ -59,15 +67,20 @@ func _exit_tree():
 
 #Runs every tick
 func _physics_process(delta):
+	
 	look_rotation()
 	var input_vector = get_input_vector()
+	
 	#Vector2.ZERO is true when no move key is being pressed
 	if input_vector == Vector2.ZERO:
 		apply_friction(acceleration * delta)
 	else:
 		calc_movement(input_vector * acceleration * delta)
+		
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
 	motion = move_and_slide(motion)
+	
+	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
 		#cancels current cooldown timer if player begins shooting again
 		if timer2.time_left != 0:
@@ -80,6 +93,7 @@ func _physics_process(delta):
 			fire_bullet()
 			#Tracks the bullets until overheat
 			weaponHeating += 1
+			PlayerStats.currentHeat -= 1
 		#otherwise runs a forced weapon cooldown, causing 2 second delay before resetting clip
 		elif can_shoot == false and timer.time_left == 0:
 			timer.start()
@@ -87,8 +101,13 @@ func _physics_process(delta):
 	else:
 		if weaponHeating <= 16 and timer2.time_left == 0:
 			timer2.start()
+	
+	#Dash
 	if Input.is_action_pressed("ui_space"):
 		dash()
+
+
+
 
 func get_input_vector():
 	#input vector is direction of key input (WASD)
@@ -115,13 +134,21 @@ func look_rotation():
 	var look_vector = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vector.y, look_vector.x)
 
+
+
+
+
+
 func weapon_Overheat():
 	can_shoot = true
 	#Resets weaponHeating back to 0 after timer
 	weaponHeating = 0
+	
 func weapon_CoolDown():
 	#Subtracts one from weaponHeating
 	weaponHeating -= 1
+	PlayerStats.currentHeat += 1
+
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
@@ -150,6 +177,9 @@ func _on_DashTimer_timeout():
 	speed = baseSpeed
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
+
+
+
 
 
 func _on_Hurtbox_hit(damage):
