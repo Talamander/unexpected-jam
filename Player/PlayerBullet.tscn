@@ -9,7 +9,7 @@ extents = Vector2( 7.5, 7.5 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0.125926, 0.785185 )
-colors = PoolColorArray( 0.0429688, 0.34391, 1, 1, 0.429783, 0.698435, 0.991211, 1 )
+colors = PoolColorArray( 0.341176, 0.705882, 0.886275, 1, 0.875462, 0.92898, 0.987305, 1 )
 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
@@ -33,7 +33,7 @@ scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 0.4, 0.529412, 0.976471, 1 )
+modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
 texture = ExtResource( 1 )
 
 [node name="VisibilityNotifier2D" parent="." index="1"]

@@ -89,5 +89,5 @@ ui_space={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.113725, 0.109804, 0.109804, 1 )
+environment/default_clear_color=Color( 0.145098, 0.145098, 0.145098, 1 )
 environment/default_environment="res://default_env.tres"

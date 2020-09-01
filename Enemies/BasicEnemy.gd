@@ -36,6 +36,6 @@ func _on_EnemyStats_enemy_died():
 	
 #This function exists in Enemy parent class, but I decided to also put it here so enemies can be unique
 func _on_StunTimer_timeout():
-	enemySprite.modulate = Color("fa4d4d")
+	enemySprite.modulate = Color("ff3b3b")
 	#currently not doing anything with this stun variable, but it may come in handy
 	stun = false

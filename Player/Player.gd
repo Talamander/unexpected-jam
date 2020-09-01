@@ -12,6 +12,8 @@ onready var fireRate = $FireRate
 onready var stunTimer = $StunTimer
 onready var dashTimer = $DashTimer
 
+var playerColor = "57b4e2"
+
 #Movement Variables
 var baseSpeed = 400
 var dashSpeed = 600
@@ -32,6 +34,7 @@ signal player_died
 
 #This function runs on the load
 func _ready():
+	self.modulate = Color(playerColor)
 	speed = baseSpeed
 	
 	#Sets the global.gd (singleton) var player to self. So enemies can reference it
@@ -196,5 +199,5 @@ func _on_died():
 	queue_free()
 
 func _on_StunTimer_timeout():
-	self.modulate = Color("4c65b9")
+	self.modulate = Color(playerColor)
 	stun = false

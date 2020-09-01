@@ -2,13 +2,14 @@
 
 [ext_resource path="res://Effects/HitEffect.gd" type="Script" id=1]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.987583, 0.636719, 1, 1, 0.961426, 0, 0.566152, 1 )
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.125926, 0.785185 )
+colors = PoolColorArray( 0.341176, 0.705882, 0.886275, 1, 0.875462, 0.92898, 0.987305, 1 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -22,7 +23,7 @@ linear_accel = 100.0
 linear_accel_random = 0.37
 scale = 1.5
 scale_random = 0.5
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 3 )
 
 [node name="HitEffect" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,7 +33,7 @@ amount = 16
 lifetime = 0.5
 explosiveness = 1.0
 randomness = 0.39
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
