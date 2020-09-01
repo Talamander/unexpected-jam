@@ -213,5 +213,7 @@ func _on_StunTimer_timeout():
 
 
 func _on_Hurtbox_body_entered(body):
-	if body.is_in_group("Enemy"):
+	#if body.is_in_group("Enemy"):
+		#var enemyVelocity = body.get_rotation()
+		#motion -= enemyVelocity * 1
 		pass

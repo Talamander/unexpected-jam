@@ -15,7 +15,9 @@ func chase_player(delta):
 	motion = motion.clamped(speed)
 	motion = move_and_slide(motion)
 
-
+func get_rotation():
+	var enemyrotation = 
+	return enemyrotation
 
 
 #This function exists in Enemy parent class, but I decided to also put it here so enemies can be unique
