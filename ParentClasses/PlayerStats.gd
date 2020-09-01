@@ -25,4 +25,3 @@ func set_health(value):
 func set_heat(value):
 	currentHeat = clamp(value, 0, MaxHeat)
 	emit_signal("player_heat_changed", currentHeat)
-	print (currentHeat)
