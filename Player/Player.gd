@@ -11,6 +11,7 @@ onready var playerSprite = $Sprite
 onready var fireRate = $FireRate
 onready var stunTimer = $StunTimer
 onready var dashTimer = $DashTimer
+onready var dashRechargeTimer = $DashRechargeTimer
 onready var light = $Light2D
 onready var muzzle = $Muzzle
 
@@ -26,6 +27,7 @@ var dashSpeed = 600
 var speed = null
 var acceleration = 4000
 var can_shoot = true
+var can_dash = true
 var motion = Vector2.ZERO
 var stun = false
 
@@ -74,7 +76,7 @@ func _physics_process(delta):
 		regen_ammo()
 	
 	#Dash
-	if Input.is_action_pressed("ui_space") and dashTimer.time_left == 0:
+	if Input.is_action_pressed("ui_space") and can_dash == true:
 		dash()
 	
 	#Disable light and shadows hotkey
@@ -162,11 +164,14 @@ func dash():
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
 
 func _on_DashTimer_timeout():
-	print("Cant Dash")
 	speed = baseSpeed
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
-
+	can_dash = false
+	dashRechargeTimer.start()
+	print("Cant Dash")
+func _on_DashRechargeTimer_timeout():
+	can_dash = true
 
 
 
@@ -200,4 +205,7 @@ func _on_Hurtbox_body_entered(body):
 		print (global_rotation)
 		var knockback = Vector2.RIGHT.rotated(self.rotation) * baseSpeed
 		motion += knockback * 4
+
+
+
 
