@@ -133,9 +133,10 @@ func fire_bullet():
 
 
 func regen_ammo():
-	if PlayerStats.currentAmmo > 0:
+	if PlayerStats.currentAmmo > 1:
 		ammoRegenTimer.start()
 	if PlayerStats.currentAmmo == 0:
+		ammoRegenTimer.stop()
 		ammoRegenZeroedTimer.start()
 		canShoot = false
 
@@ -147,7 +148,7 @@ func _on_AmmoRegenTimer_timeout():
 func _on_AmmoRegenZeroedTimer_timeout():
 	if PlayerStats.currentAmmo == 0:
 		PlayerStats.currentAmmo += 12
-	canShoot = true
+		canShoot = true
 
 
 func dash():

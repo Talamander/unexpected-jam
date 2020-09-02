@@ -82,7 +82,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="AmmoRegenZeroedTimer" type="Timer" parent="Timers"]
-wait_time = 3.0
+wait_time = 6.0
 one_shot = true
 
 [node name="AmmoRegenTimer" type="Timer" parent="Timers"]
