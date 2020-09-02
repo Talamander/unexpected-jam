@@ -33,21 +33,6 @@ shape = ExtResource( 5 )
 rotation = -1.57079
 update_rotation = false
 
-[node name="FireRate" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
-
-[node name="StunTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="AmmoRegenTimer" type="Timer" parent="."]
-wait_time = 0.4
-
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 4
 collision_mask = 2147483648
@@ -75,14 +60,40 @@ rotation = -1.57079
 [node name="Muzzle" type="Position2D" parent="."]
 position = Vector2( 8, 0 )
 
-[node name="AmmoRegenZeroedTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="FireRate" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
+one_shot = true
+
+[node name="DashTrailTimer" type="Timer" parent="Timers"]
+wait_time = 0.05
+autostart = true
+
+[node name="DashRechargeTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="AmmoRegenZeroedTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
 one_shot = true
-[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
-[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
-[connection signal="timeout" from="AmmoRegenTimer" to="." method="_on_AmmoRegenTimer_timeout"]
+
+[node name="AmmoRegenTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
-[connection signal="timeout" from="AmmoRegenZeroedTimer" to="." method="_on_AmmoRegenZeroedTimer_timeout"]
+[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="Timers/DashTrailTimer" to="." method="_on_DashTrailTimer_timeout"]
+[connection signal="timeout" from="Timers/DashRechargeTimer" to="." method="_on_DashRechargeTimer_timeout"]
+[connection signal="timeout" from="Timers/StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="Timers/AmmoRegenZeroedTimer" to="." method="_on_AmmoRegenZeroedTimer_timeout"]
+[connection signal="timeout" from="Timers/AmmoRegenTimer" to="." method="_on_AmmoRegenTimer_timeout"]
 
 [editable path="Hurtbox"]

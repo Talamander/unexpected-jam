@@ -5,19 +5,19 @@ var PlayerStats = Global.PlayerStats
 #Preloading other scenes
 var playerBullet = preload("res://Player/PlayerBullet.tscn")
 var explosion = preload("res://Effects/ExplosionEffect.tscn")
+var dash_trail_effect = preload("res://Effects/DashTrailEffect.tscn")
 
 #References to nodes under Player
 onready var playerSprite = $Sprite
-onready var fireRate = $FireRate
-onready var stunTimer = $StunTimer
-onready var dashTimer = $DashTimer
-onready var dashRechargeTimer = $DashRechargeTimer
+onready var fireRate = $Timers/FireRate
+onready var stunTimer = $Timers/StunTimer
+onready var dashTimer = $Timers/DashTimer
+onready var dashRechargeTimer = $Timers/DashRechargeTimer
 onready var light = $Light2D
 onready var muzzle = $Muzzle
 
-onready var weaponHeatTimer = $WeaponHeatTimer
-onready var ammoRegenTimer = $AmmoRegenTimer
-onready var ammoRegenZeroedTimer = $AmmoRegenZeroedTimer
+onready var ammoRegenTimer = $Timers/AmmoRegenTimer
+onready var ammoRegenZeroedTimer = $Timers/AmmoRegenZeroedTimer
 
 var playerColor = "57b4e2"
 
@@ -28,6 +28,7 @@ var speed = null
 var acceleration = 4000
 var can_shoot = true
 var can_dash = true
+var is_dashing = false
 var motion = Vector2.ZERO
 var stun = false
 
@@ -162,6 +163,7 @@ func dash():
 	get_node("CollisionShape2D").set_deferred("disabled", true)
 	#Allows player not take damage while dashing
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
+	is_dashing = true
 
 func _on_DashTimer_timeout():
 	speed = baseSpeed
@@ -170,9 +172,18 @@ func _on_DashTimer_timeout():
 	can_dash = false
 	dashRechargeTimer.start()
 	print("Cant Dash")
+	is_dashing = false
+
 func _on_DashRechargeTimer_timeout():
 	can_dash = true
 
+func _on_DashTrailTimer_timeout():
+	if is_dashing == true:
+		var dashtrail = Global.instance_scene_on_main(dash_trail_effect, playerSprite.global_position)
+		#get_parent().add_child(dashtrail)
+		#dashtrail.position = position
+		#dashtrail.texture.texture = playerSprite
+		dashtrail.rotation = rotation
 
 
 
