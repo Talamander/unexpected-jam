@@ -4,7 +4,7 @@ class_name PlayerStats
 
 export(int)var max_health = 4
 var health = max_health setget set_health
-var MaxHeat = 16
+var MaxHeat = 32
 var currentHeat = MaxHeat setget set_heat
 
 signal player_health_changed(value)
