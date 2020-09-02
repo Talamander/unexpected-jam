@@ -157,11 +157,17 @@ func weapon_Overheat():
 	can_shoot = true
 	#Resets weaponHeating back to 0 after timer
 	weaponHeating = 12
+	PlayerStats.currentHeat = 24
 	
 func weapon_CoolDown():
 	#Subtracts one from weaponHeating
-	weaponHeating -= 2
-	PlayerStats.currentHeat += 2
+	#fix This
+	if weaponHeating > 1:
+		weaponHeating -= 2
+		PlayerStats.currentHeat += 2
+	elif weaponHeating > 0:
+		weaponHeating -= 1
+		PlayerStats.currentHeat += 1
 
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
