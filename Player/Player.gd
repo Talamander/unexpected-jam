@@ -96,6 +96,7 @@ func _physics_process(delta):
 			can_shoot = false
 		#if they havent reached the overheat point it fires a bullet and adds one to heating
 		if can_shoot == true:
+			print(weaponHeating)
 			fire_bullet()
 			#Tracks the bullets until overheat
 			weaponHeating += 1
@@ -105,7 +106,7 @@ func _physics_process(delta):
 			overHeatTimer.start()
 	#for each second the player hasnt been shooting, when the timer ends it calls the weapon_CoolDown function
 	else:
-		if weaponHeating <= 32 and coolDownTimer.time_left == 0:
+		if weaponHeating > 0 and coolDownTimer.time_left == 0:
 			coolDownTimer.start()
 	
 	#Dash
