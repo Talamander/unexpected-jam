@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Effects/DashTrailEffect.gd" type="Script" id=1]
+[ext_resource path="res://Player/Square.png" type="Texture" id=2]
+
+[node name="DashTrailEffect" type="Node2D"]
+modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
+show_behind_parent = true
+position = Vector2( 1, 1 )
+scale = Vector2( 0.75, 0.75 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="AlphaTween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
+[connection signal="tween_completed" from="AlphaTween" to="." method="_on_AlphaTween_tween_completed"]
