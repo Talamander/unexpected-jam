@@ -40,6 +40,10 @@ remote_path = NodePath("../../Camera2D")
 [node name="MeterFocal" parent="Player" index="3"]
 remote_path = NodePath("../../WeaponHeatUIRT")
 
+[node name="DashRechargeTimer" type="Timer" parent="Player"]
+wait_time = 5.0
+one_shot = true
+
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
@@ -69,6 +73,7 @@ position = Vector2( 225, -55 )
 
 [node name="BasicEnemy2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 379, -7 )
+[connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 
 [editable path="Player"]
