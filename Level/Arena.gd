@@ -1,6 +1,6 @@
 extends Node2D
 
-var basicEnemy = preload("res://Enemies/ShootingEnemy.tscn")
+var basicEnemy = preload("res://Enemies/360Enemy.tscn")
 
 var instancetimer = null
 var instancetimerlength = 3

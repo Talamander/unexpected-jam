@@ -4,7 +4,7 @@ var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
 
 var player = null
 
-var MaxEnemies = 4
+var MaxEnemies = 1
 var currentEnemies = 0 setget set_enemies
 
 # warning-ignore-all:unused_signal
