@@ -190,11 +190,11 @@ func _on_Hurtbox_hit(damage):
 		self.modulate = Color.white
 		stunTimer.start()
 		Global.emit_signal("add_screenshake", 2, 0.15)
-		SoundFx.play("Hit", rand_range(.9, 1.5), 2)
+		SoundFx.play("Hit", rand_range(.5, 1.2), -2)
 
 func _on_died():
 	Global.instance_scene_on_main(explosion, playerSprite.global_position)
-	SoundFx.play("Explosion", rand_range(0.5, 1.5), 12)
+	SoundFx.play("Explosion", rand_range(0.6, 1.4), 5)
 	emit_signal("player_died")
 	queue_free()
 

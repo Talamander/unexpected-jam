@@ -42,9 +42,9 @@ func _on_StunTimer_timeout():
 	pass
 
 func hit_effect():
-	SoundFx.play("Hit", rand_range(.5, 1.2), -3)
+	SoundFx.play("Hit", rand_range(.5, 1.2), -9)
 	Global.instance_scene_on_main(hit, enemySprite.global_position)
 
 func death_effect():
-	SoundFx.play("Explosion", rand_range(0.5, 1.5), 5)
+	SoundFx.play("Explosion", rand_range(0.6, 1.4), 5)
 	Global.instance_scene_on_main(explosion, enemySprite.global_position)
