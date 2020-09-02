@@ -5,7 +5,7 @@ onready var bulletCollision = $Hitbox/CollisionShape2D
 onready var trailTimer = $ParticleTrailTimer
 onready var trail = $ParticleTrail
 
-
+onready var decayTimer = $decayTimer
 
 
 #Bullet speed
@@ -34,3 +34,8 @@ func _on_Hitbox_area_entered(_area):
 	trailTimer.start()
 	if trailTimer.time_left == 0:
 		queue_free()
+
+
+func _on_decayTimer_timeout():
+	print("hello")
+	queue_free()
