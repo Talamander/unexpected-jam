@@ -22,8 +22,8 @@ var dashSpeed = 600
 var speed = null
 var acceleration = 4000
 var weaponHeating = 0
-var timer = null
-var timer2 = null
+var overHeatTimer = null
+var coolDownTimer = null
 var overheatDelay = 2
 var weaponCoolDown = 0.6
 var can_shoot = true
@@ -46,25 +46,25 @@ func _ready():
 	
 	
 	#Sets up timer for weapon reload
-	timer = Timer.new()
-	timer2 = Timer.new()
+	overHeatTimer = Timer.new()
+	coolDownTimer = Timer.new()
 	
 	
 	#Makes timer only run itself once when called
-	timer.set_one_shot(true)
-	timer2.set_one_shot(false)
+	overHeatTimer.set_one_shot(true)
+	coolDownTimer.set_one_shot(false)
 	
 	
 	#Sets length of timer
-	timer.set_wait_time(overheatDelay)
-	timer2.set_wait_time(weaponCoolDown)
+	overHeatTimer.set_wait_time(overheatDelay)
+	coolDownTimer.set_wait_time(weaponCoolDown)
 	
 	
 	#using connect dictates what each timer does when it reaches 0
-	timer.connect("timeout", self, "weapon_Overheat")
-	timer2.connect("timeout", self, "weapon_CoolDown")
-	add_child(timer)
-	add_child(timer2)
+	overHeatTimer.connect("timeout", self, "weapon_Overheat")
+	coolDownTimer.connect("timeout", self, "weapon_CoolDown")
+	add_child(overHeatTimer)
+	add_child(coolDownTimer)
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -89,8 +89,8 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
 		#cancels current cooldown timer if player begins shooting again
-		if timer2.time_left != 0:
-			timer2.stop()
+		if coolDownTimer.time_left != 0:
+			coolDownTimer.stop()
 		#if weaponHeating equals 32 it stops allowing the weapon to be fired
 		if weaponHeating == 32:
 			can_shoot = false
@@ -101,12 +101,12 @@ func _physics_process(delta):
 			weaponHeating += 1
 			PlayerStats.currentHeat -= 1
 		#otherwise runs a forced weapon cooldown, causing 2 second delay before resetting clip
-		elif can_shoot == false and timer.time_left == 0:
-			timer.start()
+		elif can_shoot == false and overHeatTimer.time_left == 0:
+			overHeatTimer.start()
 	#for each second the player hasnt been shooting, when the timer ends it calls the weapon_CoolDown function
 	else:
-		if weaponHeating <= 16 and timer2.time_left == 0:
-			timer2.start()
+		if weaponHeating <= 16 and coolDownTimer.time_left == 0:
+			coolDownTimer.start()
 	
 	#Dash
 	if Input.is_action_pressed("ui_space"):
