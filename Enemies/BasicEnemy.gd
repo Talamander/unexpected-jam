@@ -1,20 +1,12 @@
 extends "res://ParentClasses/Enemy.gd"
 
-export var speed = 425
-export var acceleration = 4000
+
+var enemyColor = "ff3b3b"
 
 
 func _physics_process(delta):
 	if Global.player != null:
 		chase_player(delta, rotation)
-
-func chase_player(delta, value):
-	var direction = (Global.player.global_position - global_position).normalized()
-	motion += direction * acceleration * delta
-	motion = motion.clamped(speed)
-	motion = move_and_slide(motion)
-	
-	rotation = direction.angle()
 
 
 
@@ -38,6 +30,10 @@ func _on_EnemyStats_enemy_died():
 	
 #This function exists in Enemy parent class, but I decided to also put it here so enemies can be unique
 func _on_StunTimer_timeout():
-	enemySprite.modulate = Color("ff3b3b")
+	enemySprite.modulate = Color(enemyColor)
 	#currently not doing anything with this stun variable, but it may come in handy
 	stun = false
+
+
+func _on_FireRate_timeout():
+	pass # Replace with function body.

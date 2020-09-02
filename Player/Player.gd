@@ -12,6 +12,7 @@ onready var fireRate = $FireRate
 onready var stunTimer = $StunTimer
 onready var dashTimer = $DashTimer
 onready var light = $Light2D
+onready var muzzle = $Muzzle
 
 var playerColor = "57b4e2"
 
@@ -163,7 +164,7 @@ func weapon_CoolDown():
 
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
-	var bullet = Global.instance_scene_on_main(playerBullet, playerSprite.global_position)
+	var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
 	
 	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
 	#This works for setting the bullets rotation and particle rotations though

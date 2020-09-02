@@ -1,20 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Square.png" type="Texture" id=1]
 [ext_resource path="res://ParentClasses/Projectile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/PlayerBullet.gd" type="Script" id=3]
+[ext_resource path="res://Player/playerbullet.tres" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
 
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0.125926, 0.785185 )
-colors = PoolColorArray( 0.341176, 0.705882, 0.886275, 1, 0.875462, 0.92898, 0.987305, 1 )
-
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
-
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=2]
 flag_disable_z = true
 spread = 13.97
 gravity = Vector3( 0, 0, 0 )
@@ -26,7 +20,7 @@ linear_accel = 100.0
 linear_accel_random = 0.22
 scale = 5.0
 scale_random = 0.5
-color_ramp = SubResource( 3 )
+color_ramp = ExtResource( 4 )
 
 [node name="PlayerBullet" instance=ExtResource( 2 )]
 scale = Vector2( 0.4, 0.4 )
@@ -50,7 +44,7 @@ show_behind_parent = true
 rotation = -3.14159
 amount = 40
 speed_scale = 1.76
-process_material = SubResource( 4 )
+process_material = SubResource( 2 )
 
 [node name="ParticleTrailTimer" type="Timer" parent="." index="5"]
 wait_time = 3.0

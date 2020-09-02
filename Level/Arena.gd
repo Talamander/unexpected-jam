@@ -1,6 +1,6 @@
 extends Node2D
 
-var basicEnemy = preload("res://Enemies/BasicEnemy.tscn")
+var basicEnemy = preload("res://Enemies/ShootingEnemy.tscn")
 var instancetimer = null
 var instancetimerlength = 3
 var instanceEffect = ["Explosive Modifier", "Teleporting Enemies", "Dashing Enemies", "Shotgun Enemies",

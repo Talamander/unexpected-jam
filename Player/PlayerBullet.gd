@@ -8,7 +8,7 @@ onready var trail = $ParticleTrail
 
 
 #Bullet speed
-export var speed = 550
+export var speed = 600
 
 func _ready():
 	SoundFx.play("Bullet", rand_range(0.5, 0.9), -2)

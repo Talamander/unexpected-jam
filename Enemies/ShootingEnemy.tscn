@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://HitboxesAndHurtboxes/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/ShootingEnemy.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/ShootingEnemy.gd" type="Script" id=3]
+[ext_resource path="res://ParentClasses/EnemyStats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HitboxesAndHurtboxes/Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemies/EnemyCollider.tres" type="Shape2D" id=6]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -41.5181, -54.3765, 50.9642, -0.520458, -41.9595, 53.1149 )
+
+[node name="ShootingEnemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+collision_layer = 2147483664
+collision_mask = 19
+script = ExtResource( 3 )
+speed = 440
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.231373, 0.231373, 1 )
+rotation = 1.57079
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = -0.350446
+polygon = PoolVector2Array( 7.276, 2.592, -3.073, -9.785, -8.607, 5.268 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Enemy",
+]]
+visible = false
+position = Vector2( 0.0496063, 0.248032 )
+rotation = 0.00792529
+shape = ExtResource( 6 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="EnemyStats" parent="." instance=ExtResource( 4 )]
+max_health = 2
+
+[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+visible = false
+collision_mask = 2147483652
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0.111488, 0.371627 )
+shape = ExtResource( 6 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+visible = false
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0.0625, 0.375 )
+shape = ExtResource( 6 )
+
+[node name="StunTimer" type="Timer" parent="." groups=[
+"Enemy",
+]]
+wait_time = 0.1
+one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2( 0.15, 0.15 )
+occluder = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
+rotation = -1.57079
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.35
+one_shot = true
+
+[node name="muzzle" type="Position2D" parent="."]
+position = Vector2( 11.9963, 0 )
+[connection signal="enemy_died" from="EnemyStats" to="." method="_on_EnemyStats_enemy_died"]
+[connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
+
+[editable path="Hitbox"]
+
+[editable path="Hurtbox"]

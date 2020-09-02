@@ -11,6 +11,28 @@ onready var stats = $EnemyStats
 onready var enemySprite = $Sprite
 onready var stunTimer = $StunTimer
 
+
+export var speed = 425
+export var acceleration = 4000
+
+
+
+
+func check_the_distance():
+	var distance = self.position.distance_to(Global.player.position)
+	print (distance)
+	return distance
+
+func chase_player(delta, value):
+	var direction = (Global.player.global_position - global_position).normalized()
+	#if check_the_distance() > chaseLength:
+	motion += direction * acceleration * delta
+	motion = motion.clamped(speed)
+	motion = move_and_slide(motion)
+	
+	rotation = direction.angle()
+
+
 func _on_Hurtbox_hit(damage):
 	stats.health -= damage
 
