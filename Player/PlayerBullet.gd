@@ -37,5 +37,4 @@ func _on_Hitbox_area_entered(_area):
 
 
 func _on_decayTimer_timeout():
-	print("hello")
 	queue_free()
