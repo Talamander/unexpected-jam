@@ -147,7 +147,7 @@ func _on_AmmoRegenTimer_timeout():
 
 func _on_AmmoRegenZeroedTimer_timeout():
 	if PlayerStats.currentAmmo == 0:
-		PlayerStats.currentAmmo += 12
+		PlayerStats.currentAmmo += 32
 		canShoot = true
 
 
@@ -160,6 +160,7 @@ func dash():
 	#Allows player not take damage while dashing
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
 	is_dashing = true
+	can_dash = false
 
 func _on_DashTimer_timeout():
 	speed = baseSpeed

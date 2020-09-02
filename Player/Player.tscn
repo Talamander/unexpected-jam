@@ -82,11 +82,11 @@ wait_time = 0.5
 one_shot = true
 
 [node name="AmmoRegenZeroedTimer" type="Timer" parent="Timers"]
-wait_time = 6.0
+wait_time = 8.0
 one_shot = true
 
 [node name="AmmoRegenTimer" type="Timer" parent="Timers"]
-wait_time = 0.4
+wait_time = 0.2
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_DashTimer_timeout"]
