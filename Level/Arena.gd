@@ -23,7 +23,7 @@ func _process(delta):
 # warning-ignore:return_value_discarded
 		get_tree().reload_current_scene()
 		Global.PlayerStats.health = Global.PlayerStats.max_health
-		Global
+		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
 
 func _on_EnemySpawnTimer_timeout():
 	var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
