@@ -81,7 +81,6 @@ position = Vector2( 11.9963, 0 )
 [connection signal="enemy_died" from="EnemyStats" to="." method="_on_EnemyStats_enemy_died"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
-[connection signal="timeout" from="FireRate" to="." method="_on_FireRate_timeout"]
 
 [editable path="Hitbox"]
 

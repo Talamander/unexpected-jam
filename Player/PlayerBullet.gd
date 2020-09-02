@@ -11,7 +11,7 @@ onready var trail = $ParticleTrail
 export var speed = 600
 
 func _ready():
-	SoundFx.play("Bullet", rand_range(0.5, 0.9), -2)
+	SoundFx.play("Bullet", rand_range(0.5, 0.9), -11)
 	Global.emit_signal("add_screenshake", .5, 0.15)
 	trail.emitting = true
 

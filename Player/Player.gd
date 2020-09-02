@@ -91,8 +91,8 @@ func _physics_process(delta):
 		#cancels current cooldown timer if player begins shooting again
 		if timer2.time_left != 0:
 			timer2.stop()
-		#if weaponHeating equals 16 it stops allowing the weapon to be fired
-		if weaponHeating == 16:
+		#if weaponHeating equals 32 it stops allowing the weapon to be fired
+		if weaponHeating == 32:
 			can_shoot = false
 		#if they havent reached the overheat point it fires a bullet and adds one to heating
 		if can_shoot == true:
@@ -201,10 +201,11 @@ func _on_Hurtbox_hit(damage):
 		self.modulate = Color.white
 		stunTimer.start()
 		Global.emit_signal("add_screenshake", 2, 0.15)
+		SoundFx.play("Hit", rand_range(.9, 1.5), 2)
 
 func _on_died():
 	Global.instance_scene_on_main(explosion, playerSprite.global_position)
-	SoundFx.play("Explosion", rand_range(0.5, 1.5), 13)
+	SoundFx.play("Explosion", rand_range(0.5, 1.5), 12)
 	emit_signal("player_died")
 	queue_free()
 

@@ -20,7 +20,6 @@ export var acceleration = 4000
 
 func check_the_distance():
 	var distance = self.position.distance_to(Global.player.position)
-	print (distance)
 	return distance
 
 func chase_player(delta, value):
@@ -43,8 +42,9 @@ func _on_StunTimer_timeout():
 	pass
 
 func hit_effect():
+	SoundFx.play("Hit", rand_range(.5, 1.2), -3)
 	Global.instance_scene_on_main(hit, enemySprite.global_position)
 
 func death_effect():
-	SoundFx.play("Explosion", rand_range(0.5, 1.5), 9)
+	SoundFx.play("Explosion", rand_range(0.5, 1.5), 5)
 	Global.instance_scene_on_main(explosion, enemySprite.global_position)

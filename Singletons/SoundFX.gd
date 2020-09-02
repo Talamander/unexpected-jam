@@ -4,7 +4,8 @@ var sounds_path = "res://Music and Sounds/"
 
 var sounds = {
 	"Bullet" : load(sounds_path + "LaserTest.wav"),
-	"Explosion" : load(sounds_path + "Explosion.wav")
+	"Explosion" : load(sounds_path + "Explosion.wav"),
+	"Hit" : load(sounds_path + "hit.wav")
 }
 
 onready var sound_players = get_children()

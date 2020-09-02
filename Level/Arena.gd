@@ -15,6 +15,14 @@ func _ready():
 	instancetimer.connect("timeout", self, "instanceEffectSlicer")
 	add_child(instancetimer)
 	instancetimer.start()
+
+# warning-ignore:unused_argument
+func _process(delta):
+	
+	if Input.is_action_just_pressed("restart"):
+# warning-ignore:return_value_discarded
+		get_tree().reload_current_scene()
+
 func _on_EnemySpawnTimer_timeout():
 	var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 	
@@ -23,6 +31,7 @@ func _on_EnemySpawnTimer_timeout():
 		enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 	
 	Global.instance_scene_on_main(basicEnemy, enemy_position)
+	
 func instanceEffectSlicer():
 	instanceEffect.shuffle()
 	print(instanceEffect[0])
