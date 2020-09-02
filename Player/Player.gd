@@ -14,6 +14,10 @@ onready var dashTimer = $DashTimer
 onready var light = $Light2D
 onready var muzzle = $Muzzle
 
+onready var weaponHeatTimer = $WeaponHeatTimer
+onready var ammoRegenTimer = $AmmoRegenTimer
+onready var ammoRegenZeroedTimer = $AmmoRegenZeroedTimer
+
 var playerColor = "57b4e2"
 
 #Movement Variables
@@ -21,14 +25,14 @@ var baseSpeed = 400
 var dashSpeed = 600
 var speed = null
 var acceleration = 4000
-var weaponHeating = 0
-var overHeatTimer = null
-var coolDownTimer = null
-var overheatDelay = 2
-var weaponCoolDown = 0.6
 var can_shoot = true
 var motion = Vector2.ZERO
 var stun = false
+
+var canShoot = true
+
+var maxAmmo = PlayerStats.MaxAmmo
+var currentAmmo = PlayerStats.currentAmmo
 
 #Signals
 signal player_died
@@ -43,28 +47,6 @@ func _ready():
 	Global.player = self
 	
 	PlayerStats.connect("player_died", self, "_on_died")
-	
-	
-	#Sets up timer for weapon reload
-	overHeatTimer = Timer.new()
-	coolDownTimer = Timer.new()
-	
-	
-	#Makes timer only run itself once when called
-	overHeatTimer.set_one_shot(true)
-	coolDownTimer.set_one_shot(false)
-	
-	
-	#Sets length of timer
-	overHeatTimer.set_wait_time(overheatDelay)
-	coolDownTimer.set_wait_time(weaponCoolDown)
-	
-	
-	#using connect dictates what each timer does when it reaches 0
-	overHeatTimer.connect("timeout", self, "weapon_Overheat")
-	coolDownTimer.connect("timeout", self, "weapon_CoolDown")
-	add_child(overHeatTimer)
-	add_child(coolDownTimer)
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -87,30 +69,12 @@ func _physics_process(delta):
 	motion = move_and_slide(motion)
 	
 	
-	if Input.is_action_pressed("fire") and fireRate.time_left == 0:
-		#cancels current cooldown timer if player begins shooting again
-		if coolDownTimer.time_left != 0:
-			coolDownTimer.stop()
-		#if weaponHeating equals 32 it stops allowing the weapon to be fired
-		if weaponHeating >= 32:
-			can_shoot = false
-		#if they havent reached the overheat point it fires a bullet and adds one to heating
-		if can_shoot == true:
-			#print(weaponHeating)
-			fire_bullet()
-			#Tracks the bullets until overheat
-			weaponHeating += 1
-			PlayerStats.currentHeat -= 1
-		#otherwise runs a forced weapon cooldown, causing 2 second delay before resetting clip
-		elif can_shoot == false and overHeatTimer.time_left == 0:
-			overHeatTimer.start()
-	#for each second the player hasnt been shooting, when the timer ends it calls the weapon_CoolDown function
-	else:
-		if (weaponHeating > 0 and coolDownTimer.time_left == 0) and overHeatTimer.time_left == 0:
-			coolDownTimer.start()
+	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and currentAmmo > 0 and canShoot == true:
+		fire_bullet()
+		regen_ammo()
 	
 	#Dash
-	if Input.is_action_pressed("ui_space"):
+	if Input.is_action_pressed("ui_space") and dashTimer.time_left == 0:
 		dash()
 	
 	#Disable light and shadows hotkey
@@ -149,26 +113,6 @@ func look_rotation():
 	global_rotation = atan2(look_vector.y, look_vector.x)
 
 
-
-
-
-
-func weapon_Overheat():
-	can_shoot = true
-	#Resets weaponHeating back to 0 after timer
-	weaponHeating = 12
-	PlayerStats.currentHeat = 24
-	
-func weapon_CoolDown():
-	#Subtracts one from weaponHeating
-	#fix This
-	if weaponHeating > 1:
-		weaponHeating -= 2
-		PlayerStats.currentHeat += 2
-	elif weaponHeating > 0:
-		weaponHeating -= 1
-		PlayerStats.currentHeat += 1
-
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
@@ -183,6 +127,30 @@ func fire_bullet():
 	#Adds a little kick, tweak the number to change intensity
 	motion -= bullet.velocity * .75
 	fireRate.start()
+	
+	currentAmmo -= 1
+	PlayerStats.currentAmmo -= 1
+
+
+func regen_ammo():
+	if currentAmmo > 0:
+		ammoRegenTimer.start()
+	if currentAmmo == 0:
+		ammoRegenZeroedTimer.start()
+		canShoot = false
+
+func _on_AmmoRegenTimer_timeout():
+	if currentAmmo < maxAmmo:
+		currentAmmo += 1
+		PlayerStats.currentAmmo += 1
+		print (currentAmmo)
+
+func _on_AmmoRegenZeroedTimer_timeout():
+	if currentAmmo == 0:
+		currentAmmo += 12
+		PlayerStats.currentAmmo += 12
+	canShoot = true
+
 
 func dash():
 	speed = dashSpeed
@@ -194,6 +162,7 @@ func dash():
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
 
 func _on_DashTimer_timeout():
+	print("Cant Dash")
 	speed = baseSpeed
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
@@ -231,3 +200,4 @@ func _on_Hurtbox_body_entered(body):
 		print (global_rotation)
 		var knockback = Vector2.RIGHT.rotated(self.rotation) * baseSpeed
 		motion += knockback * 4
+

@@ -45,6 +45,9 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="AmmoRegenTimer" type="Timer" parent="."]
+wait_time = 0.4
+
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 4
 collision_mask = 2147483648
@@ -71,9 +74,15 @@ rotation = -1.57079
 
 [node name="Muzzle" type="Position2D" parent="."]
 position = Vector2( 8, 0 )
+
+[node name="AmmoRegenZeroedTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="AmmoRegenTimer" to="." method="_on_AmmoRegenTimer_timeout"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
+[connection signal="timeout" from="AmmoRegenZeroedTimer" to="." method="_on_AmmoRegenZeroedTimer_timeout"]
 
 [editable path="Hurtbox"]

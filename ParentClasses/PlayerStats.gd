@@ -4,12 +4,12 @@ class_name PlayerStats
 
 export(int)var max_health = 4
 var health = max_health setget set_health
-var MaxHeat = 32
-var currentHeat = MaxHeat setget set_heat
+var MaxAmmo = 32
+var currentAmmo = MaxAmmo setget set_ammo
 
 signal player_health_changed(value)
 signal player_died
-signal player_heat_changed(value)
+signal player_ammo_changed(value)
 
 
 func set_health(value):
@@ -22,6 +22,6 @@ func set_health(value):
 	if health == 0:
 		emit_signal("player_died")
 
-func set_heat(value):
-	currentHeat = clamp(value, 0, MaxHeat)
-	emit_signal("player_heat_changed", currentHeat)
+func set_ammo(value):
+	currentAmmo = clamp(value, 0, MaxAmmo)
+	emit_signal("player_ammo_changed", currentAmmo)
