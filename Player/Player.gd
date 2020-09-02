@@ -34,8 +34,6 @@ var stun = false
 
 var canShoot = true
 
-var maxAmmo = PlayerStats.MaxAmmo
-var currentAmmo = PlayerStats.currentAmmo
 
 #Signals
 signal player_died
@@ -72,7 +70,7 @@ func _physics_process(delta):
 	motion = move_and_slide(motion)
 	
 	
-	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and currentAmmo > 0 and canShoot == true:
+	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 		fire_bullet()
 		regen_ammo()
 	
@@ -131,26 +129,23 @@ func fire_bullet():
 	motion -= bullet.velocity * .75
 	fireRate.start()
 	
-	currentAmmo -= 1
 	PlayerStats.currentAmmo -= 1
 
 
 func regen_ammo():
-	if currentAmmo > 0:
+	if PlayerStats.currentAmmo > 0:
 		ammoRegenTimer.start()
-	if currentAmmo == 0:
+	if PlayerStats.currentAmmo == 0:
 		ammoRegenZeroedTimer.start()
 		canShoot = false
 
 func _on_AmmoRegenTimer_timeout():
-	if currentAmmo < maxAmmo:
-		currentAmmo += 1
+	if PlayerStats.currentAmmo < PlayerStats.MaxAmmo:
 		PlayerStats.currentAmmo += 1
-		print (currentAmmo)
+		print (PlayerStats.currentAmmo)
 
 func _on_AmmoRegenZeroedTimer_timeout():
-	if currentAmmo == 0:
-		currentAmmo += 12
+	if PlayerStats.currentAmmo == 0:
 		PlayerStats.currentAmmo += 12
 	canShoot = true
 
