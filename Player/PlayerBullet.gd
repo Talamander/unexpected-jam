@@ -7,10 +7,12 @@ onready var trail = $ParticleTrail
 
 
 
+
 #Bullet speed
 export var speed = 600
 
 func _ready():
+	tilemap = get_parent().get_node("TileMap")
 	SoundFx.play("Bullet", rand_range(0.5, 0.9), -11)
 	Global.emit_signal("add_screenshake", .5, 0.15)
 	trail.emitting = true
