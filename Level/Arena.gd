@@ -1,8 +1,6 @@
 extends Node2D
 
 var basicEnemy = preload("res://Enemies/ShootingEnemy.tscn")
-var maxEnemyCount = 5
-var currentEnemyCount = 0
 
 var instancetimer = null
 var instancetimerlength = 3
@@ -29,7 +27,7 @@ func _process(delta):
 		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
 
 func _on_EnemySpawnTimer_timeout():
-	if currentEnemyCount < maxEnemyCount:
+	if Global.currentEnemies < Global.MaxEnemies:
 		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		
 	
@@ -37,7 +35,9 @@ func _on_EnemySpawnTimer_timeout():
 			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		
 		Global.instance_scene_on_main(basicEnemy, enemy_position)
-		currentEnemyCount += 1
+		Global.currentEnemies += 1
+		print ("Current Enemies:", Global.currentEnemies)
+
 func instanceEffectSlicer():
 	instanceEffect.shuffle()
 	print(instanceEffect[0])

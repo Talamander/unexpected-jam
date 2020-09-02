@@ -143,7 +143,7 @@ func regen_ammo():
 func _on_AmmoRegenTimer_timeout():
 	if PlayerStats.currentAmmo < PlayerStats.MaxAmmo:
 		PlayerStats.currentAmmo += 1
-		print (PlayerStats.currentAmmo)
+		#print (PlayerStats.currentAmmo)
 
 func _on_AmmoRegenZeroedTimer_timeout():
 	if PlayerStats.currentAmmo == 0:
@@ -210,7 +210,7 @@ func _on_Hurtbox_body_entered(body):
 		self.global_rotation_degrees = body.rotation_degrees
 		#self.global_rotation_degrees += 45
 		#motion = motion.rotated(enemyRotation) * 160
-		print (global_rotation)
+		#print (global_rotation)
 		var knockback = Vector2.RIGHT.rotated(self.rotation) * baseSpeed
 		motion += knockback * 4
 

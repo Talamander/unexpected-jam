@@ -15,7 +15,7 @@ onready var stunTimer = $StunTimer
 export var speed = 425
 export var acceleration = 4000
 
-
+signal enemy_died
 
 
 func check_the_distance():
@@ -36,6 +36,7 @@ func _on_Hurtbox_hit(damage):
 	stats.health -= damage
 
 func _on_EnemyStats_enemy_died():
+	Global.currentEnemies -= 1
 	queue_free()
 
 func _on_StunTimer_timeout():
