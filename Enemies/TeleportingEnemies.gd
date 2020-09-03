@@ -15,9 +15,12 @@ func _ready():
 	teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
+
 func teleportTimeout(delta):
 	if Global.player != null:
 		chase_player(delta, rotation)
+
+
 func chase_player(delta, value):
 	var direction = (Global.player.global_position - global_position).normalized()
 	#if check_the_distance() > chaseLength:
