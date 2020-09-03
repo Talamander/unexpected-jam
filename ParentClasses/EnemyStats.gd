@@ -10,3 +10,5 @@ func set_health(value):
 	if health == 0:
 		emit_signal("enemy_died")
 		Global.waveRunner()
+		if randi()%20+1 > 18:
+			Global.itemDrop()

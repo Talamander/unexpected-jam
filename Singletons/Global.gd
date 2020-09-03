@@ -36,3 +36,5 @@ func waveRunner():
 		enemyWaveLimit += 10
 		enemiesThisWave = 0
 		print(currentWave)
+func itemDrop():
+	 null 
