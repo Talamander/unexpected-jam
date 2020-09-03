@@ -3,7 +3,7 @@ extends Node2D
 var basicEnemy = preload("res://Enemies/360Enemy.tscn")
 
 var instancetimer = null
-var instancetimerlength = 3
+var instancetimerlength = 15
 var instanceEffect = ["Explosive Modifier", "Teleporting Enemies", "Dashing Enemies", "Shotgun Enemies",
 "KillSwitch", "Damage Modifier"]
 
@@ -27,7 +27,7 @@ func _process(delta):
 		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
 
 func _on_EnemySpawnTimer_timeout():
-	if Global.currentEnemies < Global.MaxEnemies:
+	if (Global.currentEnemies < Global.MaxEnemies) and Global.enemiesThisWave != Global.enemyWaveLimit:
 		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		
 	
@@ -36,9 +36,9 @@ func _on_EnemySpawnTimer_timeout():
 		
 		Global.instance_scene_on_main(basicEnemy, enemy_position)
 		Global.currentEnemies += 1
+		Global.enemiesThisWave += 1
 		print ("Current Enemies:", Global.currentEnemies)
 
 func instanceEffectSlicer():
 	instanceEffect.shuffle()
-	print(instanceEffect[0])
 	return instanceEffect[0]

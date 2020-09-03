@@ -6,6 +6,10 @@ var player = null
 
 var MaxEnemies = 1
 var currentEnemies = 0 setget set_enemies
+var enemiesThisWave = 0
+var enemyWaveLimit = 10
+var currentWave = 1
+var totalWave = 5
 
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)
@@ -24,3 +28,10 @@ func instance_scene_on_main(scene, position):
 func set_enemies(value):
 	currentEnemies = clamp(value, 0, MaxEnemies)
 	emit_signal("enemy_count_changed", currentEnemies)
+#Will handle wave system, currently in testing
+#Its called inside EnemyStats
+func waveRunner():
+	if enemiesThisWave == enemyWaveLimit and currentEnemies == 0:
+		currentWave += 1
+		enemyWaveLimit += 10
+		print(currentWave)

@@ -168,7 +168,6 @@ func _on_DashTimer_timeout():
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
 	can_dash = false
 	dashRechargeTimer.start()
-	print("Cant Dash")
 	is_dashing = false
 
 func _on_DashRechargeTimer_timeout():
