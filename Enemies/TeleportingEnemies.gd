@@ -10,15 +10,16 @@ var teleportationDelay = null
 
 func _ready():
 	teleportationDelay = Timer.new()
-	teleportationDelay.set_one_shot(false)
+	teleportationDelay.set_one_shot(true)
 	teleportationDelay.set_wait_time(0.5)
-	teleportationDelay.connect("timeout", self, "teleportTimeout")
+	#teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
-
-func teleportTimeout(delta):
-	if Global.player != null:
+	
+func _physics_process(delta):
+	if Global.player != null and teleportationDelay.time_left == 0:
 		chase_player(delta, rotation)
+		teleportationDelay.start()
 
 
 func chase_player(delta, value):

@@ -34,6 +34,7 @@ func waveRunner():
 	if enemiesThisWave == enemyWaveLimit and currentEnemies == 0:
 		currentWave += 1
 		enemyWaveLimit += 10
+		MaxEnemies += 0
 		enemiesThisWave = 0
 		print(currentWave)
 func itemDrop():
