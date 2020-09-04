@@ -5,7 +5,23 @@ var shootingEnemy = preload("res://Enemies/ShootingEnemy.tscn")
 var radialEnemy = preload("res://Enemies/360Enemy.tscn")
 var teleportingEnemy = preload("res://Enemies/TeleportEnemy.tscn")
 
-var enemyTypes = [basicEnemy, shootingEnemy, radialEnemy, teleportingEnemy]
+var enemyTypes = [
+basicEnemy,
+basicEnemy,
+basicEnemy,
+basicEnemy,
+basicEnemy,
+shootingEnemy, 
+shootingEnemy, 
+shootingEnemy, 
+shootingEnemy, 
+shootingEnemy, 
+radialEnemy, 
+radialEnemy, 
+teleportingEnemy,
+teleportingEnemy,
+teleportingEnemy
+]
 
 var instancetimer = null
 var instancetimerlength = 15
