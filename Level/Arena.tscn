@@ -68,7 +68,7 @@ position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="TeleportEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 596, 180 )
+position = Vector2( 583, 17 )
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 

@@ -5,10 +5,10 @@
 [ext_resource path="res://Enemies/360Enemy.gd" type="Script" id=3]
 [ext_resource path="res://HitboxesAndHurtboxes/Hitbox.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 14.9354
 
-[sub_resource type="OccluderPolygon2D" id=1]
+[sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( 4.19138, -10.8776, -0.00800705, -18.0129, -4.28172, -10.8405, -12.8663, -12.8844, -10.971, -4.96876, -18.2177, -0.100439, -12.1602, 3.72732, -11.2683, 5.99425, -12.8663, 12.6835, -6.9946, 11.3457, -3.5013, 12.6092, -0.00799561, 18.2579, 3.26232, 12.6835, 6.19818, 11.2714, 13.0733, 12.8322, 11.0665, 6.10573, 11.7726, 3.9503, 18.0531, 0.0853691, 10.6949, -4.59713, 12.9246, -12.8473 )
 
 [sub_resource type="CircleShape2D" id=3]
@@ -36,10 +36,10 @@ polygon = PoolVector2Array( 0.083, -17.558, 4.336, -10.579, 12.908, -12.934, 10.
 max_health = 10
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="7"]
-occluder = SubResource( 1 )
+occluder = SubResource( 2 )
 
 [node name="Hitbox" parent="." index="8" instance=ExtResource( 4 )]
 collision_mask = 4
@@ -48,11 +48,22 @@ collision_mask = 4
 shape = SubResource( 3 )
 
 [node name="FireRate" type="Timer" parent="." index="9"]
-wait_time = 0.2
 one_shot = true
 
 [node name="muzzle" type="Position2D" parent="." index="10"]
-position = Vector2( 26.5042, 0 )
+position = Vector2( 24, 0 )
+
+[node name="muzzle2" type="Position2D" parent="." index="11"]
+position = Vector2( -24, 0 )
+rotation = -3.14159
+
+[node name="muzzle3" type="Position2D" parent="." index="12"]
+position = Vector2( 0, 24 )
+rotation = -4.71238
+
+[node name="muzzle4" type="Position2D" parent="." index="13"]
+position = Vector2( 0, -24 )
+rotation = 4.71238
 
 [editable path="Hurtbox"]
 

@@ -72,8 +72,8 @@ func _physics_process(delta):
 	motion = move_and_slide(motion)
 	
 	if motion.y != 0:
-		playerSprite.scale.y = range_lerp(abs(motion.y), 0 , abs(baseSpeed), .5, .7)
-		playerSprite.scale.x = range_lerp(abs(motion.y), 0, abs(baseSpeed), .5, .55)
+		playerSprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(baseSpeed), .5, .7)
+		playerSprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(baseSpeed), .5, .55)
 	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 		fire_bullet()
