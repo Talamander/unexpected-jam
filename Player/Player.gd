@@ -71,9 +71,14 @@ func _physics_process(delta):
 	previousMotion = motion
 	motion = move_and_slide(motion)
 	
+	#Squash&Stretch - Kinda works - Looks cool with recoil
 	if motion.y != 0:
-		playerSprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(baseSpeed), .5, .7)
-		playerSprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(baseSpeed), .5, .55)
+		playerSprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(baseSpeed), .5, .4)
+		playerSprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(baseSpeed), .5, .6)
+	if motion.x != 0:
+		playerSprite.scale.y = range_lerp(abs(previousMotion.x), 0 , abs(baseSpeed), .5, .4)
+		playerSprite.scale.x = range_lerp(abs(previousMotion.x), 0, abs(baseSpeed), .5, .6)
+	
 	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 		fire_bullet()
@@ -217,6 +222,7 @@ func _on_Hurtbox_body_entered(body):
 		#print (global_rotation)
 		var knockback = Vector2.RIGHT.rotated(self.rotation) * baseSpeed
 		motion += knockback * 4
+		stunTimer.start()
 
 
 

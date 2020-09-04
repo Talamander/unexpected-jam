@@ -4,7 +4,7 @@ var explosion = preload("res://Effects/EnemyExplosionEffect.tscn")
 var hit = preload("res://Effects/HitEffect.tscn")
 
 var motion = Vector2.ZERO
-
+var previousMotion = Vector2.ZERO
 var stun = false
 
 onready var stats = $EnemyStats
@@ -27,6 +27,7 @@ func chase_player(delta, value):
 	#if check_the_distance() > chaseLength:
 	motion += direction * acceleration * delta
 	motion = motion.clamped(speed)
+	previousMotion = motion
 	motion = move_and_slide(motion)
 	
 	rotation = direction.angle()

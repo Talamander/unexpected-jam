@@ -1,6 +1,6 @@
 extends Node2D
 
-var basicEnemy = preload("res://Enemies/360Enemy.tscn")
+var basicEnemy = preload("res://Enemies/BasicEnemy.tscn")
 
 var instancetimer = null
 var instancetimerlength = 15
@@ -29,14 +29,17 @@ func _on_EnemySpawnTimer_timeout():
 	if (Global.currentEnemies < Global.MaxEnemies) and Global.enemiesThisWave != Global.enemyWaveLimit:
 		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
 		
-	
+		
 		while enemy_position.x < 640 and enemy_position.x > -80 or enemy_position.y < 360 and enemy_position.y > -45:
 			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
-		
-		Global.instance_scene_on_main(basicEnemy, enemy_position)
-		Global.currentEnemies += 1
-		Global.enemiesThisWave += 1
-		print ("Current Enemies:", Global.currentEnemies)
+		var distanceFromPlayer = enemy_position.distance_to(Global.player.position)
+		if distanceFromPlayer > 400:
+			Global.instance_scene_on_main(basicEnemy, enemy_position)
+			Global.currentEnemies += 1
+			Global.enemiesThisWave += 1
+			print ("Current Enemies:", Global.currentEnemies)
+		else:
+			print ("too close")
 
 func instanceEffectSlicer():
 	instanceEffect.shuffle()

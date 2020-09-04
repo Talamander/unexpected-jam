@@ -4,7 +4,7 @@ var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
 
 var player = null
 
-var MaxEnemies = 0
+var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
 var enemiesThisWave = 0
 var enemyWaveLimit = 10
@@ -35,6 +35,6 @@ func waveRunner():
 		enemyWaveLimit += 10
 		MaxEnemies += 0
 		enemiesThisWave = 0
-		print(currentWave)
+		print("Wave:",currentWave)
 func itemDrop():
 	 null 

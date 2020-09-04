@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ParentClasses/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/BasicEnemy.gd" type="Script" id=2]
 [ext_resource path="res://Circle.png" type="Texture" id=3]
 [ext_resource path="res://HitboxesAndHurtboxes/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemies/EnemyCollider.tres" type="Shape2D" id=5]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 0.117828, -8.67066, -2.16664, -8.30647, -4.38489, -7.41255, -6.23895, -6.02201, -7.69571, -4.10173, -8.55653, -1.94969, -8.82139, 0.169233, -8.55653, 2.65235, -7.66261, 4.8706, -6.17274, 6.75777, -4.31867, 8.1152, -2.23285, 9.00912, -0.0146036, 9.34021, 2.36919, 8.97602, 4.65366, 8.04898, 6.4415, 6.59222, 7.79894, 4.83749, 8.79219, 2.55302, 9.02394, 0.434092, 8.72597, -2.01592, 7.76583, -4.23416, 6.4415, -6.05512, 4.62055, -7.34634, 2.30297, -8.33958 )
 
 [node name="BasicEnemy" instance=ExtResource( 1 )]
 collision_layer = 2147483664
@@ -42,6 +45,9 @@ wait_time = 0.1
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="7"]
 rotation = -1.57079
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="8"]
+occluder = SubResource( 1 )
 
 [editable path="Hitbox"]
 

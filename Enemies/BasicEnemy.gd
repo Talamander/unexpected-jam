@@ -7,6 +7,13 @@ var enemyColor = "ff3b3b"
 func _physics_process(delta):
 	if Global.player != null:
 		chase_player(delta, rotation)
+	#Squash&Stretch - Don't like how it looks on the enemy but I may come back to it
+	#if motion.y != 0:
+		#enemySprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(speed), .15, .15)
+		#enemySprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(speed), .15, .16)
+	#if motion.x != 0:
+		#enemySprite.scale.y = range_lerp(abs(previousMotion.x), 0 , abs(speed), .15, .15)
+		#enemySprite.scale.x = range_lerp(abs(previousMotion.x), 0, abs(speed), .15, .16)
 
 
 

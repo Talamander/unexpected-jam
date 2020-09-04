@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Arena.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Level/Camera2D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Square.png" type="Texture" id=5]
 [ext_resource path="res://Level/TileMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Enemies/TeleportEnemy.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -66,9 +65,6 @@ tile_data = PoolIntArray( -2228336, 0, 0, -2228335, 0, 0, -2228334, 0, 0, -22283
 [node name="WeaponHeatUIRT" parent="." instance=ExtResource( 3 )]
 position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
-
-[node name="TeleportEnemy" parent="." instance=ExtResource( 7 )]
-position = Vector2( 583, 17 )
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 
