@@ -9,6 +9,9 @@ export(int) var shootingDistance = 250
 export(float) var spread = 40
 
 onready var muzzle = $muzzle
+onready var muzzle2 = $muzzle2
+onready var muzzle3 = $muzzle3
+onready var muzzle4 = $muzzle4
 onready var fireRate = $FireRate
 
 func _physics_process(delta):
@@ -36,14 +39,24 @@ func fire_bullet():
 	#This works for setting the bullets rotation and particle rotations though
 	bullet1.speed = 300
 	
-	bullet1.set_rotation(global_rotation)
+	bullet1.set_rotation(muzzle.global_rotation)
 	bullet1.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet1.speed
 	#bullet1.velocity = Vector2.RIGHT.rotated(deg2rad(rand_range(-spread/2, spread/2))) * bullet1.speed
 	
-	#var bullet2 = Global.instance_scene_on_main(enemyBullet, enemySprite.global_position)
+	var bullet2 = Global.instance_scene_on_main(enemyBullet, muzzle2.global_position)
 	
-	#bullet2.set_rotation(-global_rotation)
-	#bullet2.velocity = -Vector2.RIGHT.rotated(self.rotation) * bullet2.speed
+	bullet2.set_rotation(muzzle2.global_rotation)
+	bullet2.velocity = -Vector2.RIGHT.rotated(self.rotation) * bullet1.speed
+	
+	var bullet3 = Global.instance_scene_on_main(enemyBullet, muzzle3.global_position)
+	
+	bullet3.set_rotation(muzzle3.global_rotation)
+	bullet3.velocity = -Vector2.UP.rotated(self.rotation) * bullet1.speed
+	
+	var bullet4 = Global.instance_scene_on_main(enemyBullet, muzzle4.global_position)
+	
+	bullet4.set_rotation(muzzle4.global_rotation)
+	bullet4.velocity = Vector2.UP.rotated(self.rotation) * bullet1.speed
 	
 	
 	fireRate.start()
