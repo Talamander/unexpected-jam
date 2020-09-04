@@ -14,6 +14,21 @@ var enemyTypesWaveTwo = [
 	basicEnemy,
 	shootingEnemy
 ]
+#Evemy Types for Wave 3
+var enemyTypesWaveThree = [
+	basicEnemy,
+	basicEnemy,
+	basicEnemy,
+	radialEnemy
+]
+#Evemy Types for Wave 4
+var enemyTypesWaveFour = [
+	basicEnemy,
+	basicEnemy,
+	basicEnemy,
+	basicEnemy,
+	teleportingEnemy
+]
 
 #Enemy Types for Wave3+
 var enemyTypes = [
@@ -80,6 +95,22 @@ func _on_EnemySpawnTimer_timeout():
 				enemyTypesWaveTwo.shuffle()
 				
 				var enemyThatSpawns = enemyTypesWaveTwo[0]
+				
+				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
+				Global.currentEnemies += 1
+				Global.enemiesThisWave += 1
+			elif Global.currentWave == 3:
+				enemyTypesWaveThree.shuffle()
+				
+				var enemyThatSpawns = enemyTypesWaveThree[0]
+				
+				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
+				Global.currentEnemies += 1
+				Global.enemiesThisWave += 1
+			elif Global.currentWave == 4:
+				enemyTypesWaveFour.shuffle()
+				
+				var enemyThatSpawns = enemyTypesWaveFour[0]
 				
 				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
 				Global.currentEnemies += 1
