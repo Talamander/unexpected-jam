@@ -27,6 +27,7 @@ func instance_scene_on_main(scene, position):
 func set_enemies(value):
 	currentEnemies = clamp(value, 0, MaxEnemies)
 	emit_signal("enemy_count_changed", currentEnemies)
+	
 #Will handle wave system, currently in testing
 #Its called inside EnemyStats
 func waveRunner():
@@ -36,5 +37,6 @@ func waveRunner():
 		MaxEnemies += 0
 		enemiesThisWave = 0
 		print("Wave:",currentWave)
+
 func itemDrop():
 	 null 
