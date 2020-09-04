@@ -7,21 +7,11 @@ var enemyBullet = preload("res://Enemies/EnemyBullet.tscn")
 var enemyColor = "ff3b3b"
 
 onready var muzzle = $muzzle
-onready var fireRate = $TpFireRate
+onready var fireRate = $FireRate
 
-export(int) var chaseLength = 230
+export(int) var chaseLength = 150
 export(int) var shootingDistance = 250
 var teleportationDelay = null
-
-# Called when the node enters the scene tree for the first time.
-func _physics_process(delta):
-	if Global.player != null and teleportationDelay.time_left == 0:
-		chase_player(delta, rotation)
-		death_effect()
-		teleportationDelay.start()
-		if check_the_distance() < shootingDistance:
-			if fireRate.time_left == 0:
-				fire_bullet()
 
 func _ready():
 	teleportationDelay = Timer.new()
@@ -30,14 +20,26 @@ func _ready():
 	#teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
+	
+# Called when the node enters the scene tree for the first time.
+func _physics_process(delta):
+	if Global.player != null and teleportationDelay.time_left == 0:
+		chase_player(delta, rotation)
+		set_collision_mask_bit(1, true)
+		teleportationDelay.start()
+		#if check_the_distance() < shootingDistance:
+			#if fireRate.time_left == 0:
+				#fire_bullet()
 
 func chase_player(delta, value):
 	var direction = (Global.player.global_position - global_position).normalized()
 	if check_the_distance() > chaseLength:
-		death_effect()
+		set_collision_mask_bit(1, false)
 		motion += direction * acceleration
 		motion = move_and_slide(motion)
+	#elif 
 	
+	death_effect()
 	rotation = direction.angle()
 
 func fire_bullet():
