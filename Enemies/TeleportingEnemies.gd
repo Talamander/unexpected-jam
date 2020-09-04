@@ -25,22 +25,20 @@ func _ready():
 func _physics_process(delta):
 	if Global.player != null and teleportationDelay.time_left == 0:
 		chase_player(delta, rotation)
-		set_collision_mask_bit(1, true)
 		teleportationDelay.start()
 		#if check_the_distance() < shootingDistance:
 			#if fireRate.time_left == 0:
 				#fire_bullet()
 
 func chase_player(delta, value):
+	var a = randf() * 2 * PI
+	var r = 170 * sqrt(randf())
+	var x = r * cos(a)
+	var y = r * sin(a)
 	var direction = (Global.player.global_position - global_position).normalized()
-	if check_the_distance() > chaseLength:
-		set_collision_mask_bit(1, false)
-		motion += direction * acceleration
-		motion = move_and_slide(motion)
-	#elif 
-	
-	death_effect()
 	rotation = direction.angle()
+	global_position = Global.player.global_position + Vector2(x,y)
+	death_effect()
 
 func fire_bullet():
 	#Instances the enemyBullet scene via the Global.gd singleton.
