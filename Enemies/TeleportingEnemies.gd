@@ -6,8 +6,8 @@ extends "res://ParentClasses/Enemy.gd"
 var enemyBullet = preload("res://Enemies/EnemyBullet.tscn")
 var enemyColor = "ff3b3b"
 
-onready var muzzle = $muzzle
-onready var fireRate = $FireRate
+onready var muzzle = $Muzzle
+#onready var fireRate = $FireRate
 
 export(int) var chaseLength = 150
 export(int) var shootingDistance = 250
@@ -16,7 +16,7 @@ var teleportationDelay = null
 func _ready():
 	teleportationDelay = Timer.new()
 	teleportationDelay.set_one_shot(true)
-	teleportationDelay.set_wait_time(0.8)
+	teleportationDelay.set_wait_time(1.5)
 	#teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
@@ -35,10 +35,11 @@ func chase_player(delta, value):
 	var r = 170 * sqrt(randf())
 	var x = r * cos(a)
 	var y = r * sin(a)
-	var direction = (Global.player.global_position - global_position).normalized()
-	rotation = direction.angle()
 	global_position = Global.player.global_position + Vector2(x,y)
 	death_effect()
+	var direction = (Global.player.global_position - global_position).normalized()
+	rotation = direction.angle()
+	fire_bullet()
 
 func fire_bullet():
 	#Instances the enemyBullet scene via the Global.gd singleton.
@@ -51,7 +52,7 @@ func fire_bullet():
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 	#motion -= bullet.velocity * .1
-	fireRate.start()
+	#fireRate.start()
 
 
 func _on_Hurtbox_hit(damage):
