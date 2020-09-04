@@ -3,11 +3,12 @@ extends "res://ParentClasses/Enemy.gd"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var teleportEffect = preload("res://Effects/TeleportEffect.tscn")
 var enemyBullet = preload("res://Enemies/EnemyBullet.tscn")
 var enemyColor = "ff3b3b"
 
 onready var muzzle = $Muzzle
-#onready var fireRate = $FireRate
+onready var fireRate = $FireRate
 
 export(int) var chaseLength = 150
 export(int) var shootingDistance = 250
@@ -16,30 +17,34 @@ var teleportationDelay = null
 func _ready():
 	teleportationDelay = Timer.new()
 	teleportationDelay.set_one_shot(true)
-	teleportationDelay.set_wait_time(1.5)
+	teleportationDelay.set_wait_time(3)
 	#teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
 	
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
-	if Global.player != null and teleportationDelay.time_left == 0:
-		chase_player(delta, rotation)
-		teleportationDelay.start()
+	if Global.player != null:
+		if teleportationDelay.time_left == 0:
+			teleport_to_player(delta, rotation)
+			teleportationDelay.start()
 		#if check_the_distance() < shootingDistance:
-			#if fireRate.time_left == 0:
-				#fire_bullet()
+		if fireRate.time_left == 0:
+			fire_bullet()
+		rotate_enemy()
 
-func chase_player(delta, value):
+func teleport_to_player(delta, value):
 	var a = randf() * 2 * PI
 	var r = 170 * sqrt(randf())
 	var x = r * cos(a)
 	var y = r * sin(a)
 	global_position = Global.player.global_position + Vector2(x,y)
+	teleport_effect()
 	#death_effect()
+
+func rotate_enemy():
 	var direction = (Global.player.global_position - global_position).normalized()
 	rotation = direction.angle()
-	fire_bullet()
 
 func fire_bullet():
 	#Instances the enemyBullet scene via the Global.gd singleton.
@@ -52,7 +57,7 @@ func fire_bullet():
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 	#motion -= bullet.velocity * .1
-	#fireRate.start()
+	fireRate.start()
 
 
 func _on_Hurtbox_hit(damage):
@@ -77,3 +82,8 @@ func _on_EnemyStats_enemy_died():
 	Global.enemiesKilled += 1
 	death_effect()
 	queue_free()
+
+
+func teleport_effect():
+	#SoundFx.play("Explosion", rand_range(0.6, 1.4), 5)
+	Global.instance_scene_on_main(teleportEffect, enemySprite.global_position)

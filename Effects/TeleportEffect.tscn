@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Effects/TeleportEffect.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0.476563, 0.476563, 1, 0.577148, 0.162323, 0.162323, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 45.0
+initial_velocity_random = 0.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_random = 0.5
+color_ramp = SubResource( 3 )
+
+[node name="TeleportEffect" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
