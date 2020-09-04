@@ -9,7 +9,6 @@ var currentEnemies = 0 setget set_enemies
 var enemiesThisWave = 0
 var enemyWaveLimit = 10
 var currentWave = 1
-var totalWave = 5
 
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)

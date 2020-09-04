@@ -4,8 +4,7 @@ var basicEnemy = preload("res://Enemies/360Enemy.tscn")
 
 var instancetimer = null
 var instancetimerlength = 15
-var instanceEffect = ["Explosive Modifier", "Teleporting Enemies", "Dashing Enemies", "Shotgun Enemies",
-"KillSwitch", "Damage Modifier"]
+var instanceEffect = ["KillSwitch", "Damage Modifier", "Reverse Movement"]
 
 #Stuff later
 func _ready():
