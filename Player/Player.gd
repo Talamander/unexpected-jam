@@ -30,6 +30,7 @@ var can_shoot = true
 var can_dash = true
 var is_dashing = false
 var motion = Vector2.ZERO
+var previousMotion = Vector2.ZERO
 var stun = false
 
 var canShoot = true
@@ -67,8 +68,12 @@ func _physics_process(delta):
 		calc_movement(input_vector * acceleration * delta)
 		
 	#Godot's built in move_and_slide function handles the actual moving, just passing in the motion var
+	previousMotion = motion
 	motion = move_and_slide(motion)
 	
+	if motion.y != 0:
+		playerSprite.scale.y = range_lerp(abs(motion.y), 0 , abs(baseSpeed), .5, .7)
+		playerSprite.scale.x = range_lerp(abs(motion.y), 0, abs(baseSpeed), .5, .55)
 	
 	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 		fire_bullet()
