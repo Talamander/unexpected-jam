@@ -5,6 +5,17 @@ var shootingEnemy = preload("res://Enemies/ShootingEnemy.tscn")
 var radialEnemy = preload("res://Enemies/360Enemy.tscn")
 var teleportingEnemy = preload("res://Enemies/TeleportEnemy.tscn")
 
+#Enemy Types for Wave 1
+var enemyTypesWaveOne = [
+	basicEnemy
+]
+#Evemy Types for Wave 2
+var enemyTypesWaveTwo = [
+	basicEnemy,
+	shootingEnemy
+]
+
+#Enemy Types for Wave3+
 var enemyTypes = [
 basicEnemy,
 basicEnemy,
@@ -57,12 +68,31 @@ func _on_EnemySpawnTimer_timeout():
 		var distanceFromPlayer = enemy_position.distance_to(Global.player.position)
 		
 		if distanceFromPlayer > 400:
-			enemyTypes.shuffle()
-			var enemyThatSpawns = enemyTypes[0]
-			Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
-			Global.currentEnemies += 1
-			Global.enemiesThisWave += 1
+			if Global.currentWave == 1:
+				enemyTypesWaveOne.shuffle()
+				
+				var enemyThatSpawns = enemyTypesWaveOne[0]
+				
+				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
+				Global.currentEnemies += 1
+				Global.enemiesThisWave += 1
+			elif Global.currentWave == 2:
+				enemyTypesWaveTwo.shuffle()
+				
+				var enemyThatSpawns = enemyTypesWaveTwo[0]
+				
+				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
+				Global.currentEnemies += 1
+				Global.enemiesThisWave += 1
+			elif Global.currentWave >= 3:
+				enemyTypes.shuffle()
+				var enemyThatSpawns = enemyTypes[0]
+				Global.instance_scene_on_main(enemyThatSpawns, enemy_position)
+				Global.currentEnemies += 1
+				Global.enemiesThisWave += 1
 			print ("Current Enemies:", Global.currentEnemies)
+			
+			print ("Enemies Killed:", Global.enemiesKilled)
 		else:
 			print ("too close")
 

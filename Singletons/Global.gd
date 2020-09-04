@@ -4,6 +4,8 @@ var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
 
 var player = null
 
+var enemiesKilled = 0
+
 var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
 var enemiesThisWave = 0

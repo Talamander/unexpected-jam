@@ -36,7 +36,7 @@ func chase_player(delta, value):
 	var x = r * cos(a)
 	var y = r * sin(a)
 	global_position = Global.player.global_position + Vector2(x,y)
-	death_effect()
+	#death_effect()
 	var direction = (Global.player.global_position - global_position).normalized()
 	rotation = direction.angle()
 	fire_bullet()
@@ -74,5 +74,6 @@ func _on_StunTimer_timeout():
 
 func _on_EnemyStats_enemy_died():
 	Global.currentEnemies -= 1
+	Global.enemiesKilled += 1
 	death_effect()
 	queue_free()

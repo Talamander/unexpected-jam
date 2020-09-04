@@ -33,6 +33,7 @@ func _on_Hurtbox_hit(damage):
 #This function exists in Enemy parent class, but I decided to also put it here so enemies can be unique
 func _on_EnemyStats_enemy_died():
 	Global.currentEnemies -= 1
+	Global.enemiesKilled += 1
 	death_effect()
 	queue_free()
 	
