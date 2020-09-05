@@ -73,6 +73,7 @@ func _process(delta):
 		get_tree().reload_current_scene()
 		Global.PlayerStats.health = Global.PlayerStats.max_health
 		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
+		Global.player.canShoot = true
 
 func _on_EnemySpawnTimer_timeout():
 	if (Global.currentEnemies < Global.MaxEnemies) and Global.enemiesThisWave != Global.enemyWaveLimit:
