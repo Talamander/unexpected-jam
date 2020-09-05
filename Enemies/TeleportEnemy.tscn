@@ -20,7 +20,7 @@ polygon = PoolVector2Array( -8.40625, -10.875, -2.96875, -7.71875, -8.40625, -4.
 [node name="TeleportEnemy" instance=ExtResource( 1 )]
 modulate = Color( 1, 0.231373, 0.231373, 1 )
 collision_layer = 16
-collision_mask = 19
+collision_mask = 50
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

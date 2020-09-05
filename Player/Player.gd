@@ -19,6 +19,8 @@ onready var muzzle = $Muzzle
 onready var ammoRegenTimer = $Timers/AmmoRegenTimer
 onready var ammoRegenZeroedTimer = $Timers/AmmoRegenZeroedTimer
 
+enum Layer {WORLD = 1, ENEMIES = 4}
+
 var playerColor = "57b4e2"
 
 #Movement Variables
@@ -164,9 +166,9 @@ func _on_AmmoRegenZeroedTimer_timeout():
 func dash():
 	speed = dashSpeed
 	dashTimer.start()
-	#Allows player to dash through enemies, may or may not want to keep
-	#Will need a more robust system if we keep it, because as of now players can phase through walls
-	get_node("CollisionShape2D").set_deferred("disabled", true)
+	#Allows player to dash through enemies and walls
+	self.set_collision_mask_bit(Layer.WORLD, false)
+	self.set_collision_mask_bit(Layer.ENEMIES, false)
 	#Allows player not take damage while dashing
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", true)
 	is_dashing = true
@@ -174,7 +176,8 @@ func dash():
 
 func _on_DashTimer_timeout():
 	speed = baseSpeed
-	get_node("CollisionShape2D").set_deferred("disabled", false)
+	self.set_collision_mask_bit(Layer.WORLD, true)
+	self.set_collision_mask_bit(Layer.ENEMIES, true)
 	get_node("Hurtbox/CollisionShape2D").set_deferred("disabled", false)
 	can_dash = false
 	dashRechargeTimer.start()
