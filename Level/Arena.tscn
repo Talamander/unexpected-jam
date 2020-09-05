@@ -35,6 +35,8 @@ position = Vector2( 299.546, 275.37 )
 
 [node name="CameraFocal" parent="Player" index="2"]
 remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="MeterFocal" parent="Player" index="3"]
 remote_path = NodePath("../../WeaponHeatUIRT")
