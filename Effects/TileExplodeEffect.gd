@@ -13,5 +13,7 @@ func _ready():
 #	pass
 
 
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _on_Tween_tween_completed(object, key):
 	queue_free()

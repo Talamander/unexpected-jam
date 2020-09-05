@@ -61,6 +61,7 @@ smoothing_enabled = true
 smoothing_speed = 4.5
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

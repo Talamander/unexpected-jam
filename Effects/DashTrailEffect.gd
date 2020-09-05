@@ -8,5 +8,7 @@ func _ready():
 	tweenster.interpolate_property(self, "modulate", Color(1, 1, 2, 1), Color(1, 1, 1, 0), .4, Tween.TRANS_SINE,Tween.EASE_OUT)
 	tweenster.start()
 
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _on_Tween_tween_completed(object, key):
 	queue_free()

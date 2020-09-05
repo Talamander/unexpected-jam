@@ -15,6 +15,7 @@ onready var stunTimer = $StunTimer
 export var speed = 425
 export var acceleration = 4000
 
+# warning-ignore:unused_signal
 signal enemy_died
 
 
@@ -22,6 +23,7 @@ func check_the_distance():
 	var distance = self.position.distance_to(Global.player.position)
 	return distance
 
+# warning-ignore:unused_argument
 func chase_player(delta, value):
 	var direction = (Global.player.global_position - global_position).normalized()
 	#if check_the_distance() > chaseLength:

@@ -218,6 +218,7 @@ func _on_StunTimer_timeout():
 func _on_Hurtbox_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("EnemyBullet"):
 		stun = true
+# warning-ignore:unused_variable
 		var enemyRotation = body.rotation
 		self.global_rotation_degrees = body.rotation_degrees
 		#self.global_rotation_degrees += 45

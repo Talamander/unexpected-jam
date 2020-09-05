@@ -82,9 +82,12 @@ func _on_EnemySpawnTimer_timeout():
 		
 		while enemy_position.x < 640 and enemy_position.x > -80 or enemy_position.y < 360 and enemy_position.y > -45:
 			enemy_position = Vector2(rand_range(-1060, 1160), rand_range(-340, 900))
+		
 		if Global.player != null:
 			distanceFromPlayer = enemy_position.distance_to(Global.player.position)
+		
 		if distanceFromPlayer > 400 and distanceFromPlayer < maxDistanceFromPlayer:
+			
 			if Global.currentWave == 1:
 				enemyTypesWaveOne.shuffle()
 				

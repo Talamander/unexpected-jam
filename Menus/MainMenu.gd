@@ -19,14 +19,17 @@ func _on_VideoPlayer_finished():
 
 
 func _on_StartButton_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Level/Arena.tscn")
 
 
 func _on_CreditsButton_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Menus/Credits.tscn")
 
 
 func _on_OptionsButton_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Menus/Options.tscn")
 
 

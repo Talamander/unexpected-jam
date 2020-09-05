@@ -11,6 +11,7 @@ func _ready():
 	container.visible = false
 	waveText.visible = false
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	if Global.currentWave != previousWave:
 		container.visible = true

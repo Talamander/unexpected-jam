@@ -23,17 +23,18 @@ func _ready():
 	teleportationDelay.start()
 	
 # Called when the node enters the scene tree for the first time.
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	if Global.player != null:
 		if teleportationDelay.time_left == 0:
-			teleport_to_player(delta, rotation)
+			teleport_to_player()
 			teleportationDelay.start()
 		#if check_the_distance() < shootingDistance:
 		if fireRate.time_left == 0:
 			fire_bullet()
 		rotate_enemy()
 
-func teleport_to_player(delta, value):
+func teleport_to_player():
 	var a = randf() * 2 * PI
 	var r = 170 * sqrt(randf())
 	var x = r * cos(a)

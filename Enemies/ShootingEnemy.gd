@@ -17,6 +17,7 @@ func _physics_process(delta):
 			if fireRate.time_left == 0:
 				fire_bullet()
 
+# warning-ignore:unused_argument
 func chase_player(delta, value):
 	var direction = (Global.player.global_position - global_position).normalized()
 	if check_the_distance() > chaseLength:
