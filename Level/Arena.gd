@@ -51,6 +51,7 @@ teleportingEnemy
 
 var instancetimer = null
 var instancetimerlength = 15
+var distanceFromPlayer = 0
 var instanceEffect = ["KillSwitch", "Damage Modifier", "Reverse Movement"]
 
 #Stuff later
@@ -79,9 +80,8 @@ func _on_EnemySpawnTimer_timeout():
 		
 		while enemy_position.x < 640 and enemy_position.x > -80 or enemy_position.y < 360 and enemy_position.y > -45:
 			enemy_position = Vector2(rand_range(-1060, 1160), rand_range(-340, 900))
-			
-		var distanceFromPlayer = enemy_position.distance_to(Global.player.position)
-		
+		if Global.player != null:
+			distanceFromPlayer = enemy_position.distance_to(Global.player.position)
 		if distanceFromPlayer > 400:
 			if Global.currentWave == 1:
 				enemyTypesWaveOne.shuffle()

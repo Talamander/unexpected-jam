@@ -1,8 +1,8 @@
 extends Node
 
 var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
-var healthItem = preload("res://Items/HealthItem.tscn").instance()
-var ammoItem = preload("res://Items/AmmoItem.tscn").instance()
+var healthItem = preload("res://Items/HealthItem.tscn")
+var ammoItem = preload("res://Items/AmmoItem.tscn")
 
 var player = null
 
@@ -43,11 +43,9 @@ func waveRunner():
 		print("Wave:",currentWave)
 
 func itemDrop(position):
-	itemDropRates = randi()%20+1
+	itemDropRates = randi()%6+1
 	match itemDropRates:
-		1,2:
-			get_tree().root.add_child(healthItem)
-			healthItem.global_position = position
-		3,4,5:
-			get_tree().root.add_child(ammoItem)
-			ammoItem.global_position = position
+		1,2,3:
+			Global.instance_scene_on_main(healthItem, position)
+		4,5,6:
+			Global.instance_scene_on_main(ammoItem, position)

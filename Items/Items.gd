@@ -4,10 +4,11 @@ extends Node
 
 func _healthPickUp(body):
 	if body == Global.player:
-		PlayerStats.health += 1
+		Global.PlayerStats.health += 1
 		queue_free()
 
 func _AmmoPickUp(body):
 	if body == Global.player:
-		PlayerStats.currentAmmo += 1
+		Global.PlayerStats.currentAmmo += 32
+		Global.player.canShoot = true
 		queue_free()
