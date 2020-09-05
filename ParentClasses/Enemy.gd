@@ -38,6 +38,9 @@ func _on_Hurtbox_hit(damage):
 
 func _on_EnemyStats_enemy_died():
 	Global.currentEnemies -= 1
+	Global.enemiesKilled += 1
+	Global.itemDrop(self.global_position)
+	death_effect()
 	queue_free()
 
 func _on_StunTimer_timeout():

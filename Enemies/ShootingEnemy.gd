@@ -57,8 +57,3 @@ func _on_StunTimer_timeout():
 	stun = false
 
 
-func _on_EnemyStats_enemy_died():
-	Global.currentEnemies -= 1
-	Global.enemiesKilled += 1
-	death_effect()
-	queue_free()

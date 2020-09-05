@@ -1,16 +1,18 @@
 extends Node
 
 var PlayerStats = preload("res://ParentClasses/PlayerStats.tres")
+var healthItem = preload("res://Items/HealthItem.tscn").instance()
+var ammoItem = preload("res://Items/AmmoItem.tscn").instance()
 
 var player = null
 
-var enemiesKilled = 0
-
 var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
+var enemiesKilled = 0
 var enemiesThisWave = 0
 var enemyWaveLimit = 10
 var currentWave = 1
+var itemDropRates = null
 
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)
@@ -35,10 +37,17 @@ func set_enemies(value):
 func waveRunner():
 	if enemiesThisWave == enemyWaveLimit and currentEnemies == 0:
 		currentWave += 1
-		enemyWaveLimit += 2
+		enemyWaveLimit += 10
 		MaxEnemies += 0
 		enemiesThisWave = 0
 		print("Wave:",currentWave)
 
-func itemDrop():
-	 null 
+func itemDrop(position):
+	itemDropRates = randi()%20+1
+	match itemDropRates:
+		1,2:
+			get_tree().root.add_child(healthItem)
+			healthItem.global_position = position
+		3,4,5:
+			get_tree().root.add_child(ammoItem)
+			ammoItem.global_position = position
