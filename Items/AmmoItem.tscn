@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Items/Items.gd" type="Script" id=1]
+[ext_resource path="res://Items/AmmoItems.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.62017
@@ -13,4 +13,8 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="InitialDecay" type="Timer" parent="."]
+wait_time = 30.0
 [connection signal="body_entered" from="Area2D" to="." method="_AmmoPickUp"]
+[connection signal="timeout" from="InitialDecay" to="." method="_InitialAmmoDecay_timeout"]
