@@ -41,6 +41,7 @@ func waveRunner():
 		MaxEnemies += 0
 		enemiesThisWave = 0
 		print("Wave:",currentWave)
+		SoundFx.play("NewWave", 1, 1)
 
 func itemDrop(position):
 	itemDropRates = randi()%20+1

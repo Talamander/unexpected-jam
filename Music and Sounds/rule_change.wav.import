@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Explosion.wav-ec4fbe112c9af6aa861bdd06ec8d7cda.sample"
+path="res://.import/rule_change.wav-a796673507eeb82f31fdd6e450ac0ff0.sample"
 
 [deps]
 
-source_file="res://Music and Sounds/Explosion.wav"
-dest_files=[ "res://.import/Explosion.wav-ec4fbe112c9af6aa861bdd06ec8d7cda.sample" ]
+source_file="res://Music and Sounds/rule_change.wav"
+dest_files=[ "res://.import/rule_change.wav-a796673507eeb82f31fdd6e450ac0ff0.sample" ]
 
 [params]
 

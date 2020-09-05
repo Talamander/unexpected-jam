@@ -6,6 +6,7 @@ var sounds = {
 	"Bullet" : load(sounds_path + "LaserTest.wav"),
 	"Explosion" : load(sounds_path + "Explosion.wav"),
 	"Teleport" : load(sounds_path + "teleport.wav"),
+	"NewWave" : load(sounds_path + "NewWave.wav"),
 	"Hit" : load(sounds_path + "hit.wav")
 }
 
