@@ -35,37 +35,37 @@ polygon = PoolVector2Array( -8.35743, -10.8523, 10.0481, 0, -8.47541, 10.6798 )
 visible = false
 shape = SubResource( 1 )
 
-[node name="EnemyStats" parent="." index="4"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="4"]
+occluder = SubResource( 2 )
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." index="5"]
+occluder = SubResource( 3 )
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="." index="6"]
+occluder = SubResource( 4 )
+
+[node name="EnemyStats" parent="." index="7"]
 max_health = 4
 
-[node name="Hurtbox" parent="." index="5"]
+[node name="Hurtbox" parent="." index="8"]
 visible = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 1 )
 
-[node name="Hitbox" parent="." index="7" instance=ExtResource( 4 )]
+[node name="Hitbox" parent="." index="10" instance=ExtResource( 4 )]
 visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 1 )
 
-[node name="Muzzle" type="Position2D" parent="." index="8"]
+[node name="Muzzle" type="Position2D" parent="." index="11"]
 position = Vector2( 16.0244, 0 )
 
-[node name="FireRate" type="Timer" parent="." index="9"]
+[node name="FireRate" type="Timer" parent="." index="12"]
 wait_time = 0.75
 one_shot = true
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="10"]
-occluder = SubResource( 2 )
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="." index="11"]
-occluder = SubResource( 3 )
-
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="." index="12"]
-occluder = SubResource( 4 )
 
 [editable path="Hurtbox"]
 

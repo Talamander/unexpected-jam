@@ -10,8 +10,8 @@ var enemyColor = "ff3b3b"
 onready var muzzle = $Muzzle
 onready var fireRate = $FireRate
 
-export(int) var chaseLength = 150
 export(int) var shootingDistance = 250
+
 var teleportationDelay = null
 
 func _ready():
@@ -85,5 +85,5 @@ func _on_EnemyStats_enemy_died():
 
 
 func teleport_effect():
-	#SoundFx.play("Explosion", rand_range(0.6, 1.4), 5)
+	SoundFx.play("Teleport", rand_range(0.8, 1.1), 1)
 	Global.instance_scene_on_main(teleportEffect, enemySprite.global_position)
