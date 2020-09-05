@@ -12,7 +12,9 @@ extents = Vector2( 6, 6.66667 )
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -4, -4, 4, -4, 4, 4, -4, 4 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 light_mask = 2
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 2147483649

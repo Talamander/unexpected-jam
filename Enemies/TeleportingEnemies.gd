@@ -65,10 +65,11 @@ func _on_Hurtbox_hit(damage):
 	enemySprite.modulate = Color.white
 	stunTimer.start()
 	#Adds knockback on hit
-	motion -= motion * 4
+	motion -= motion * 45
 	#currently not doing anything with this stun variable, but it may come in handy
 	stun = true
 	hit_effect()
+
 
 #This function exists in Enemy parent class, but I decided to also put it here so enemies can be unique
 func _on_StunTimer_timeout():

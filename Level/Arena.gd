@@ -74,11 +74,11 @@ func _process(delta):
 
 func _on_EnemySpawnTimer_timeout():
 	if (Global.currentEnemies < Global.MaxEnemies) and Global.enemiesThisWave != Global.enemyWaveLimit:
-		var enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+		var enemy_position = Vector2(rand_range(-1060, 1160), rand_range(-340, 900))
 		
 		
 		while enemy_position.x < 640 and enemy_position.x > -80 or enemy_position.y < 360 and enemy_position.y > -45:
-			enemy_position = Vector2(rand_range(-160, 670), rand_range(-90, 390))
+			enemy_position = Vector2(rand_range(-1060, 1160), rand_range(-340, 900))
 			
 		var distanceFromPlayer = enemy_position.distance_to(Global.player.position)
 		

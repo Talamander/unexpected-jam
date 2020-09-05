@@ -9,7 +9,7 @@ var enemiesKilled = 0
 var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
 var enemiesThisWave = 0
-var enemyWaveLimit = 2
+var enemyWaveLimit = 10
 var currentWave = 1
 
 # warning-ignore-all:unused_signal
