@@ -43,7 +43,7 @@ func waveRunner():
 		print("Wave:",currentWave)
 
 func itemDrop(position):
-	itemDropRates = randi()%6+1
+	itemDropRates = randi()%20+1
 	match itemDropRates:
 		1,2,3:
 			Global.instance_scene_on_main(healthItem, position)
