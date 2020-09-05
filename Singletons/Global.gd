@@ -47,5 +47,6 @@ func itemDrop(position):
 	match itemDropRates:
 		1,2:
 			Global.instance_scene_on_main(healthItem, position)
+			
 		3,4,5:
 			Global.instance_scene_on_main(ammoItem, position)
