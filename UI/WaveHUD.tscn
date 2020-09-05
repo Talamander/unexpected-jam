@@ -3,7 +3,7 @@
 [ext_resource path="res://UI/WaveHUD.gd" type="Script" id=1]
 [ext_resource path="res://UI/Roboto-Medium.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=2]
@@ -89,8 +89,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Fade Out"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Polygon2D/RichTextLabel:custom_colors/default_color:r")
 tracks/0/interp = 1
@@ -185,7 +184,7 @@ margin_left = -27.4258
 margin_top = -1.51349
 margin_right = 43.5742
 margin_bottom = 20.4865
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "Wave 1"
@@ -201,5 +200,5 @@ one_shot = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Fade In"
 "anims/Fade In" = SubResource( 2 )
-"anims/Fade Out" = SubResource( 1 )
+"anims/Fade Out" = SubResource( 3 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

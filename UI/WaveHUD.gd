@@ -8,10 +8,13 @@ onready var animator = $AnimationPlayer
 var previousWave = Global.currentWave
 
 func _ready():
-	pass
+	container.visible = false
+	waveText.visible = false
 
 func _physics_process(delta):
 	if Global.currentWave != previousWave:
+		container.visible = true
+		waveText.visible = true
 		animator.play("Fade In")
 		previousWave = Global.currentWave
 		var currentWaveText = ("Wave ")
