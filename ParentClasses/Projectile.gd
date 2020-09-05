@@ -21,6 +21,8 @@ func _physics_process(delta):
 	if (collision != null and !collided):
 		#velocity = -(0.2 * velocity)
 		collided = true
+		if (collision.collider.name == "OuterBounds"):
+			queue_free()
 		if (collision.collider.name == "TileMap"):
 			cell = tilemap.world_to_map(collision.position - collision.normal)
 			tile_id = tilemap.get_cellv(cell)
