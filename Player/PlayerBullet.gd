@@ -17,6 +17,7 @@ func _ready():
 	Global.emit_signal("add_screenshake", .5, 0.15)
 	trail.emitting = true
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	damage_increase_checker()
 

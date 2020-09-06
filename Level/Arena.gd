@@ -2,6 +2,8 @@ extends Node2D
 
 onready var modTimer = $ModifierTimer
 
+var initModTimer = 30
+
 var basicEnemy = preload("res://Enemies/BasicEnemy.tscn")
 var shootingEnemy = preload("res://Enemies/ShootingEnemy.tscn")
 var radialEnemy = preload("res://Enemies/360Enemy.tscn")
@@ -76,16 +78,16 @@ func _physics_process(delta):
 
 func slow_mo_check():
 	if Global.currentModifier == "SlowMotion":
-		if modTimer.wait_time > 2.5:
+		if modTimer.wait_time > (initModTimer * .3):
 			modTimer.stop()
-			modTimer.set_wait_time(2.5)
+			modTimer.set_wait_time(initModTimer * .3)
 			modTimer.start()
 			print(modTimer.wait_time)
-			Engine.time_scale = 0.5
+			Engine.time_scale = 0.3
 	if Global.currentModifier != "SlowMotion":
-		if modTimer.wait_time < 5:
+		if modTimer.wait_time < initModTimer:
 			modTimer.stop()
-			modTimer.set_wait_time(5)
+			modTimer.set_wait_time(initModTimer)
 			modTimer.start()
 			Engine.time_scale = 1
 
@@ -156,3 +158,4 @@ func _on_ModifierTimer_timeout():
 	print ("set")
 	Global.currentModifier = modifierList[0]
 	print(Global.currentModifier)
+	SoundFx.play("New Modifier", 1, 1)
