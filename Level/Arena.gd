@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var modTimer = $ModifierTimer
+
 var basicEnemy = preload("res://Enemies/BasicEnemy.tscn")
 var shootingEnemy = preload("res://Enemies/ShootingEnemy.tscn")
 var radialEnemy = preload("res://Enemies/360Enemy.tscn")
