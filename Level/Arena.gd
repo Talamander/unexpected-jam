@@ -57,7 +57,8 @@ var instancetimer = null
 var instancetimerlength = 15
 var distanceFromPlayer = 0
 var maxDistanceFromPlayer = 950
-var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement"]
+var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement",
+ "RecoilRange", "NoRecoil", "BasicRuleSet"]
 
 #Stuff later
 func _ready():

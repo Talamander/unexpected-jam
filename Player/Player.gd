@@ -34,6 +34,8 @@ var is_dashing = false
 var motion = Vector2.ZERO
 var previousMotion = Vector2.ZERO
 var stun = false
+var isRecoilRangeInPlace = false
+var currentRecoilRange = 0.0
 
 var canShoot = true
 
@@ -118,6 +120,28 @@ func reverse_movement_check():
 	else:
 		checker = true
 		return checker
+		
+func recoilrange():
+	var checker = null
+	if Global.currentModifier != "RecoilRange":
+		checker = false
+		return checker
+	elif Global.currentModifier != "RecoilRange" and isRecoilRangeInPlace==true:
+		isRecoilRangeInPlace = false
+		checker = true
+		return checker
+	else:
+		checker = true
+		return checker
+		
+func noRecoil():
+	var checker = null
+	if Global.currentModifier != "NoRecoil":
+		checker = false
+		return checker
+	else:
+		checker = true
+		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
@@ -146,11 +170,20 @@ func fire_bullet():
 	#This works for setting the bullets rotation and particle rotations though
 	var look_vector = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vector.y, look_vector.x)
-	
 	bullet.set_rotation(global_rotation)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
-	motion -= bullet.velocity * .75
+	if recoilrange() == true:
+		if isRecoilRangeInPlace == false:
+			currentRecoilRange = float(rand_range(1, 1.5))
+			isRecoilRangeInPlace = true
+		else:
+			pass
+		motion -= bullet.velocity * currentRecoilRange
+	if noRecoil() == true:
+		motion -= bullet.velocity * 0
+	else:
+		motion -= bullet.velocity * .75
 	fireRate.start()
 	
 	PlayerStats.currentAmmo -= 1
