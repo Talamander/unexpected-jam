@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Items/HealthItems.gd" type="Script" id=1]
+[ext_resource path="res://Circle.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 2.66553
+radius = 8.72712
 
 [node name="HealthItem" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,10 +13,15 @@ script = ExtResource( 1 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.00675583, 0 )
+position = Vector2( -0.00675583, 1 )
 shape = SubResource( 1 )
 
 [node name="InitialDecay" type="Timer" parent="."]
 wait_time = 30.0
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.682353, 0, 0, 1 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
 [connection signal="body_entered" from="Area2D" to="." method="_healthPickUp"]
 [connection signal="timeout" from="InitialDecay" to="." method="_InitialHealthDecay_timeout"]

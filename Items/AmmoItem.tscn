@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Items/AmmoItems.gd" type="Script" id=1]
+[ext_resource path="res://Circle.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 5.62017
+radius = 8.39926
 
 [node name="AmmoItem" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,5 +17,10 @@ shape = SubResource( 1 )
 
 [node name="InitialDecay" type="Timer" parent="."]
 wait_time = 30.0
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.0196078, 0.0666667, 0.431373, 1 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
 [connection signal="body_entered" from="Area2D" to="." method="_AmmoPickUp"]
 [connection signal="timeout" from="InitialDecay" to="." method="_InitialAmmoDecay_timeout"]
