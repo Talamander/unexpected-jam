@@ -10,7 +10,7 @@ var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
 var enemiesKilled = 0
 var enemiesThisWave = 0
-var enemyWaveLimit = 10
+var enemyWaveLimit = 1
 var currentWave = 1
 var itemDropRates = null
 

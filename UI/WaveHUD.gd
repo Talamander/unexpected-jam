@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 onready var container = $Polygon2D
-onready var waveText = $Polygon2D/RichTextLabel
+onready var waveText = $Polygon2D/Label
 onready var decayTimer = $Timer
 onready var animator = $AnimationPlayer
 
