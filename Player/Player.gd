@@ -98,14 +98,26 @@ func _physics_process(delta):
 			light.visible = true
 
 
-
-
 func get_input_vector():
 	#input vector is direction of key input (WASD)
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	if reverse_movement_check() == false:
+		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	else:
+		input_vector.x = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
+		input_vector.y = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	return input_vector.normalized()
+
+
+func reverse_movement_check():
+	var checker = null
+	if Global.currentModifier != "ReverseMovement":
+		checker = false
+		return checker
+	else:
+		checker = true
+		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
