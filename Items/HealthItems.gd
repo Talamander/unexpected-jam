@@ -7,7 +7,7 @@ func _ready():
 	
 func _healthPickUp(body):
 	if body == Global.player:
-		Global.PlayerStats.health += 1
+		Global.PlayerStats.health += 2
 		queue_free()
 
 func _InitialHealthDecay_timeout():
