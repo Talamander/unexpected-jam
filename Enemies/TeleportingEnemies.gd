@@ -3,7 +3,6 @@ extends "res://ParentClasses/Enemy.gd"
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var teleportEffect = preload("res://Effects/TeleportEffect.tscn")
 var enemyBullet = preload("res://Enemies/EnemyBullet.tscn")
 var enemyColor = "ff3b3b"
 

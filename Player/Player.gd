@@ -103,6 +103,7 @@ func _physics_process(delta):
 func get_input_vector():
 	#input vector is direction of key input (WASD)
 	var input_vector = Vector2.ZERO
+		
 	if reverse_movement_check() == false:
 		input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 		input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -121,7 +122,7 @@ func reverse_movement_check():
 		checker = true
 		return checker
 		
-func recoilrange():
+func recoilRange_check():
 	var checker = null
 	if Global.currentModifier != "RecoilRange":
 		checker = false
@@ -134,7 +135,7 @@ func recoilrange():
 		checker = true
 		return checker
 		
-func noRecoil():
+func noRecoil_check():
 	var checker = null
 	if Global.currentModifier != "NoRecoil":
 		checker = false
@@ -173,14 +174,14 @@ func fire_bullet():
 	bullet.set_rotation(global_rotation)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
-	if recoilrange() == true:
+	if recoilRange_check() == true:
 		if isRecoilRangeInPlace == false:
 			currentRecoilRange = float(rand_range(1, 1.5))
 			isRecoilRangeInPlace = true
 		else:
 			pass
 		motion -= bullet.velocity * currentRecoilRange
-	if noRecoil() == true:
+	if noRecoil_check() == true:
 		motion -= bullet.velocity * 0
 	else:
 		motion -= bullet.velocity * .75
