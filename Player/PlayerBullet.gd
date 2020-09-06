@@ -17,6 +17,15 @@ func _ready():
 	Global.emit_signal("add_screenshake", .5, 0.15)
 	trail.emitting = true
 
+func _physics_process(delta):
+	damage_increase_checker()
+
+func damage_increase_checker():
+	if Global.currentModifier != "PlayerDamageIncrease":
+		$Hitbox.damage = 1
+	else:
+		$Hitbox.damage = 2
+
 
 func _on_Hitbox_body_entered(_body):
 	bulletSprite.visible = false
