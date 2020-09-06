@@ -14,6 +14,9 @@ var enemyWaveLimit = 10
 var currentWave = 1
 var itemDropRates = null
 
+var previousModifier = "start"
+var currentModifier = "start"
+
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)
 signal enemy_count_changed(value)

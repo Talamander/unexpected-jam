@@ -84,9 +84,10 @@ position = Vector2( 299.546, 275.37 )
 scale = Vector2( 1.5, 1.5 )
 
 [node name="ModifierTimer" type="Timer" parent="."]
-wait_time = 45.0
-one_shot = true
+process_mode = 0
+wait_time = 5.0
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
+[connection signal="timeout" from="ModifierTimer" to="." method="_on_ModifierTimer_timeout"]
 
 [editable path="Player"]

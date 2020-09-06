@@ -55,27 +55,39 @@ var instancetimer = null
 var instancetimerlength = 15
 var distanceFromPlayer = 0
 var maxDistanceFromPlayer = 950
-var instanceEffect = ["KillSwitch", "Damage Modifier", "Reverse Movement"]
+var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement"]
 
 #Stuff later
 func _ready():
 	Music.list_play()
-	instancetimer = Timer.new()
-	instancetimer.set_one_shot(false)
-	instancetimer.set_wait_time(instancetimerlength)
-	instancetimer.connect("timeout", self, "instanceEffectSlicer")
-	add_child(instancetimer)
-	instancetimer.start()
+	modTimer.start()
 
 # warning-ignore:unused_argument
-func _process(delta):
-	
+func _physics_process(delta):
+	Global.previousModifier = Global.currentModifier
 	if Input.is_action_just_pressed("restart"):
 # warning-ignore:return_value_discarded
 		get_tree().reload_current_scene()
 		Global.PlayerStats.health = Global.PlayerStats.max_health
 		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
 		Global.player.canShoot = true
+	
+	slow_mo_check()
+
+func slow_mo_check():
+	if Global.currentModifier == "SlowMotion":
+		if modTimer.wait_time > 2.5:
+			modTimer.stop()
+			modTimer.set_wait_time(2.5)
+			modTimer.start()
+			print(modTimer.wait_time)
+			Engine.time_scale = 0.5
+	if Global.currentModifier != "SlowMotion":
+		if modTimer.wait_time < 5:
+			modTimer.stop()
+			modTimer.set_wait_time(5)
+			modTimer.start()
+			Engine.time_scale = 1
 
 func _on_EnemySpawnTimer_timeout():
 	if (Global.currentEnemies < Global.MaxEnemies) and Global.enemiesThisWave != Global.enemyWaveLimit:
@@ -132,8 +144,15 @@ func _on_EnemySpawnTimer_timeout():
 			
 			print ("Enemies Killed:", Global.enemiesKilled)
 		else:
-			print ("Failed to spawn based on distance criteria")
+			pass
+			#print ("Failed to spawn based on distance criteria")
 
-func instanceEffectSlicer():
-	instanceEffect.shuffle()
-	return instanceEffect[0]
+
+func _on_ModifierTimer_timeout():
+	modifierList.shuffle()
+	while modifierList[0] == Global.previousModifier:
+		modifierList.shuffle()
+		print ("dupe")
+	print ("set")
+	Global.currentModifier = modifierList[0]
+	print(Global.currentModifier)
