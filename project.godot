@@ -29,7 +29,8 @@ config/icon="res://icon.png"
 Global="*res://Singletons/Global.gd"
 SoundFx="*res://Singletons/SoundFX.tscn"
 Music="*res://Singletons/Music.tscn"
-DialolgueSystem="*res://UI/WaveHUD.tscn"
+WaveHUD="*res://UI/WaveHUD.tscn"
+ModifierNotifcation="*res://UI/ModifierNotifcation.tscn"
 
 [display]
 

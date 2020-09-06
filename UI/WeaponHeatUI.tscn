@@ -3,7 +3,7 @@
 [ext_resource path="res://UI/WeaponHeatUI.tres" type="StyleBox" id=1]
 [ext_resource path="res://UI/WeaponHeatUI.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0627451, 0.215686, 0.290196, 0.243137 )
 border_color = Color( 0, 0.262745, 0.729412, 1 )
 
@@ -25,7 +25,7 @@ margin_top = 7.0
 margin_right = 8.0
 margin_bottom = 8.0
 custom_styles/fg = ExtResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/bg = SubResource( 1 )
 max_value = 32.0
 value = 32.0
 percent_visible = false
