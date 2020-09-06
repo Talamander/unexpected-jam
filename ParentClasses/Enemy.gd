@@ -39,6 +39,7 @@ func _on_Hurtbox_hit(damage):
 	stats.health -= damage
 
 func _on_EnemyStats_enemy_died():
+	emit_signal("removed", self)
 	Global.currentEnemies -= 1
 	Global.enemiesKilled += 1
 	Global.itemDrop(self.global_position)

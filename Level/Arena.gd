@@ -63,6 +63,9 @@ var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement"]
 func _ready():
 	Music.list_play()
 	modTimer.start()
+	
+	#for object in get_tree().get_nodes_in_group("minimap_object"):
+		#object.connect("removed", $MiniMap, "_on_object_removed")
 
 # warning-ignore:unused_argument
 func _physics_process(delta):

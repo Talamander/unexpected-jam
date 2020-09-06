@@ -1,6 +1,6 @@
 extends "res://ParentClasses/Enemy.gd"
 
-
+var minimap_icon = "Enemy"
 var enemyColor = "ff3b3b"
 
 

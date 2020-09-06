@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/MiniMap.gd" type="Script" id=1]
+[ext_resource path="res://Player/Square.png" type="Texture" id=2]
+
+[node name="MiniMap" type="MarginContainer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_bottom = 80.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="ColorRect" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 75.0
+color = Color( 0.215686, 0.282353, 1, 0.0509804 )
+
+[node name="PlayerMarker" type="Sprite" parent="Grid"]
+modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="EnemyMarker" type="Sprite" parent="Grid"]
+visible = false
+modulate = Color( 1, 0.231373, 0.231373, 1 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
