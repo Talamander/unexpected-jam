@@ -48,7 +48,8 @@ show_behind_parent = true
 occluder = SubResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
-scale = Vector2( 3.97461, 3.97461 )
+position = Vector2( -1.52588e-05, 1.52588e-05 )
+scale = Vector2( 5.27897, 5.27897 )
 texture = ExtResource( 4 )
 color = Color( 0.447059, 0.8, 0.972549, 1 )
 energy = 0.76

@@ -1,9 +1,11 @@
 extends Node
 
 onready var timer = get_node("InitialDecay")
+onready var animator = $AnimationPlayer
 
 func _ready():
 	timer.start()
+	animator.play("bounce")
 	
 func _healthPickUp(body):
 	if body == Global.player:
