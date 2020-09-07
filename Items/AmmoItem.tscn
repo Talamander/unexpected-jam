@@ -48,7 +48,7 @@ wait_time = 30.0
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
 position = Vector2( 0, -0.454128 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -56,5 +56,6 @@ autoplay = "bounce"
 anims/bounce = SubResource( 5 )
 
 [node name="Particles2D" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 0.5, 0.5 )
 [connection signal="body_entered" from="Area2D" to="." method="_AmmoPickUp"]
 [connection signal="timeout" from="InitialDecay" to="." method="_InitialAmmoDecay_timeout"]
