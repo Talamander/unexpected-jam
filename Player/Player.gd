@@ -75,18 +75,22 @@ func _physics_process(delta):
 	previousMotion = motion
 	motion = move_and_slide(motion)
 	
-	#Squash&Stretch - Kinda works - Looks cool with recoil
-	if motion.y != 0:
-		playerSprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(baseSpeed), .5, .4)
-		playerSprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(baseSpeed), .5, .6)
-	if motion.x != 0:
-		playerSprite.scale.y = range_lerp(abs(previousMotion.x), 0 , abs(baseSpeed), .5, .4)
-		playerSprite.scale.x = range_lerp(abs(previousMotion.x), 0, abs(baseSpeed), .5, .6)
+	if stun == true:
+		if motion.y != 0:
+			playerSprite.scale.y = range_lerp(abs(previousMotion.y), 0 , abs(baseSpeed), .5, .4)
+			playerSprite.scale.x = range_lerp(abs(previousMotion.y), 0, abs(baseSpeed), .5, .6)
+		if motion.x != 0:
+			playerSprite.scale.y = range_lerp(abs(previousMotion.x), 0 , abs(baseSpeed), .5, .4)
+			playerSprite.scale.x = range_lerp(abs(previousMotion.x), 0, abs(baseSpeed), .5, .6)
 	
-	
-	if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
-		fire_bullet()
-		regen_ammo()
+	if reverse_movement_check() == false:
+		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
+			fire_bullet()
+			regen_ammo()
+	else:
+		if Input.is_action_pressed("reverse_fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
+			fire_bullet()
+			regen_ammo()
 	
 	#Dash
 	if Input.is_action_pressed("ui_space") and can_dash == true:

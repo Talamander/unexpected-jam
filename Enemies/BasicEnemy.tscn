@@ -15,7 +15,6 @@ polygon = PoolVector2Array( 0.117828, -8.67066, -2.16664, -8.30647, -4.38489, -7
 collision_layer = 2147483664
 collision_mask = 50
 script = ExtResource( 2 )
-speed = 440
 
 [node name="Sprite" parent="." index="0"]
 modulate = Color( 1, 0.231373, 0.231373, 1 )

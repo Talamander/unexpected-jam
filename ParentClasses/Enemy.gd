@@ -14,7 +14,7 @@ onready var enemySprite = $Sprite
 onready var stunTimer = $StunTimer
 
 
-export onready var speed = 425 - randi()%50+1
+export onready var speed = 425 - randi()%100+1
 export onready var acceleration = 4000
 
 
