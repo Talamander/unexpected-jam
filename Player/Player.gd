@@ -176,13 +176,13 @@ func fire_bullet():
 	#Adds a little kick, tweak the number to change intensity
 	if recoilRange_check() == true:
 		if isRecoilRangeInPlace == false:
-			currentRecoilRange = float(rand_range(1, 1.5))
+			currentRecoilRange = float(rand_range(0.76, 0.80))
 			isRecoilRangeInPlace = true
 		else:
 			pass
 		motion -= bullet.velocity * currentRecoilRange
 	if noRecoil_check() == true:
-		motion -= bullet.velocity * 0
+		motion -= (bullet.velocity + bullet.velocity) * 0
 	else:
 		motion -= bullet.velocity * .75
 	fireRate.start()

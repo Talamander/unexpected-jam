@@ -14,8 +14,9 @@ onready var enemySprite = $Sprite
 onready var stunTimer = $StunTimer
 
 
-export var speed = 425
-export var acceleration = 4000
+export onready var speed = 425 - randi()%50+1
+export onready var acceleration = 4000
+
 
 # warning-ignore:unused_signal
 signal enemy_died
