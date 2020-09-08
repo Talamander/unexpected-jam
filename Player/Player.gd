@@ -53,6 +53,11 @@ func _ready():
 	Global.player = self
 	
 	PlayerStats.connect("player_died", self, "_on_died")
+	
+	if Global.lighting_enabled == false:
+		light.visible = false
+	else:
+		light.visible = true
 
 #This function runs when the player is destroyed
 func _exit_tree():
@@ -96,12 +101,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_space") and can_dash == true:
 		dash()
 	
-	#Disable light and shadows hotkey
-	if Input.is_action_just_pressed("toggle_lights"):
-		if light.visible == true:
-			light.visible = false
-		elif light.visible == false:
-			light.visible = true
+	#Now controlled in OptionsMenu
+	#if Input.is_action_just_pressed("toggle_lights"):
+		#if light.visible == true:
+			#light.visible = false
+		#elif light.visible == false:
+			#light.visible = true
 
 
 func get_input_vector():
