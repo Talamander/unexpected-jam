@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://UI/HealthMeter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/ModifierNotifcation.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/WaveHUD.tscn" type="PackedScene" id=4]
 
@@ -8,3 +9,5 @@
 [node name="WaveHUD" parent="." instance=ExtResource( 4 )]
 
 [node name="ModiferUI" parent="." instance=ExtResource( 3 )]
+
+[node name="HealthMeter" parent="." instance=ExtResource( 1 )]

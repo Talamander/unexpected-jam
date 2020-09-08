@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerStats
 
 
-export(int)var max_health = 44
+export(int)var max_health = 10
 var health = max_health setget set_health
 var MaxAmmo = 32
 var currentAmmo = MaxAmmo setget set_ammo
