@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.39926
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "bounce"
 length = 3.0
 loop = true
@@ -53,7 +53,7 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "bounce"
-anims/bounce = SubResource( 5 )
+anims/bounce = SubResource( 2 )
 
 [node name="Particles2D" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 0.5, 0.5 )
