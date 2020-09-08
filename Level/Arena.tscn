@@ -90,6 +90,9 @@ process_mode = 0
 wait_time = 30.0
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
+
+[node name="MiniMap" parent="UI" index="3"]
+player = NodePath("../../Player")
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="ModifierTimer" to="." method="_on_ModifierTimer_timeout"]
@@ -97,3 +100,5 @@ wait_time = 30.0
 [editable path="Player"]
 
 [editable path="UI"]
+
+[editable path="UI/MiniMap"]

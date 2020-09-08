@@ -1,9 +1,10 @@
 extends KinematicBody2D
 
+
 var explosion = preload("res://Effects/EnemyExplosionEffect.tscn")
 var hit = preload("res://Effects/HitEffect.tscn")
 var teleportEffect = preload("res://Effects/TeleportEffect.tscn")
-
+var minimap_icon = "Enemy"
 var motion = Vector2.ZERO
 var previousMotion = Vector2.ZERO
 var stun = false
@@ -21,6 +22,8 @@ export onready var acceleration = 4000
 # warning-ignore:unused_signal
 signal enemy_died
 
+func _ready():
+	SignalManager.emit_signal("enemy_spawned", self)
 
 func check_the_distance():
 	var distance = self.position.distance_to(Global.player.position)
@@ -42,7 +45,7 @@ func _on_Hurtbox_hit(damage):
 	stats.health -= damage
 
 func _on_EnemyStats_enemy_died():
-	emit_signal("removed", self)
+	SignalManager.emit_signal("enemy_despawn", self)
 	Global.currentEnemies -= 1
 	Global.enemiesKilled += 1
 	Global.itemDrop(self.global_position)

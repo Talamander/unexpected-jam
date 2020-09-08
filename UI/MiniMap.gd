@@ -17,27 +17,29 @@ var previous_object_count = 0
 var object_count = 1
 
 func _ready():
+	SignalManager.connect("enemy_spawned", self, "_add_map_object")
+	SignalManager.connect("enemy_despawn", self, "_on_object_removed")
 	player_marker.position = grid.rect_size / 2
 	grid_scale = grid.rect_size / (get_viewport_rect().size * zoom)
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if !player:
 		return
 	player_marker.rotation = get_node(player).rotation + PI / 2
 	
 	
-	add_map_object()
-	
 	update_map()
 
 
-func add_map_object():
-	var map_objects = get_tree().get_nodes_in_group("minimap_object")
-	for item in map_objects:
-		var new_marker = icons[item.minimap_icon].duplicate()
-		grid.add_child(new_marker)
-		new_marker.show()
-		markers[item] = new_marker
+func _add_map_object(enemy):
+	print("triggered")
+	#var map_objects = get_tree().get_nodes_in_group("minimap_object")
+	#for item in map_objects:
+	var new_marker = icons[enemy.minimap_icon].duplicate()
+	grid.add_child(new_marker)
+	new_marker.show()
+	markers[enemy] = new_marker
 
 func update_map():
 	for item in markers:
@@ -51,7 +53,6 @@ func update_map():
 		markers[item].position = obj_pos
 		
 
-func _on_object_removed(object):
-	if object in markers:
-		markers[object].queue_free()
-		markers.erase(object)
+func _on_object_removed(enemy):
+	markers[enemy].queue_free()
+	markers.erase(enemy)

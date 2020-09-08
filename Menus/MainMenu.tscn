@@ -121,14 +121,14 @@ align = 1
 
 [node name="Square" type="Sprite" parent="MainMenu/Title"]
 modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
-position = Vector2( 365, 22 )
+position = Vector2( 365, 10 )
 rotation = -0.523598
 scale = Vector2( 1.48332, 1.48332 )
 texture = ExtResource( 12 )
 
 [node name="ShootingEnemy" type="Sprite" parent="MainMenu/Title"]
 modulate = Color( 1, 0.231373, 0.231373, 1 )
-position = Vector2( 183, 25.56 )
+position = Vector2( 183, 17 )
 rotation = 2.35619
 scale = Vector2( 0.316406, 0.316406 )
 texture = ExtResource( 13 )
