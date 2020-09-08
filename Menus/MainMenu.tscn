@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menus/Buttons/StartButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -9,71 +9,8 @@
 [ext_resource path="res://Menus/FadeIn.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Menus/MainMenuVideo.ogv" type="VideoStream" id=8]
 [ext_resource path="res://Menus/dynamicFont.tres" type="DynamicFont" id=9]
-[ext_resource path="res://Menus/Buttons/BackButton.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Menus/Buttons/OptionsFont.tres" type="DynamicFont" id=11]
-[ext_resource path="res://Player/Square.png" type="Texture" id=12]
-[ext_resource path="res://Enemies/ShootingEnemy.png" type="Texture" id=13]
-[ext_resource path="res://Menus/Buttons/HelpButton.tscn" type="PackedScene" id=14]
-[ext_resource path="res://UI/Roboto-Medium.ttf" type="DynamicFontData" id=15]
 
-[sub_resource type="Animation" id=1]
-resource_name = "float"
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Square:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 365, 10 ), Vector2( 365, 22 ), Vector2( 365, 10 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ShootingEnemy:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 183, 17 ), Vector2( 183, 25.56 ), Vector2( 183, 17 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -5.862 ), Vector2( 0, 5.862 ), Vector2( 0, -5.862 ) ]
-}
-
-[sub_resource type="DynamicFont" id=4]
-size = 21
-font_data = ExtResource( 15 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 12
-font_data = ExtResource( 15 )
-
-[sub_resource type="Environment" id=2]
-background_mode = 4
-glow_enabled = true
-glow_intensity = 0.35
-glow_bloom = 0.1
-glow_blend_mode = 0
-glow_bicubic_upscale = true
-
-[node name="MenuSystem" type="Control"]
+[node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -99,7 +36,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
+[node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 50.0
 margin_top = 40.0
 margin_right = 590.0
@@ -109,76 +46,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="MainMenu"]
+[node name="Label2" type="Label" parent="Menu"]
 margin_right = 540.0
 margin_bottom = 38.0
 custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_colors/font_color_shadow = Color( 0, 0.211765, 0.513726, 1 )
 custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Pot-Shot"
-align = 1
+custom_constants/shadow_offset_y = 4
+text = "Pot-Shot: The Game"
 
-[node name="Square" type="Sprite" parent="MainMenu/Title"]
-modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
-position = Vector2( 365, 22 )
-rotation = -0.523598
-scale = Vector2( 1.48332, 1.48332 )
-texture = ExtResource( 12 )
-
-[node name="ShootingEnemy" type="Sprite" parent="MainMenu/Title"]
-modulate = Color( 1, 0.231373, 0.231373, 1 )
-position = Vector2( 183, 25.56 )
-rotation = 2.35619
-scale = Vector2( 0.316406, 0.316406 )
-texture = ExtResource( 13 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu/Title"]
-autoplay = "float"
-anims/float = SubResource( 1 )
-
-[node name="Spacer" type="Label" parent="MainMenu"]
-visible = false
+[node name="Label3" type="Label" parent="Menu"]
 margin_top = 38.0
 margin_right = 540.0
 margin_bottom = 52.0
 
-[node name="CenterRow" type="HBoxContainer" parent="MainMenu"]
-margin_top = 38.0
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_top = 52.0
 margin_right = 540.0
-margin_bottom = 310.0
+margin_bottom = 304.0
 size_flags_vertical = 3
 
-[node name="Buttons" type="VBoxContainer" parent="MainMenu/CenterRow"]
-margin_right = 540.0
-margin_bottom = 272.0
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 360.0
+margin_bottom = 252.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = -7
+custom_constants/separation = 4
 alignment = 1
 
-[node name="StartButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 1 )]
+[node name="StartButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_right = 360.0
 
-[node name="OptionsButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 2 )]
-margin_top = 53.0
-margin_bottom = 113.0
+[node name="OptionsButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
+margin_top = 64.0
+margin_right = 360.0
+margin_bottom = 124.0
 
-[node name="HelpButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 14 )]
-margin_top = 106.0
-margin_bottom = 166.0
+[node name="CreditsButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+margin_top = 128.0
+margin_right = 360.0
+margin_bottom = 188.0
 
-[node name="CreditsButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 3 )]
-margin_top = 159.0
-margin_bottom = 219.0
+[node name="QuitButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 4 )]
+margin_top = 192.0
+margin_right = 360.0
+margin_bottom = 252.0
 
-[node name="QuitButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 4 )]
-margin_top = 212.0
-margin_bottom = 272.0
-
-[node name="VersionLabel" type="Label" parent="MainMenu"]
-margin_top = 310.0
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
+margin_left = 364.0
 margin_right = 540.0
-margin_bottom = 319.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Menu"]
+margin_top = 304.0
+margin_right = 540.0
+margin_bottom = 313.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
@@ -187,300 +111,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsMenu" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 50.0
-margin_top = 40.0
-margin_right = 410.0
-margin_bottom = 364.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="OptionsMenu"]
-margin_right = 360.0
-margin_bottom = 38.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Options"
-
-[node name="Spacer" type="Label" parent="OptionsMenu"]
-margin_top = 38.0
-margin_right = 360.0
-margin_bottom = 52.0
-
-[node name="CenterRow" type="HBoxContainer" parent="OptionsMenu"]
-margin_top = 52.0
-margin_right = 360.0
-margin_bottom = 324.0
-size_flags_vertical = 3
-
-[node name="Buttons" type="VBoxContainer" parent="OptionsMenu/CenterRow"]
-margin_right = 360.0
-margin_bottom = 272.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 17
-alignment = 1
-
-[node name="HintsToggle" type="CheckBox" parent="OptionsMenu/CenterRow/Buttons"]
-margin_right = 360.0
-margin_bottom = 24.0
-custom_fonts/font = ExtResource( 11 )
-text = "Hints Enabled"
-flat = true
-
-[node name="LightingToggle2" type="CheckBox" parent="OptionsMenu/CenterRow/Buttons"]
-margin_top = 41.0
-margin_right = 360.0
-margin_bottom = 65.0
-custom_fonts/font = ExtResource( 11 )
-pressed = true
-text = "2D Lighting Enabled (disable for lower-end hardware)"
-flat = true
-
-[node name="VolumeSliders" type="VBoxContainer" parent="OptionsMenu/CenterRow/Buttons"]
-margin_top = 82.0
-margin_right = 200.0
-margin_bottom = 195.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_horizontal = 2
-size_flags_vertical = 0
-
-[node name="Master" type="Label" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_right = 200.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 11 )
-text = "Master Volume"
-align = 2
-
-[node name="MasterVolumeSlider" type="HSlider" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_top = 19.0
-margin_right = 200.0
-margin_bottom = 35.0
-size_flags_vertical = 1
-min_value = -40.0
-max_value = 20.0
-
-[node name="Music" type="Label" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_top = 39.0
-margin_right = 200.0
-margin_bottom = 54.0
-custom_fonts/font = ExtResource( 11 )
-text = "Music Volume"
-align = 2
-
-[node name="MusicVolumeSlider" type="HSlider" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_top = 58.0
-margin_right = 200.0
-margin_bottom = 74.0
-size_flags_vertical = 1
-min_value = -40.0
-max_value = 20.0
-
-[node name="SFX" type="Label" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_top = 78.0
-margin_right = 200.0
-margin_bottom = 93.0
-custom_fonts/font = ExtResource( 11 )
-text = "SFX Volume"
-align = 2
-
-[node name="SFXVolumeSlider" type="HSlider" parent="OptionsMenu/CenterRow/Buttons/VolumeSliders"]
-margin_top = 97.0
-margin_right = 200.0
-margin_bottom = 113.0
-size_flags_vertical = 1
-min_value = -40.0
-max_value = 20.0
-
-[node name="BackButton" parent="OptionsMenu/CenterRow/Buttons" instance=ExtResource( 10 )]
-margin_top = 212.0
-margin_right = 360.0
-margin_bottom = 272.0
-
-[node name="HelpMenu" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 50.0
-margin_top = 40.0
-margin_right = 410.0
-margin_bottom = 364.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="HelpMenu"]
-margin_right = 457.0
-margin_bottom = 38.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Help"
-
-[node name="Title2" type="Label" parent="HelpMenu"]
-margin_top = 38.0
-margin_right = 457.0
-margin_bottom = 52.0
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-
-[node name="CenterRow" type="HBoxContainer" parent="HelpMenu"]
-margin_top = 52.0
-margin_right = 457.0
-margin_bottom = 324.0
-size_flags_vertical = 3
-
-[node name="Buttons" type="VBoxContainer" parent="HelpMenu/CenterRow"]
-margin_right = 457.0
-margin_bottom = 272.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 7
-alignment = 1
-
-[node name="Controls" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 2.0
-margin_right = 457.0
-margin_bottom = 28.0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Controls"
-
-[node name="WASD" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 35.0
-margin_right = 457.0
-margin_bottom = 50.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "WASD - Move Player"
-
-[node name="Spacebar" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 57.0
-margin_right = 457.0
-margin_bottom = 72.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Spacebar - Dash"
-
-[node name="Shoot" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 79.0
-margin_right = 457.0
-margin_bottom = 94.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "LeftClick - Shoot"
-
-[node name="Game Mechanics" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 101.0
-margin_right = 457.0
-margin_bottom = 127.0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Game Mechanics"
-
-[node name="How to play" type="Label" parent="HelpMenu/CenterRow/Buttons"]
-margin_top = 134.0
-margin_right = 457.0
-margin_bottom = 203.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Destroy waves of enemies while the rules are constantly changing.
-Every 30 seconds the game-rules un-predictably change*, you must adapt to survive.
-
-*You can toggle \"Hints\" in the Options Menu to learn more about the rule changes."
-
-[node name="BackButton" parent="HelpMenu/CenterRow/Buttons" instance=ExtResource( 10 )]
-margin_top = 210.0
-margin_right = 457.0
-margin_bottom = 270.0
-
-[node name="CreditsMenu" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 50.0
-margin_top = 40.0
-margin_right = 410.0
-margin_bottom = 364.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="CreditsMenu"]
-margin_right = 360.0
-margin_bottom = 38.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Credits"
-
-[node name="Spacer" type="Label" parent="CreditsMenu"]
-margin_top = 38.0
-margin_right = 360.0
-margin_bottom = 52.0
-
-[node name="CreditStuff" type="Label" parent="CreditsMenu"]
-margin_top = 52.0
-margin_right = 360.0
-margin_bottom = 90.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Insert Credits Here"
-
-[node name="CenterRow" type="HBoxContainer" parent="CreditsMenu"]
-margin_top = 90.0
-margin_right = 360.0
-margin_bottom = 324.0
-size_flags_vertical = 3
-
-[node name="Buttons" type="VBoxContainer" parent="CreditsMenu/CenterRow"]
-margin_right = 360.0
-margin_bottom = 234.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 17
-alignment = 1
-
-[node name="BackButton" parent="CreditsMenu/CenterRow/Buttons" instance=ExtResource( 10 )]
-margin_top = 87.0
-margin_right = 360.0
-margin_bottom = 147.0
-
 [node name="FadeIn" parent="." instance=ExtResource( 7 )]
 visible = false
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/LightingToggle2" to="." method="_on_LightingToggle_toggled"]
-[connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
-[connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]
-[connection signal="pressed" from="OptionsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="HelpMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="CreditsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]

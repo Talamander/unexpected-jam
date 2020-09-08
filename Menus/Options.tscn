@@ -4,9 +4,7 @@
 [ext_resource path="res://Menus/dynamicFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Menus/Credits.gd" type="Script" id=3]
 
-[node name="Options" type="Control" groups=[
-"OptionsMenu",
-]]
+[node name="Options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )

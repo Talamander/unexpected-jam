@@ -17,8 +17,6 @@ var itemDropRates = null
 var previousModifier = "start"
 var currentModifier = "start"
 
-var lighting_enabled = true
-
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)
 signal enemy_count_changed(value)
