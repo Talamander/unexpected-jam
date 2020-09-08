@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Arena.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Level/Camera2D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Square.png" type="Texture" id=5]
 [ext_resource path="res://Level/TileMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Level/OuterBounds.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
@@ -87,8 +88,12 @@ scale = Vector2( 1.5, 1.5 )
 [node name="ModifierTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 30.0
+
+[node name="UI" parent="." instance=ExtResource( 7 )]
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="ModifierTimer" to="." method="_on_ModifierTimer_timeout"]
 
 [editable path="Player"]
+
+[editable path="UI"]
