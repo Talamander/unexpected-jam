@@ -36,9 +36,9 @@ func _process(delta):
 		self.visible = true
 	if Global.player != null:
 		player_marker.rotation = get_node(player).rotation + PI / 2
+		update_map()
 	
 	
-	update_map()
 
 
 func _add_map_object(enemy):
