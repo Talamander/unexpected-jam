@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Menus/Buttons/StartButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -11,51 +11,9 @@
 [ext_resource path="res://Menus/dynamicFont.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Menus/Buttons/BackButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Menus/Buttons/OptionsFont.tres" type="DynamicFont" id=11]
-[ext_resource path="res://Player/Square.png" type="Texture" id=12]
-[ext_resource path="res://Enemies/ShootingEnemy.png" type="Texture" id=13]
+[ext_resource path="res://Menus/Pot-ShotTitle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Menus/Buttons/HelpButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/Roboto-Medium.ttf" type="DynamicFontData" id=15]
-
-[sub_resource type="Animation" id=1]
-resource_name = "float"
-length = 3.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Square:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 365, 10 ), Vector2( 365, 22 ), Vector2( 365, 10 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ShootingEnemy:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 183, 17 ), Vector2( 183, 25.56 ), Vector2( 183, 17 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -5.862 ), Vector2( 0, 5.862 ), Vector2( 0, -5.862 ) ]
-}
 
 [sub_resource type="DynamicFont" id=2]
 size = 21
@@ -109,33 +67,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="MainMenu"]
-margin_right = 540.0
-margin_bottom = 38.0
-custom_fonts/font = ExtResource( 9 )
-custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 2
-text = "Pot-Shot"
-align = 1
-
-[node name="Square" type="Sprite" parent="MainMenu/Title"]
-modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
-position = Vector2( 365, 18.8 )
-rotation = -0.523598
-scale = Vector2( 1.48332, 1.48332 )
-texture = ExtResource( 12 )
-
-[node name="ShootingEnemy" type="Sprite" parent="MainMenu/Title"]
-modulate = Color( 1, 0.231373, 0.231373, 1 )
-position = Vector2( 183, 23.2773 )
-rotation = 2.35619
-scale = Vector2( 0.316406, 0.316406 )
-texture = ExtResource( 13 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu/Title"]
-autoplay = "float"
-anims/float = SubResource( 1 )
+[node name="Pot-Shot" parent="MainMenu" instance=ExtResource( 12 )]
 
 [node name="Spacer" type="Label" parent="MainMenu"]
 visible = false

@@ -7,4 +7,4 @@ signal enemy_spawned
 signal enemy_despawn
 signal item_spawn
 signal item_despawn
-
+signal game_restarted

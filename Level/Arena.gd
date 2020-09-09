@@ -64,15 +64,16 @@ var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement",
 func _ready():
 	Music.list_play()
 	modTimer.start()
-	
+	Global.PlayerStats.connect("player_died", self, "_on_player_death")
+# warning-ignore:return_value_discarded
+	SignalManager.connect("game_restarted", self, "restart_game")
 	#for object in get_tree().get_nodes_in_group("minimap_object"):
 		#object.connect("removed", $MiniMap, "_on_object_removed")
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
+	
 	Global.previousModifier = Global.currentModifier
-	if Input.is_action_just_pressed("restart"):
-		reset_game()
 	
 	slow_mo_check()
 
@@ -161,17 +162,9 @@ func _on_ModifierTimer_timeout():
 	print(Global.currentModifier)
 	SoundFx.play("New Modifier", 1, 1)
 
+func _on_player_death():
+	$UI/GameOver.visible = true
 
-func reset_game():
-	get_tree().reload_current_scene()
-	Global.PlayerStats.health = Global.PlayerStats.max_health
-	Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
-	Global.player.canShoot = true
-	Global.currentEnemies = 0
-	Global.currentWave = 1
-	Global.currentModifier = "start"
-	Global.enemiesThisWave = 0
-	Global.enemyWaveLimit = 10
-	Global.enemiesKilled = 0
+func restart_game():
 	modTimer.stop()
 	modTimer.start()
