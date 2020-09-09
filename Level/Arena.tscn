@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/Arena.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://UI/UI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Level/OuterBounds.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/GameOver.tscn" type="PackedScene" id=9]
+[ext_resource path="res://UI/PauseScreen.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -96,6 +97,9 @@ wait_time = 30.0
 player = NodePath("../../Player")
 
 [node name="GameOver" parent="UI" instance=ExtResource( 9 )]
+visible = false
+
+[node name="PauseScreen" parent="UI" instance=ExtResource( 10 )]
 visible = false
 [connection signal="timeout" from="Player/DashRechargeTimer" to="Player" method="_on_DashRechargeTimer_timeout"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
