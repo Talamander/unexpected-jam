@@ -14,3 +14,11 @@
 [node name="HealthMeter" parent="." instance=ExtResource( 1 )]
 
 [node name="MiniMap" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = -105.0
+margin_right = 91.0
+margin_bottom = -25.0
