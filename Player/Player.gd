@@ -6,6 +6,7 @@ var PlayerStats = Global.PlayerStats
 var playerBullet = preload("res://Player/PlayerBullet.tscn")
 var explosion = preload("res://Effects/ExplosionEffect.tscn")
 var dash_trail_effect = preload("res://Effects/DashTrailEffect.tscn")
+var muzzleflash = preload("res://Effects/PlayerMuzzleFlash.tscn")
 
 #References to nodes under Player
 onready var playerSprite = $Sprite
@@ -178,12 +179,13 @@ func look_rotation():
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
-	
+	var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
 	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
 	#This works for setting the bullets rotation and particle rotations though
 	var look_vector = get_global_mouse_position() - global_position
 	global_rotation = atan2(look_vector.y, look_vector.x)
 	bullet.set_rotation(global_rotation)
+	muzzleflashInstance.set_rotation(global_rotation)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 	if recoilRange_check() == true:
@@ -197,6 +199,7 @@ func fire_bullet():
 		motion -= (bullet.velocity + bullet.velocity) * 0
 	else:
 		motion -= bullet.velocity * .75
+	
 	fireRate.start()
 	
 	PlayerStats.currentAmmo -= 1

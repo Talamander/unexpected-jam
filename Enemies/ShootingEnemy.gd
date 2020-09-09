@@ -2,6 +2,7 @@ extends "res://ParentClasses/Enemy.gd"
 
 var enemyBullet = preload("res://Enemies/EnemyBullet.tscn")
 var enemyColor = "ff3b3b"
+var muzzleFlash = preload("res://Effects/EnemyMuzzleFlash.tscn")
 
 onready var muzzle = $muzzle
 onready var fireRate = $FireRate
@@ -30,11 +31,13 @@ func chase_player(delta, value):
 func fire_bullet():
 	#Instances the enemyBullet scene via the Global.gd singleton.
 	var bullet = Global.instance_scene_on_main(enemyBullet, muzzle.global_position)
+	var muzzleFlashInstance = Global.instance_scene_on_main(muzzleFlash, muzzle.global_position)
 	
 	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
 	#This works for setting the bullets rotation and particle rotations though
 	
 	bullet.set_rotation(global_rotation)
+	muzzleFlashInstance.set_rotation(global_rotation)
 	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 	#motion -= bullet.velocity * .1
