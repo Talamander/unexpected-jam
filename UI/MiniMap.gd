@@ -42,7 +42,6 @@ func _process(delta):
 
 
 func _add_map_object(enemy):
-	print("triggered")
 	#var map_objects = get_tree().get_nodes_in_group("minimap_object")
 	#for item in map_objects:
 	var new_marker = icons[enemy.minimap_icon].duplicate()

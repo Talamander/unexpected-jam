@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var pickup_effect = preload ("res://Effects/ItemPickupEffect.tscn")
+
 onready var timer = get_node("InitialDecay")
 onready var animator = $AnimationPlayer
 
@@ -20,6 +22,8 @@ func _AmmoPickUp(body):
 		Global.PlayerStats.currentAmmo += 32
 		Global.player.canShoot = true
 		SignalManager.emit_signal("item_despawn", self)
+		SoundFx.play("Pickup", rand_range(.5, 1.2), -5)
+		Global.instance_scene_on_main(pickup_effect, $Sprite.global_position)
 		queue_free()
 
 func _InitialAmmoDecay_timeout():
