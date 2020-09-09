@@ -87,6 +87,9 @@ func _physics_process(delta):
 		if motion.x != 0:
 			playerSprite.scale.y = range_lerp(abs(previousMotion.x), 0 , abs(baseSpeed), .5, .4)
 			playerSprite.scale.x = range_lerp(abs(previousMotion.x), 0, abs(baseSpeed), .5, .6)
+	elif stun != true:
+		playerSprite.scale.y = .5
+		playerSprite.scale.x = .5
 	
 	if reverse_movement_check() == false:
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
