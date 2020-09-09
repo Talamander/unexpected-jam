@@ -72,13 +72,10 @@ func _ready():
 func _physics_process(delta):
 	Global.previousModifier = Global.currentModifier
 	if Input.is_action_just_pressed("restart"):
-# warning-ignore:return_value_discarded
-		get_tree().reload_current_scene()
-		Global.PlayerStats.health = Global.PlayerStats.max_health
-		Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
-		Global.player.canShoot = true
+		reset_game()
 	
 	slow_mo_check()
+
 
 func slow_mo_check():
 	if Global.currentModifier == "SlowMotion":
@@ -163,3 +160,18 @@ func _on_ModifierTimer_timeout():
 	Global.currentModifier = modifierList[0]
 	print(Global.currentModifier)
 	SoundFx.play("New Modifier", 1, 1)
+
+
+func reset_game():
+	get_tree().reload_current_scene()
+	Global.PlayerStats.health = Global.PlayerStats.max_health
+	Global.PlayerStats.currentAmmo = Global.PlayerStats.MaxAmmo
+	Global.player.canShoot = true
+	Global.currentEnemies = 0
+	Global.currentWave = 1
+	Global.currentModifier = "start"
+	Global.enemiesThisWave = 0
+	Global.enemyWaveLimit = 10
+	Global.enemiesKilled = 0
+	modTimer.stop()
+	modTimer.start()
