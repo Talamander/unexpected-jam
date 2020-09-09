@@ -2,14 +2,9 @@ extends CenterContainer
 
 onready var killCounter = $VBoxContainer/VBoxContainer3/KillCount
 onready var waveCounter = $VBoxContainer/VBoxContainer3/WaveCount
-onready var nameInputBox = $VBoxContainer/VBoxContainer3/HBoxContainer
-onready var nameInput = $VBoxContainer/VBoxContainer3/HBoxContainer/NameInput
 
 
 
-func _ready():
-	if Global.player_name == null:
-		nameInputBox.visible = true
 
 func _process(delta):
 	killCounter.text = ("Enemies Killed: ") + str(Global.enemiesKilled)
@@ -36,13 +31,3 @@ func _on_reset():
 	Global.enemiesThisWave = 0
 	Global.enemyWaveLimit = 10
 	Global.enemiesKilled = 0
-
-
-func _on_SubmitButton_pressed():
-	if Global.player_name == null:
-		Global.player_name = nameInput.text
-	elif Global.player_name != null:
-		var name = Global.player_name
-		SilentWolf.Scores.persist_score(Global.player_name, Global.total_score)
-		SilentWolf.Scores.get_high_scores()
-

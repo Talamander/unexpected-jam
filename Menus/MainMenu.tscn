@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Menus/Buttons/StartButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -12,20 +12,18 @@
 [ext_resource path="res://Menus/Buttons/BackButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Menus/Buttons/OptionsFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Menus/Pot-ShotTitle.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Menus/Buttons/LeaderboardButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Menus/Buttons/HelpButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/Roboto-Medium.ttf" type="DynamicFontData" id=15]
-[ext_resource path="res://Addons/silent_wolf/Scores/Leaderboard.tscn" type="PackedScene" id=16]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 21
 font_data = ExtResource( 15 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 12
 font_data = ExtResource( 15 )
 
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 0.35
@@ -101,12 +99,7 @@ margin_bottom = 113.0
 margin_top = 106.0
 margin_bottom = 166.0
 
-[node name="LeaderboardButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 13 )]
-margin_top = 159.0
-margin_bottom = 219.0
-
 [node name="CreditsButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 3 )]
-visible = false
 margin_top = 159.0
 margin_bottom = 219.0
 
@@ -121,7 +114,7 @@ margin_bottom = 319.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
-text = "Game Created by Doc & Talamander. Music by Somebean. V1.0.0 Submitted to Unexpected Game Jam 2020"
+text = "v1.0.0 Submitted to Unexpected Game Jam 2020"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -288,7 +281,7 @@ alignment = 1
 margin_top = 2.0
 margin_right = 457.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -298,7 +291,7 @@ text = "Controls"
 margin_top = 35.0
 margin_right = 457.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -308,7 +301,7 @@ text = "WASD - Move Player"
 margin_top = 57.0
 margin_right = 457.0
 margin_bottom = 72.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -318,7 +311,7 @@ text = "Spacebar - Dash"
 margin_top = 79.0
 margin_right = 457.0
 margin_bottom = 94.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -328,7 +321,7 @@ text = "LeftClick - Shoot"
 margin_top = 101.0
 margin_right = 457.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -338,7 +331,7 @@ text = "Game Mechanics"
 margin_top = 134.0
 margin_right = 457.0
 margin_bottom = 203.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
@@ -406,19 +399,15 @@ margin_top = 87.0
 margin_right = 360.0
 margin_bottom = 147.0
 
-[node name="Leaderboard" parent="." instance=ExtResource( 16 )]
-visible = false
-
 [node name="FadeIn" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
+environment = SubResource( 3 )
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/LeaderboardButton" to="." method="_on_LeaderboardButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/LightingToggle2" to="." method="_on_LightingToggle_toggled"]
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
@@ -427,6 +416,3 @@ environment = SubResource( 4 )
 [connection signal="pressed" from="OptionsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="HelpMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="CreditsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="Leaderboard/Board/CloseButtonContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-
-[editable path="Leaderboard"]
