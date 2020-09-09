@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Menus/Buttons/StartButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -20,6 +20,14 @@ size = 21
 font_data = ExtResource( 15 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 12
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 12
 font_data = ExtResource( 15 )
 
@@ -58,6 +66,7 @@ __meta__ = {
 }
 
 [node name="MainMenu" type="VBoxContainer" parent="."]
+visible = false
 margin_left = 50.0
 margin_top = 40.0
 margin_right = 590.0
@@ -346,10 +355,9 @@ margin_right = 457.0
 margin_bottom = 270.0
 
 [node name="CreditsMenu" type="VBoxContainer" parent="."]
-visible = false
 margin_left = 50.0
 margin_top = 40.0
-margin_right = 410.0
+margin_right = 590.0
 margin_bottom = 364.0
 custom_constants/separation = 0
 __meta__ = {
@@ -357,47 +365,116 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="CreditsMenu"]
-margin_right = 360.0
+margin_right = 540.0
 margin_bottom = 38.0
 custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
 text = "Credits"
+align = 1
 
 [node name="Spacer" type="Label" parent="CreditsMenu"]
 margin_top = 38.0
-margin_right = 360.0
+margin_right = 540.0
 margin_bottom = 52.0
+align = 1
 
-[node name="CreditStuff" type="Label" parent="CreditsMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsMenu"]
 margin_top = 52.0
-margin_right = 360.0
-margin_bottom = 90.0
-custom_fonts/font = ExtResource( 9 )
+margin_right = 540.0
+margin_bottom = 259.0
+custom_constants/separation = 39
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsMenu/VBoxContainer"]
+margin_right = 540.0
+margin_bottom = 43.0
+
+[node name="Doc" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer"]
+margin_right = 540.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 2
-text = "Insert Credits Here"
+text = "Doc"
+align = 1
 
-[node name="CenterRow" type="HBoxContainer" parent="CreditsMenu"]
-margin_top = 90.0
-margin_right = 360.0
-margin_bottom = 324.0
-size_flags_vertical = 3
+[node name="DocCredits" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 540.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "Programmer - Game Designer"
+align = 1
 
-[node name="Buttons" type="VBoxContainer" parent="CreditsMenu/CenterRow"]
-margin_right = 360.0
-margin_bottom = 234.0
+[node name="VBoxContainer3" type="VBoxContainer" parent="CreditsMenu/VBoxContainer"]
+margin_top = 82.0
+margin_right = 540.0
+margin_bottom = 125.0
+
+[node name="Somebean" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer3"]
+margin_right = 540.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "Somebean"
+align = 1
+
+[node name="TalCredits2" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer3"]
+margin_top = 28.0
+margin_right = 540.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "Musical Composer - SFX Engineer"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CreditsMenu/VBoxContainer"]
+margin_top = 164.0
+margin_right = 540.0
+margin_bottom = 207.0
+
+[node name="Talamander" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer2"]
+margin_right = 540.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "Talamander"
+align = 1
+
+[node name="TalCredits" type="Label" parent="CreditsMenu/VBoxContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 540.0
+margin_bottom = 43.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color_shadow = Color( 0.0117647, 0.0156863, 0.0235294, 0.333333 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+text = "Programmer - Game Designer - Artist - SFX \"Engineer\""
+align = 1
+
+[node name="Buttons" type="VBoxContainer" parent="CreditsMenu"]
+margin_top = 259.0
+margin_right = 540.0
+margin_bottom = 333.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 17
 alignment = 1
 
-[node name="BackButton" parent="CreditsMenu/CenterRow/Buttons" instance=ExtResource( 10 )]
-margin_top = 87.0
-margin_right = 360.0
-margin_bottom = 147.0
+[node name="BackButton" parent="CreditsMenu/Buttons" instance=ExtResource( 10 )]
+margin_top = 7.0
+margin_bottom = 67.0
 
 [node name="FadeIn" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -408,6 +485,7 @@ environment = SubResource( 3 )
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
+[connection signal="pressed" from="MainMenu/CenterRow/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/LightingToggle2" to="." method="_on_LightingToggle_toggled"]
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
@@ -415,4 +493,4 @@ environment = SubResource( 3 )
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]
 [connection signal="pressed" from="OptionsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="HelpMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="CreditsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="CreditsMenu/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
