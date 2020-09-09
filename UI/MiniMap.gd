@@ -29,6 +29,10 @@ func _ready():
 func _process(delta):
 	if !player:
 		return
+	if Global.currentModifier == "noMiniMap":
+		self.visible = false
+	elif Global.currentModifier != "noMiniMap":
+		self.visible = true
 	player_marker.rotation = get_node(player).rotation + PI / 2
 	
 	
