@@ -18,6 +18,7 @@ var previous_object_count = 0
 var object_count = 1
 
 func _ready():
+# warning-ignore-all:return_value_discarded
 	SignalManager.connect("enemy_spawned", self, "_add_map_object")
 	SignalManager.connect("enemy_despawn", self, "_on_object_removed")
 	SignalManager.connect("item_spawn", self, "_add_map_object")
@@ -33,7 +34,8 @@ func _process(delta):
 		self.visible = false
 	elif Global.currentModifier != "noMiniMap":
 		self.visible = true
-	player_marker.rotation = get_node(player).rotation + PI / 2
+	if Global.player != null:
+		player_marker.rotation = get_node(player).rotation + PI / 2
 	
 	
 	update_map()
