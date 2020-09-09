@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Menus/Buttons/StartButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Menus/Buttons/OptionsButton.tscn" type="PackedScene" id=2]
@@ -12,8 +12,10 @@
 [ext_resource path="res://Menus/Buttons/BackButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Menus/Buttons/OptionsFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Menus/Pot-ShotTitle.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Menus/Buttons/LeaderboardButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Menus/Buttons/HelpButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/Roboto-Medium.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Addons/silent_wolf/Scores/Leaderboard.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=2]
 size = 21
@@ -99,7 +101,12 @@ margin_bottom = 113.0
 margin_top = 106.0
 margin_bottom = 166.0
 
+[node name="LeaderboardButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 13 )]
+margin_top = 159.0
+margin_bottom = 219.0
+
 [node name="CreditsButton" parent="MainMenu/CenterRow/Buttons" instance=ExtResource( 3 )]
+visible = false
 margin_top = 159.0
 margin_bottom = 219.0
 
@@ -114,7 +121,8 @@ margin_bottom = 319.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_fonts/font = ExtResource( 5 )
-text = "Version 1.0 Submitted to Unexpected Game Jam 2020"
+text = "Game Created by Doc & Talamander. Music by Somebean. V1.0.0 Submitted to Unexpected Game Jam 2020"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -398,6 +406,9 @@ margin_top = 87.0
 margin_right = 360.0
 margin_bottom = 147.0
 
+[node name="Leaderboard" parent="." instance=ExtResource( 16 )]
+visible = false
+
 [node name="FadeIn" parent="." instance=ExtResource( 7 )]
 visible = false
 
@@ -407,7 +418,7 @@ environment = SubResource( 4 )
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
-[connection signal="pressed" from="MainMenu/CenterRow/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="MainMenu/CenterRow/Buttons/LeaderboardButton" to="." method="_on_LeaderboardButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/LightingToggle2" to="." method="_on_LightingToggle_toggled"]
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
@@ -416,3 +427,6 @@ environment = SubResource( 4 )
 [connection signal="pressed" from="OptionsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="HelpMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="CreditsMenu/CenterRow/Buttons/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Leaderboard/Board/CloseButtonContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+
+[editable path="Leaderboard"]

@@ -5,6 +5,8 @@ var healthItem = preload("res://Items/HealthItem.tscn")
 var ammoItem = preload("res://Items/AmmoItem.tscn")
 
 var player = null
+var player_name = null
+var total_score = 0 setget set_score
 
 var MaxEnemies = 25
 var currentEnemies = 0 setget set_enemies
@@ -32,6 +34,13 @@ func instance_scene_on_main(scene, position):
 	main.add_child(instance)
 	instance.global_position = position
 	return instance
+
+func set_score(value):
+	var enemyScoreVal = 100
+	var waveScoreVal = 500
+	var enemyScore = enemyScoreVal * enemiesKilled
+	var waveScore = waveScoreVal * (currentWave - 1)
+	total_score = enemyScore + waveScore
 
 func set_enemies(value):
 	currentEnemies = clamp(value, 0, MaxEnemies)

@@ -12,7 +12,7 @@ func _ready():
 	
 func _healthPickUp(body):
 	if body == Global.player:
-		Global.PlayerStats.health += 2
+		Global.PlayerStats.health += 5
 		SignalManager.emit_signal("item_despawn", self)
 		queue_free()
 

@@ -50,6 +50,16 @@ func _on_BackButton_pressed():
 	creditsMenu.visible = false
 	helpMenu.visible = false
 
+func _on_LeaderboardButton_pressed():
+	$Leaderboard.visible = true
+	optionsMenu.visible = false
+	creditsMenu.visible = false
+	helpMenu.visible = false
+	mainMenu.visible = false
+
+func _on_CloseButton_pressed():
+	$Leaderboard.visible = false
+	mainMenu.visible = true
 
 # warning-ignore:unused_argument
 func _on_CheckBox_toggled(button_pressed):
@@ -73,4 +83,5 @@ func _on_MusicVolumeSlider_value_changed(value):
 
 func _on_SFXVolumeSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), value)
+
 

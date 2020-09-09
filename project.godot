@@ -30,6 +30,7 @@ Global="*res://Singletons/Global.gd"
 SoundFx="*res://Singletons/SoundFX.tscn"
 Music="*res://Singletons/Music.tscn"
 SignalManager="*res://Singletons/SignalManager.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 
 [display]
 

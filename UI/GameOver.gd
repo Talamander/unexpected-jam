@@ -1,16 +1,19 @@
 extends CenterContainer
 
+onready var killCounter = $VBoxContainer/VBoxContainer3/KillCount
+onready var waveCounter = $VBoxContainer/VBoxContainer3/WaveCount
+onready var nameInputBox = $VBoxContainer/VBoxContainer3/HBoxContainer
+onready var nameInput = $VBoxContainer/VBoxContainer3/HBoxContainer/NameInput
 
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if Global.player_name == null:
+		nameInputBox.visible = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	killCounter.text = ("Enemies Killed: ") + str(Global.enemiesKilled)
+	waveCounter.text = ("Waves Survived: ") + str(Global.currentWave - 1)
 
 
 func _on_RestartButton_pressed():
@@ -33,3 +36,13 @@ func _on_reset():
 	Global.enemiesThisWave = 0
 	Global.enemyWaveLimit = 10
 	Global.enemiesKilled = 0
+
+
+func _on_SubmitButton_pressed():
+	if Global.player_name == null:
+		Global.player_name = nameInput.text
+	elif Global.player_name != null:
+		var name = Global.player_name
+		SilentWolf.Scores.persist_score(Global.player_name, Global.total_score)
+		SilentWolf.Scores.get_high_scores()
+
