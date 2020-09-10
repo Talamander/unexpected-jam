@@ -69,8 +69,15 @@ func _on_CheckBox_toggled(button_pressed):
 func _on_LightingToggle_toggled(button_pressed):
 	if button_pressed == true:
 		Global.lighting_enabled = true
-	elif button_pressed == false:
+	else:
 		Global.lighting_enabled = false
+
+
+func _on_HintsToggle_toggled(button_pressed):
+	if button_pressed == true:
+		Global.hints_enabled = true
+	else:
+		Global.hints_enabled = false
 
 
 func _on_MasterVolumeSlider_value_changed(value):
