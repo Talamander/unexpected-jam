@@ -4,6 +4,7 @@ onready var killCounter = $VBoxContainer/VBoxContainer3/KillCount
 onready var waveCounter = $VBoxContainer/VBoxContainer3/WaveCount
 
 
+# warning-ignore:unused_argument
 func _process(delta):
 	killCounter.text = ("Enemies Killed: ") + str(Global.enemiesKilled)
 	waveCounter.text = ("Waves Survived: ") + str(Global.currentWave - 1)
@@ -15,6 +16,7 @@ func _on_RestartButton_pressed():
 
 func _on_ReturnToButton_pressed():
 	pause()
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Menus/MainMenu.tscn")
 	_on_reset()
 

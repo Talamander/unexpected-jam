@@ -20,6 +20,7 @@ func _ready():
 	#teleportationDelay.connect("timeout", self, "teleportTimeout")
 	add_child(teleportationDelay)
 	teleportationDelay.start()
+	enemySprite.modulate = Color(enemyColor)
 	
 # Called when the node enters the scene tree for the first time.
 # warning-ignore:unused_argument

@@ -12,7 +12,7 @@ var minimap_icon = "Pickup"
 func _ready():
 	SignalManager.emit_signal("item_spawn", self)
 	timer.start()
-	animator.play("bounce")
+	#animator.play("bounce")
 
 func _physics_process(delta):
 	chase_player(delta*8)
@@ -22,7 +22,7 @@ func _AmmoPickUp(body):
 		Global.PlayerStats.currentAmmo += 32
 		Global.player.canShoot = true
 		SignalManager.emit_signal("item_despawn", self)
-		SoundFx.play("Pickup", rand_range(.5, 1.2), -5)
+		SoundFx.play("Pickup", rand_range(.5, 1.2), -10)
 		Global.instance_scene_on_main(pickup_effect, $Sprite.global_position)
 		queue_free()
 
