@@ -35,6 +35,7 @@ func instance_scene_on_main(scene, position):
 	instance.global_position = position
 	return instance
 
+# warning-ignore:unused_argument
 func set_score(value):
 	var enemyScoreVal = 100
 	var waveScoreVal = 500

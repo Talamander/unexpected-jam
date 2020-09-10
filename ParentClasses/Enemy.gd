@@ -45,7 +45,6 @@ func _on_Hurtbox_hit(damage):
 	stats.health -= damage
 
 func _on_EnemyStats_enemy_died():
-	print (Global.total_score)
 	SignalManager.emit_signal("enemy_despawn", self)
 	Global.currentEnemies -= 1
 	Global.enemiesKilled += 1
