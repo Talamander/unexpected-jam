@@ -18,7 +18,6 @@ polygon = PoolVector2Array( -8.4375, 4.53125, -3.34375, 7.625, -8.4375, 10.7188 
 polygon = PoolVector2Array( -8.40625, -10.875, -2.96875, -7.71875, -8.40625, -4.5625 )
 
 [node name="TeleportEnemy" instance=ExtResource( 1 )]
-modulate = Color( 1, 0.231373, 0.231373, 1 )
 collision_layer = 16
 collision_mask = 50
 script = ExtResource( 2 )
