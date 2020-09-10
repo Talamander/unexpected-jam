@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.49943 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 4.49943 )
 
 [sub_resource type="Animation" id=3]
@@ -46,7 +46,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -0.500565 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="InitialDecay" type="Timer" parent="."]
 wait_time = 30.0
