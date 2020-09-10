@@ -156,6 +156,15 @@ func noRecoil_check():
 	else:
 		checker = true
 		return checker
+		
+func infiniteAmmo():
+	var checker = null
+	if Global.currentModifier != "infiniteAmmo":
+		checker = false
+		return checker
+	else:
+		checker = true
+		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
@@ -201,8 +210,10 @@ func fire_bullet():
 		motion -= bullet.velocity * .75
 	
 	fireRate.start()
-	
-	PlayerStats.currentAmmo -= 1
+	if !infiniteAmmo():
+		PlayerStats.currentAmmo -= 1
+	else:
+		pass
 
 
 func regen_ammo():
