@@ -58,8 +58,18 @@ shadow_enabled = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = -1.57079
 
-[node name="Muzzle" type="Position2D" parent="."]
+[node name="ClassicWeaponMuzzle" type="Node2D" parent="."]
+
+[node name="Muzzle" type="Position2D" parent="ClassicWeaponMuzzle"]
 position = Vector2( 8, 0 )
+
+[node name="TwoShotMuzzles" type="Node2D" parent="."]
+
+[node name="TwoShotMuzzleOne" type="Position2D" parent="TwoShotMuzzles"]
+position = Vector2( 0, 10 )
+
+[node name="TwoShotMuzzleTwo" type="Position2D" parent="TwoShotMuzzles"]
+position = Vector2( 0, -10 )
 
 [node name="Timers" type="Node" parent="."]
 

@@ -15,7 +15,9 @@ onready var stunTimer = $Timers/StunTimer
 onready var dashTimer = $Timers/DashTimer
 onready var dashRechargeTimer = $Timers/DashRechargeTimer
 onready var light = $Light2D
-onready var muzzle = $Muzzle
+onready var muzzle = $ClassicWeaponMuzzle/Muzzle
+onready var twoShotMuzzleOne = $TwoShotMuzzles/TwoShotMuzzleOne
+onready var twoShotMuzzleTwo = $TwoShotMuzzles/TwoShotMuzzleTwo
 
 onready var ammoRegenTimer = $Timers/AmmoRegenTimer
 onready var ammoRegenZeroedTimer = $Timers/AmmoRegenZeroedTimer
@@ -165,6 +167,14 @@ func infiniteAmmo():
 	else:
 		checker = true
 		return checker
+func twoShot():
+	var checker = null
+	if Global.currentModifier != "twoShot":
+		checker = false
+		return checker
+	else:
+		checker = true
+		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
@@ -187,33 +197,66 @@ func look_rotation():
 
 func fire_bullet():
 	#Instances the playerBullet scene via the Global.gd singleton.
-	var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
-	var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
-	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
-	#This works for setting the bullets rotation and particle rotations though
-	var look_vector = get_global_mouse_position() - global_position
-	global_rotation = atan2(look_vector.y, look_vector.x)
-	bullet.set_rotation(global_rotation)
-	muzzleflashInstance.set_rotation(global_rotation)
-	bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
+	if twoShot()==true:
+		var bullet = Global.instance_scene_on_main(playerBullet, twoShotMuzzleOne.global_position)
+		var bullet2 = Global.instance_scene_on_main(playerBullet, twoShotMuzzleTwo.global_position)
+		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
+		var muzzleflashInstance2 = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
+		
+		var look_vector = get_global_mouse_position() - global_position
+		global_rotation = atan2(look_vector.y, look_vector.x)
+		bullet.set_rotation(global_rotation)
+		bullet2.set_rotation(global_rotation)
+		muzzleflashInstance.set_rotation(global_rotation)
+		muzzleflashInstance2.set_rotation(global_rotation)
+		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
+		bullet2.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet2.speed
 	#Adds a little kick, tweak the number to change intensity
-	if recoilRange_check() == true:
-		if isRecoilRangeInPlace == false:
-			currentRecoilRange = float(rand_range(0.76, 0.80))
-			isRecoilRangeInPlace = true
+		if recoilRange_check() == true:
+			if isRecoilRangeInPlace == false:
+				currentRecoilRange = float(rand_range(0.76, 0.80))
+				isRecoilRangeInPlace = true
+			else:
+				pass
+			motion -= bullet.velocity * currentRecoilRange
+		if noRecoil_check() == true:
+			motion -= (bullet.velocity + bullet.velocity) * 0
+		else:
+			motion -= bullet.velocity * .75
+	
+		fireRate.start()
+		if !infiniteAmmo():
+			PlayerStats.currentAmmo -= 1
 		else:
 			pass
-		motion -= bullet.velocity * currentRecoilRange
-	if noRecoil_check() == true:
-		motion -= (bullet.velocity + bullet.velocity) * 0
 	else:
-		motion -= bullet.velocity * .75
+		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
+		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
+	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
+	#This works for setting the bullets rotation and particle rotations though
+		var look_vector = get_global_mouse_position() - global_position
+		global_rotation = atan2(look_vector.y, look_vector.x)
+		bullet.set_rotation(global_rotation)
+		muzzleflashInstance.set_rotation(global_rotation)
+		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
+	#Adds a little kick, tweak the number to change intensity
+		if recoilRange_check() == true:
+			if isRecoilRangeInPlace == false:
+				currentRecoilRange = float(rand_range(0.76, 0.80))
+				isRecoilRangeInPlace = true
+			else:
+				pass
+			motion -= bullet.velocity * currentRecoilRange
+		if noRecoil_check() == true:
+			motion -= (bullet.velocity + bullet.velocity) * 0
+		else:
+			motion -= bullet.velocity * .75
 	
-	fireRate.start()
-	if !infiniteAmmo():
-		PlayerStats.currentAmmo -= 1
-	else:
-		pass
+		fireRate.start()
+		if !infiniteAmmo():
+			PlayerStats.currentAmmo -= 1
+		else:
+			pass
 
 
 func regen_ammo():
