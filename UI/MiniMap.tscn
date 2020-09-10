@@ -26,7 +26,7 @@ color = Color( 0.215686, 0.282353, 1, 0.0509804 )
 
 [node name="PlayerMarker" type="Sprite" parent="Grid"]
 modulate = Color( 0.341176, 0.705882, 0.886275, 1 )
-scale = Vector2( 0.4, 0.4 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 
 [node name="EnemyMarker" type="Sprite" parent="Grid"]
