@@ -14,8 +14,8 @@ onready var stats = $EnemyStats
 onready var enemySprite = $Sprite
 onready var stunTimer = $StunTimer
 
-
-export(int) var speed = 425
+var possibleSpeeds = [380, 390, 400, 400, 400, 410, 425, 425]
+export(int) var speed = possibleSpeeds[0]
 export(int) var acceleration = 4000
 
 
@@ -23,6 +23,7 @@ export(int) var acceleration = 4000
 signal enemy_died
 
 func _ready():
+	possibleSpeeds.shuffle()
 	SignalManager.emit_signal("enemy_spawned", self)
 
 func check_the_distance():
