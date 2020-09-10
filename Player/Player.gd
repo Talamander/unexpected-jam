@@ -211,24 +211,12 @@ func fire_bullet():
 		muzzleflashInstance2.set_rotation(global_rotation)
 		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 		bullet2.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet2.speed
-	#Adds a little kick, tweak the number to change intensity
-		if recoilRange_check() == true:
-			if isRecoilRangeInPlace == false:
-				currentRecoilRange = float(rand_range(0.76, 0.80))
-				isRecoilRangeInPlace = true
-			else:
-				pass
-			motion -= bullet.velocity * currentRecoilRange
-		if noRecoil_check() == true:
-			motion -= (bullet.velocity + bullet.velocity) * 0
-		else:
-			motion -= bullet.velocity * .75
+		#Adds a little kick, tweak the number to change intensity
+		motion -= bullet.velocity * .43
+		motion -= bullet2.velocity * .43
 	
 		fireRate.start()
-		if !infiniteAmmo():
-			PlayerStats.currentAmmo -= 1
-		else:
-			pass
+		PlayerStats.currentAmmo -= 1
 	else:
 		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
 		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
