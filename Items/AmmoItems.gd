@@ -12,7 +12,7 @@ var minimap_icon = "Pickup"
 func _ready():
 	SignalManager.emit_signal("item_spawn", self)
 	timer.start()
-	animator.play("bounce")
+	#animator.play("bounce")
 
 func _physics_process(delta):
 	chase_player(delta*8)
