@@ -61,9 +61,12 @@ func _on_CloseButton_pressed():
 	$Leaderboard.visible = false
 	mainMenu.visible = true
 
-# warning-ignore:unused_argument
-func _on_CheckBox_toggled(button_pressed):
-	pass # Replace with function body.
+
+func _on_HintsToggle_toggled(button_pressed):
+	if button_pressed == true:
+		Global.hints_enabled = true
+	elif button_pressed == false:
+		Global.hints_enabled = false
 
 
 func _on_LightingToggle_toggled(button_pressed):
@@ -83,5 +86,6 @@ func _on_MusicVolumeSlider_value_changed(value):
 
 func _on_SFXVolumeSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), value)
+
 
 
