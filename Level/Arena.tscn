@@ -89,7 +89,7 @@ scale = Vector2( 1.5, 1.5 )
 
 [node name="ModifierTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 5.0
+wait_time = 30.0
 
 [node name="UI" parent="." instance=ExtResource( 7 )]
 

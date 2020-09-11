@@ -512,7 +512,6 @@ environment = SubResource( 5 )
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MainMenu/CenterRow/Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/HintsToggle" to="." method="_on_HintsToggle_toggled"]
 [connection signal="toggled" from="OptionsMenu/CenterRow/Buttons/LightingToggle2" to="." method="_on_LightingToggle_toggled"]
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
 [connection signal="value_changed" from="OptionsMenu/CenterRow/Buttons/VolumeSliders/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
