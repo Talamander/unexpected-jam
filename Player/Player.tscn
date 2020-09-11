@@ -66,10 +66,10 @@ position = Vector2( 8, 0 )
 [node name="TwoShotMuzzles" type="Node2D" parent="."]
 
 [node name="TwoShotMuzzleOne" type="Position2D" parent="TwoShotMuzzles"]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 10 )
 
 [node name="TwoShotMuzzleTwo" type="Position2D" parent="TwoShotMuzzles"]
-position = Vector2( 0, -5 )
+position = Vector2( 0, -10 )
 
 [node name="Timers" type="Node" parent="."]
 
