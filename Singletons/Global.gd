@@ -20,7 +20,6 @@ var previousModifier = "start"
 var currentModifier = "start"
 
 var lighting_enabled = true
-var hints_enabled = false
 
 # warning-ignore-all:unused_signal
 signal add_screenshake(amount, duration)
