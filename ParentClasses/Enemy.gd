@@ -55,7 +55,8 @@ func _on_EnemyStats_enemy_died():
 		teleport_effect()
 		Global.player.global_position = ifKillSwitch
 	death_effect()
-	queue_free()
+	call_deferred("free")
+	#queue_free()
 
 func killSwitch_Check():
 	var checker = null
