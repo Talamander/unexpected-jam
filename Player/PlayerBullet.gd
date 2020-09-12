@@ -24,6 +24,8 @@ func _physics_process(delta):
 func damage_increase_checker():
 	if Global.currentModifier != "PlayerDamageIncrease":
 		$Hitbox.damage = 1
+	elif Global.currentModifier == "chargeShot":
+		$Hitbox.damage = Global.player.chargeShotDamage
 	else:
 		$Hitbox.damage = 2
 

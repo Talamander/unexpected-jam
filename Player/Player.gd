@@ -39,6 +39,7 @@ var previousMotion = Vector2.ZERO
 var stun = false
 var isRecoilRangeInPlace = false
 var currentRecoilRange = 0.0
+var chargeShotDamage = 1
 
 var canShoot = true
 
@@ -98,6 +99,13 @@ func _physics_process(delta):
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 			fire_bullet()
 			regen_ammo()
+	elif chargeShot() == true:
+		PlayerStats.currentAmmo = 0
+		if Input.is_action_pressed("fire"):
+			fireRate.start()
+			if fireRate.time_left == 0:
+				PlayerStats.currentAmmo += 1
+				chargeShotDamage = PlayerStats.currentAmmo
 	else:
 		if Input.is_action_pressed("reverse_fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 			fire_bullet()
@@ -175,6 +183,14 @@ func twoShot():
 	else:
 		checker = true
 		return checker
+func chargeShot():
+	var checker = null
+	if Global.currentModifier != "chargeShot":
+		checker = false
+		return checker
+	else:
+		checker = true
+		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
@@ -229,6 +245,22 @@ func fire_bullet():
 			PlayerStats.currentAmmo -= 1
 		else:
 			pass
+	elif chargeShot()==true:
+		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
+		bullet.scale = float(chargeShotDamage) * 0.4
+		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
+	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
+	#This works for setting the bullets rotation and particle rotations though
+		var look_vector = get_global_mouse_position() - global_position
+		global_rotation = atan2(look_vector.y, look_vector.x)
+		bullet.set_rotation(global_rotation)
+		muzzleflashInstance.set_rotation(global_rotation)
+		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
+	#Adds a little kick, tweak the number to change intensity
+		motion -= bullet.velocity * currentRecoilRange
+		motion -= bullet.velocity * .75
+	
+		fireRate.start()
 	else:
 		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
 		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
@@ -260,22 +292,30 @@ func fire_bullet():
 
 
 func regen_ammo():
-	if PlayerStats.currentAmmo > 1:
-		ammoRegenTimer.start()
-	if PlayerStats.currentAmmo == 0:
-		ammoRegenTimer.stop()
-		ammoRegenZeroedTimer.start()
-		canShoot = false
+	if chargeShot() == true:
+		pass
+	else:
+		if PlayerStats.currentAmmo > 1:
+			ammoRegenTimer.start()
+		if PlayerStats.currentAmmo == 0:
+			ammoRegenTimer.stop()
+			ammoRegenZeroedTimer.start()
+			canShoot = false
 
 func _on_AmmoRegenTimer_timeout():
-	if PlayerStats.currentAmmo < PlayerStats.MaxAmmo:
-		PlayerStats.currentAmmo += 1
-		#print (PlayerStats.currentAmmo)
+	if chargeShot() == true:
+		pass
+	else:
+		if PlayerStats.currentAmmo < PlayerStats.MaxAmmo:
+			PlayerStats.currentAmmo += 1
 
 func _on_AmmoRegenZeroedTimer_timeout():
-	if PlayerStats.currentAmmo == 0:
-		PlayerStats.currentAmmo += 32
-		canShoot = true
+	if chargeShot() == true:
+		pass
+	else:
+		if PlayerStats.currentAmmo == 0:
+			PlayerStats.currentAmmo += 32
+			canShoot = true
 
 
 func dash():
