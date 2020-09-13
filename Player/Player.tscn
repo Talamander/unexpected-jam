@@ -101,7 +101,6 @@ wait_time = 0.2
 
 [node name="ChargeCheck" type="Timer" parent="Timers"]
 wait_time = 0.3
-one_shot = true
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_DashTimer_timeout"]
@@ -110,6 +109,5 @@ one_shot = true
 [connection signal="timeout" from="Timers/StunTimer" to="." method="_on_StunTimer_timeout"]
 [connection signal="timeout" from="Timers/AmmoRegenZeroedTimer" to="." method="_on_AmmoRegenZeroedTimer_timeout"]
 [connection signal="timeout" from="Timers/AmmoRegenTimer" to="." method="_on_AmmoRegenTimer_timeout"]
-[connection signal="timeout" from="Timers/ChargeCheck" to="." method="_on_ChargeCheck_timeout"]
 
 [editable path="Hurtbox"]

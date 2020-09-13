@@ -40,6 +40,7 @@ var previousMotion = Vector2.ZERO
 var stun = false
 var isRecoilRangeInPlace = false
 var currentRecoilRange = 0.0
+var newChargeCycle = true
 
 var canShoot = true
 
@@ -100,7 +101,6 @@ func _physics_process(delta):
 			fire_bullet()
 			regen_ammo()
 	elif chargeShot() == true:
-		PlayerStats.currentAmmo = 0
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and canShoot == true:
 			if chargeTimer.time_left == 0 and PlayerStats.currentAmmo == 0:
 				chargeTimer.start()
@@ -191,10 +191,16 @@ func twoShot():
 func chargeShot():
 	var checker = null
 	if Global.currentModifier != "chargeShot":
+		if newChargeCycle == false:
+			PlayerStats.currentAmmo = 32
+			
 		fireRate.set_wait_time(0.1)
 		checker = false
 		return checker
 	else:
+		if newChargeCycle == true:
+			newChargeCycle = false
+			PlayerStats.currentAmmo = 0
 		fireRate.set_wait_time(0.05)
 		checker = true
 		return checker

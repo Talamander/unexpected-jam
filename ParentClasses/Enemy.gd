@@ -41,9 +41,11 @@ func chase_player(delta, value):
 
 
 func _on_Hurtbox_hit(damage):
-	stats.health -= damage - (Global.player.chargeShotDamage - stats.health)
-	Global.player.chargeShotDamage -= stats.health
-
+	if Global.currentModifier != "chargeShot":
+		stats.health -= damage - (Global.chargeShotDamage - stats.health)
+		Global.chargeShotDamage -= stats.health
+	else:
+		stats.health -= damage
 func _on_EnemyStats_enemy_died():
 	SignalManager.emit_signal("enemy_despawn", self)
 	Global.currentEnemies -= 1
