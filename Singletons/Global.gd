@@ -15,6 +15,7 @@ var enemiesThisWave = 0
 var enemyWaveLimit = 10
 var currentWave = 1
 var itemDropRates = null
+var chargeShotDamage = 1
 
 var previousModifier = "start"
 var currentModifier = "start"

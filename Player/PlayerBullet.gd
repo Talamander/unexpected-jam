@@ -21,9 +21,11 @@ func _ready():
 # warning-ignore:unused_argument
 func _physics_process(delta):
 	damage_increase_checker()
-	if Global.currentModifier == "chargeShot" and Global.player.chargeShotDamage != 0:
+	if Global.currentModifier == "chargeShot" and Global.chargeShotDamage != 0:
 		
-		if Global.player.chargeShotDamage > 21 and Global.player.chargeShotDamage <= 32:
+		if bulletChecker == null:
+			pass
+		elif Global.chargeShotDamage > 21 and Global.chargeShotDamage <= 32:
 			get_node("SizeThreeShot").disabled = false
 			get_node("SizeThreeSprite").visible = true
 			get_node("SizeTwoShot").disabled = true
@@ -31,7 +33,7 @@ func _physics_process(delta):
 			get_node("RegularShot").disabled = true
 			get_node("RegularSprite").visible = false
 			
-		elif Global.player.chargeShotDamage > 10 and Global.player.chargeShotDamage <= 21:
+		elif Global.chargeShotDamage > 10 and Global.chargeShotDamage <= 21:
 			get_node("SizeThreeShot").disabled = true
 			get_node("SizeThreeSprite").visible = false
 			get_node("SizeTwoShot").disabled = false
@@ -39,32 +41,25 @@ func _physics_process(delta):
 			get_node("RegularShot").disabled = true
 			get_node("RegularSprite").visible = false
 			
-		elif Global.player.chargeShotDamage < 10 and Global.player.chargeShotDamage >= 1:
+		elif Global.chargeShotDamage < 10 and Global.chargeShotDamage >= 1:
 			get_node("SizeThreeShot").disabled = true
 			get_node("SizeThreeSprite").visible = false
 			get_node("SizeTwoShot").disabled = true
 			get_node("SizeTwoSprite").visible = false
 			get_node("RegularShot").disabled = false
 			get_node("RegularSprite").visible = true
-	elif bulletChecker != null:
-		get_node("SizeThreeShot").disabled = true
-		get_node("SizeThreeSprite").visible = false
-		get_node("SizeTwoShot").disabled = true
-		get_node("SizeTwoSprite").visible = false
-		get_node("RegularShot").disabled = false
-		get_node("RegularSprite").visible = true
 
 func damage_increase_checker():
 	if Global.currentModifier != "PlayerDamageIncrease":
 		$Hitbox.damage = 1
 	elif Global.currentModifier == "chargeShot":
-		$Hitbox.damage = Global.player.chargeShotDamage
+		$Hitbox.damage = Global.chargeShotDamage
 	else:
 		$Hitbox.damage = 2
 
 
 func _on_Hitbox_body_entered(_body):
-	if Global.currentModifier == "chargeShot" and Global.player.chargeShotDamage == 0:
+	if Global.currentModifier == "chargeShot" and Global.chargeShotDamage == 0:
 		bulletSprite.visible = false
 		get_node("Hitbox/CollisionShape2D").set_deferred("disabled", true)
 		trail.emitting = false
@@ -81,7 +76,7 @@ func _on_Hitbox_body_entered(_body):
 
 
 func _on_Hitbox_area_entered(_area):
-	if Global.currentModifier == "chargeShot" and Global.player.chargeShotDamage == 0:
+	if Global.currentModifier == "chargeShot" and Global.chargeShotDamage == 0:
 		bulletSprite.visible = false
 		get_node("Hitbox/CollisionShape2D").set_deferred("disabled", true)
 		trail.emitting = false

@@ -40,7 +40,6 @@ var previousMotion = Vector2.ZERO
 var stun = false
 var isRecoilRangeInPlace = false
 var currentRecoilRange = 0.0
-var chargeShotDamage = 1
 
 var canShoot = true
 
@@ -96,7 +95,7 @@ func _physics_process(delta):
 		playerSprite.scale.y = .5
 		playerSprite.scale.x = .5
 	
-	if reverse_movement_check() == false:
+	if reverse_movement_check() == false and chargeShot() == false:
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 			fire_bullet()
 			regen_ammo()
@@ -108,7 +107,7 @@ func _physics_process(delta):
 			elif chargeTimer.time_left == 0:
 				chargeTimer.start()
 				PlayerStats.currentAmmo += 1
-				chargeShotDamage = PlayerStats.currentAmmo
+				Global.chargeShotDamage = PlayerStats.currentAmmo
 		elif Input.is_action_just_released("fire") and PlayerStats.currentAmmo > 0:
 			chargeTimer.stop()
 			fire_bullet()
@@ -258,11 +257,11 @@ func fire_bullet():
 		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
 	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
 	#This works for setting the bullets rotation and particle rotations though
-		if chargeShotDamage > 21 and chargeShotDamage <= 32:
+		if Global.chargeShotDamage > 21 and Global.chargeShotDamage <= 32:
 			currentRecoilRange = 0.82
-		elif chargeShotDamage > 10 and chargeShotDamage <= 21:
+		elif Global.chargeShotDamage > 10 and Global.chargeShotDamage <= 21:
 			currentRecoilRange = 0.78
-		elif chargeShotDamage < 10 and chargeShotDamage >= 1:
+		elif Global.chargeShotDamage < 10 and Global.chargeShotDamage >= 1:
 			currentRecoilRange = 0.75
 		var look_vector = get_global_mouse_position() - global_position
 		global_rotation = atan2(look_vector.y, look_vector.x)
