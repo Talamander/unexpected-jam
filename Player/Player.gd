@@ -104,10 +104,10 @@ func _physics_process(delta):
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and canShoot == true:
 			if chargeTimer.time_left == 0 and PlayerStats.currentAmmo == 0:
 				chargeTimer.start()
-			elif chargeTimer.time_left == 0:
-				chargeTimer.start()
-				PlayerStats.currentAmmo += 1
-				Global.chargeShotDamage = PlayerStats.currentAmmo
+			#elif chargeTimer.time_left == 0:
+				#chargeTimer.start()
+				#PlayerStats.currentAmmo += 1
+				#Global.chargeShotDamage = PlayerStats.currentAmmo
 		elif Input.is_action_just_released("fire") and PlayerStats.currentAmmo > 0:
 			chargeTimer.stop()
 			fire_bullet()
@@ -392,3 +392,7 @@ func _on_Hurtbox_body_entered(body):
 
 
 
+func _on_ChargeCheck_timeout():
+	print ("timeout")
+	PlayerStats.currentAmmo += 1
+	Global.chargeShotDamage = PlayerStats.currentAmmo
