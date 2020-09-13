@@ -64,7 +64,7 @@ func itemDrop(position):
 	itemDropRates = randi()%20+1
 	match itemDropRates:
 		1,2,3:
-			instance_scene_on_main(healthItem, position)
+			Global.instance_scene_on_main(healthItem, position)
 			
 		4,5,6,7:
-			instance_scene_on_main(ammoItem, position)
+			Global.instance_scene_on_main(ammoItem, position)
