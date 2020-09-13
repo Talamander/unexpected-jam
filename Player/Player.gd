@@ -102,16 +102,14 @@ func _physics_process(delta):
 			regen_ammo()
 	elif chargeShot() == true:
 		PlayerStats.currentAmmo = 0
-		if Input.is_action_pressed("fire"):
+		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and canShoot == true:
 			if chargeTimer.time_left == 0 and PlayerStats.currentAmmo == 0:
 				chargeTimer.start()
 			elif chargeTimer.time_left == 0:
 				chargeTimer.start()
 				PlayerStats.currentAmmo += 1
 				chargeShotDamage = PlayerStats.currentAmmo
-			else:
-				pass
-		else:
+		elif Input.is_action_just_released("fire") and PlayerStats.currentAmmo > 0:
 			chargeTimer.stop()
 			fire_bullet()
 	else:
@@ -194,9 +192,11 @@ func twoShot():
 func chargeShot():
 	var checker = null
 	if Global.currentModifier != "chargeShot":
+		fireRate.set_wait_time(0.1)
 		checker = false
 		return checker
 	else:
+		fireRate.set_wait_time(0.05)
 		checker = true
 		return checker
 
@@ -271,6 +271,8 @@ func fire_bullet():
 		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
 	#Adds a little kick, tweak the number to change intensity
 		motion -= bullet.velocity * currentRecoilRange
+		canShoot = false
+		fireRate.start()
 	else:
 		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
 		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
@@ -303,7 +305,8 @@ func fire_bullet():
 
 func regen_ammo():
 	if chargeShot() == true:
-		pass
+		if fireRate.time_left == 0:
+			canShoot = true
 	else:
 		if PlayerStats.currentAmmo > 1:
 			ammoRegenTimer.start()

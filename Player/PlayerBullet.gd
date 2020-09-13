@@ -1,6 +1,7 @@
 extends "res://ParentClasses/Projectile.gd"
 
 onready var bulletSprite = $RegularSprite
+onready var bulletChecker = $PlayerBullet
 onready var bulletCollision = $Hitbox/RegularShot
 onready var trailTimer = $ParticleTrailTimer
 onready var trail = $ParticleTrail
@@ -45,7 +46,7 @@ func _physics_process(delta):
 			get_node("SizeTwoSprite").visible = false
 			get_node("RegularShot").disabled = false
 			get_node("RegularSprite").visible = true
-	else:
+	elif bulletChecker != null:
 		get_node("SizeThreeShot").disabled = true
 		get_node("SizeThreeSprite").visible = false
 		get_node("SizeTwoShot").disabled = true
@@ -70,7 +71,7 @@ func _on_Hitbox_body_entered(_body):
 		trailTimer.start()
 		if trailTimer.time_left == 0:
 			queue_free()
-	else:
+	elif bulletSprite != null:
 		bulletSprite.visible = false
 		get_node("Hitbox/CollisionShape2D").set_deferred("disabled", true)
 		trail.emitting = false
@@ -87,7 +88,7 @@ func _on_Hitbox_area_entered(_area):
 		trailTimer.start()
 		if trailTimer.time_left == 0:
 			queue_free()
-	else:
+	elif bulletSprite != null:
 		bulletSprite.visible = false
 		get_node("Hitbox/CollisionShape2D").set_deferred("disabled", true)
 		trail.emitting = false
