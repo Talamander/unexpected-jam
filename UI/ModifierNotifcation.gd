@@ -40,5 +40,7 @@ func set_hint():
 		hintText.text = "That's one big magazine"
 	if Global.currentModifier == "twoShot":
 		hintText.text = "Say hello to my little friend!"
+	if Global.currentModifier == "chargeShot":
+		hintText.text = "So anyway I prepared to start Blastin'"
 func _on_Timer_timeout():
 		animator.play("Fade Out")
