@@ -15,7 +15,6 @@ var enemiesThisWave = 0
 var enemyWaveLimit = 10
 var currentWave = 1
 var itemDropRates = null
-var chargeShotDamage = 1
 
 var previousModifier = "start"
 var currentModifier = "start"
@@ -64,7 +63,7 @@ func itemDrop(position):
 	itemDropRates = randi()%20+1
 	match itemDropRates:
 		1,2,3:
-			Global.instance_scene_on_main(healthItem, position)
+			instance_scene_on_main(healthItem, position)
 			
 		4,5,6,7:
-			Global.instance_scene_on_main(ammoItem, position)
+			instance_scene_on_main(ammoItem, position)

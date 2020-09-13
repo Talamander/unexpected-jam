@@ -62,5 +62,5 @@ func update_map():
 		
 
 func _on_object_removed(enemy):
-	markers[enemy].call_deferred("free")
+	markers[enemy].queue_free()
 	markers.erase(enemy)

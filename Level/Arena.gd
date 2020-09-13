@@ -2,7 +2,7 @@ extends Node2D
 
 onready var modTimer = $ModifierTimer
 
-var initModTimer = 5
+var initModTimer = 30
 
 var basicEnemy = preload("res://Enemies/BasicEnemy.tscn")
 var shootingEnemy = preload("res://Enemies/ShootingEnemy.tscn")
@@ -57,8 +57,9 @@ var instancetimer = null
 var instancetimerlength = 15
 var distanceFromPlayer = 0
 var maxDistanceFromPlayer = 950
-var modifierList = [
-"chargeShot"]
+var modifierList = ["SlowMotion", "PlayerDamageIncrease", "ReverseMovement",
+ "RecoilRange", "NoRecoil", "BasicRuleSet", "killSwitch", "noMiniMap", "infiniteAmmo",
+"twoShot"]
 
 #Stuff later
 func _ready():
@@ -154,9 +155,9 @@ func _on_EnemySpawnTimer_timeout():
 
 func _on_ModifierTimer_timeout():
 	modifierList.shuffle()
-	#while modifierList[0] == Global.previousModifier:
-		#modifierList.shuffle()
-		#print ("dupe")
+	while modifierList[0] == Global.previousModifier:
+		modifierList.shuffle()
+		print ("dupe")
 	print ("set")
 	Global.currentModifier = modifierList[0]
 	print(Global.currentModifier)

@@ -11,7 +11,6 @@ var muzzleflash = preload("res://Effects/PlayerMuzzleFlash.tscn")
 #References to nodes under Player
 onready var playerSprite = $Sprite
 onready var fireRate = $Timers/FireRate
-onready var chargeTimer = $Timers/ChargeCheck
 onready var stunTimer = $Timers/StunTimer
 onready var dashTimer = $Timers/DashTimer
 onready var dashRechargeTimer = $Timers/DashRechargeTimer
@@ -40,7 +39,6 @@ var previousMotion = Vector2.ZERO
 var stun = false
 var isRecoilRangeInPlace = false
 var currentRecoilRange = 0.0
-var newChargeCycle = true
 
 var canShoot = true
 
@@ -96,21 +94,10 @@ func _physics_process(delta):
 		playerSprite.scale.y = .5
 		playerSprite.scale.x = .5
 	
-	if reverse_movement_check() == false and chargeShot() == false:
+	if reverse_movement_check() == false:
 		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 			fire_bullet()
 			regen_ammo()
-	elif chargeShot() == true:
-		if Input.is_action_pressed("fire") and fireRate.time_left == 0 and canShoot == true:
-			if chargeTimer.time_left == 0 and PlayerStats.currentAmmo == 0:
-				chargeTimer.start()
-			#elif chargeTimer.time_left == 0:
-				#chargeTimer.start()
-				#PlayerStats.currentAmmo += 1
-				#Global.chargeShotDamage = PlayerStats.currentAmmo
-		elif Input.is_action_just_released("fire") and PlayerStats.currentAmmo > 0:
-			chargeTimer.stop()
-			fire_bullet()
 	else:
 		if Input.is_action_pressed("reverse_fire") and fireRate.time_left == 0 and PlayerStats.currentAmmo > 0 and canShoot == true:
 			fire_bullet()
@@ -188,22 +175,6 @@ func twoShot():
 	else:
 		checker = true
 		return checker
-func chargeShot():
-	var checker = null
-	if Global.currentModifier != "chargeShot":
-		if newChargeCycle == false:
-			PlayerStats.currentAmmo = 32
-			
-		fireRate.set_wait_time(0.1)
-		checker = false
-		return checker
-	else:
-		if newChargeCycle == true:
-			newChargeCycle = false
-			PlayerStats.currentAmmo = 0
-		fireRate.set_wait_time(0.05)
-		checker = true
-		return checker
 
 func apply_friction(amount):
 	#Get the player movement moving smoothly
@@ -258,26 +229,6 @@ func fire_bullet():
 			PlayerStats.currentAmmo -= 1
 		else:
 			pass
-	elif chargeShot()==true:
-		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
-		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
-	#This code is a copy of the look_rotation function, couldn't figure out a way to cleanly call in the func.
-	#This works for setting the bullets rotation and particle rotations though
-		if Global.chargeShotDamage > 21 and Global.chargeShotDamage <= 32:
-			currentRecoilRange = 0.82
-		elif Global.chargeShotDamage > 10 and Global.chargeShotDamage <= 21:
-			currentRecoilRange = 0.78
-		elif Global.chargeShotDamage < 10 and Global.chargeShotDamage >= 1:
-			currentRecoilRange = 0.75
-		var look_vector = get_global_mouse_position() - global_position
-		global_rotation = atan2(look_vector.y, look_vector.x)
-		bullet.set_rotation(global_rotation)
-		muzzleflashInstance.set_rotation(global_rotation)
-		bullet.velocity = Vector2.RIGHT.rotated(self.rotation) * bullet.speed
-	#Adds a little kick, tweak the number to change intensity
-		motion -= bullet.velocity * currentRecoilRange
-		canShoot = false
-		fireRate.start()
 	else:
 		var bullet = Global.instance_scene_on_main(playerBullet, muzzle.global_position)
 		var muzzleflashInstance = Global.instance_scene_on_main(muzzleflash, playerSprite.global_position)
@@ -309,20 +260,17 @@ func fire_bullet():
 
 
 func regen_ammo():
-	if chargeShot() == true:
-		if fireRate.time_left == 0:
-			canShoot = true
-	else:
-		if PlayerStats.currentAmmo > 1:
-			ammoRegenTimer.start()
-		if PlayerStats.currentAmmo == 0:
-			ammoRegenTimer.stop()
-			ammoRegenZeroedTimer.start()
-			canShoot = false
+	if PlayerStats.currentAmmo > 1:
+		ammoRegenTimer.start()
+	if PlayerStats.currentAmmo == 0:
+		ammoRegenTimer.stop()
+		ammoRegenZeroedTimer.start()
+		canShoot = false
 
 func _on_AmmoRegenTimer_timeout():
 	if PlayerStats.currentAmmo < PlayerStats.MaxAmmo:
 		PlayerStats.currentAmmo += 1
+		#print (PlayerStats.currentAmmo)
 
 func _on_AmmoRegenZeroedTimer_timeout():
 	if PlayerStats.currentAmmo == 0:
@@ -398,7 +346,3 @@ func _on_Hurtbox_body_entered(body):
 
 
 
-func _on_ChargeCheck_timeout():
-	print ("timeout")
-	PlayerStats.currentAmmo += 1
-	Global.chargeShotDamage = PlayerStats.currentAmmo

@@ -98,9 +98,6 @@ one_shot = true
 
 [node name="AmmoRegenTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
-
-[node name="ChargeCheck" type="Timer" parent="Timers"]
-wait_time = 0.3
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_Hurtbox_hit"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_DashTimer_timeout"]
