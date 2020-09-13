@@ -109,6 +109,5 @@ wait_time = 0.3
 [connection signal="timeout" from="Timers/StunTimer" to="." method="_on_StunTimer_timeout"]
 [connection signal="timeout" from="Timers/AmmoRegenZeroedTimer" to="." method="_on_AmmoRegenZeroedTimer_timeout"]
 [connection signal="timeout" from="Timers/AmmoRegenTimer" to="." method="_on_AmmoRegenTimer_timeout"]
-[connection signal="timeout" from="Timers/ChargeCheck" to="." method="_on_ChargeCheck_timeout"]
 
 [editable path="Hurtbox"]

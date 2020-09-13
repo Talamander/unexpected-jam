@@ -57,7 +57,8 @@ var instancetimer = null
 var instancetimerlength = 15
 var distanceFromPlayer = 0
 var maxDistanceFromPlayer = 950
-var modifierList = ["twoShot", "chargeShot"]
+var modifierList = [
+"chargeShot"]
 
 #Stuff later
 func _ready():
@@ -153,9 +154,9 @@ func _on_EnemySpawnTimer_timeout():
 
 func _on_ModifierTimer_timeout():
 	modifierList.shuffle()
-	while modifierList[0] == Global.previousModifier:
-		modifierList.shuffle()
-		print ("dupe")
+	#while modifierList[0] == Global.previousModifier:
+		#modifierList.shuffle()
+		#print ("dupe")
 	print ("set")
 	Global.currentModifier = modifierList[0]
 	print(Global.currentModifier)
